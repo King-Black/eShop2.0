@@ -1,14 +1,46 @@
 package Valueobjects;
 
-public class User {
+public class User {	
+	private String name;
+	private String passwort;
+	private int nr;
+	private String anrede;
 	private String vorName;
 	private String nachName;
-	private String passwort;
+
 	
-	public User(String vorName, String nachName, String passwort){
+	public User(String name, String passwort, int nr, String anrede, String vorName, String nachName){
+		this.name = name;
+		this.passwort = passwort;
+		this.nr = nr;
+		this.anrede = anrede;
 		this.vorName = vorName;
 		this.nachName = nachName;
-		this.passwort = passwort;
+
+	}
+	
+	public String getName(){
+		return this.name;
+	}
+	
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	public int getNummer(){
+		return this.nr;
+	}
+	
+	public void setNummer(int nr){
+		this.nr = nr;
+	}
+	
+	public String getAnrede(){
+		return this.anrede;
+	}
+	
+	public void setAnrede(String anrede){
+		this.anrede = anrede;
 	}
 	
 	public String getVorName(){

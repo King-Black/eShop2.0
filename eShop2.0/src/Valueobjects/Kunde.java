@@ -2,20 +2,24 @@ package Valueobjects;
 
 public class Kunde extends User {
 	
-	private int kundenId;
+	public String adresse;
+	public int plz;
+	public String ort;
 	
-	public Kunde(int kundenId, String vorName, String nachName, String passwort){
-		super(vorName, nachName, passwort);
-		this.kundenId = kundenId;
+	public Kunde(String name, String passwort, int nr, String anrede, String vorName, String nachName, String adresse, int plz, String ort){
+		super(name, passwort, nr, anrede, vorName, nachName);
+		this.adresse = adresse;
+		this.plz = plz;
+		this.ort = ort;
 		
 	}
 	
-	public int getKundenId(){
+/*	public int getKundenId(){
 		return this.kundenId;
 	}
 	
 	public void setKundenId(int kundenId){
 		this.kundenId = kundenId;
 	}
-
+*/
 }
