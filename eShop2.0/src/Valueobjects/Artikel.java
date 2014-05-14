@@ -50,4 +50,12 @@ public class Artikel {
 		this.Preis = Preis;
 	}
 	
+	public int getArtikelBestand(){
+		return this.ArtikelBestand;
+	}
+	
+	public void setArtikelBestand(int ArtikelBestand){
+		this.ArtikelBestand = ArtikelBestand;
+	}
+	
 }
