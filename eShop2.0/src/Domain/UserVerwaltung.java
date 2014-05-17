@@ -56,4 +56,30 @@ public class UserVerwaltung {
 		}
 		System.out.println(" ");
 	}
+	
+	public User findUserByNumber(int ID){
+		Iterator<User> it = userBestand.iterator();
+		// Artikel erstellen
+		User user = null;
+		// Artikelverzeichnis durchlaufen
+		while (it.hasNext()) {
+			user = it.next();
+			// gesuchter User gefunden
+			if(ID==user.getNummer()){
+				return user;				
+			} else if (!(ID==user.getNummer())&&!it.hasNext()){ // gesuchte Artikel ID nicht gefunden
+				//exception 
+			}
+		}
+		return null;
+	}
+	
+	public void loescheUser(int userNr, User aktuellerBenutzer){
+		if(findUserByNumber(userNr)!=null){
+			userBestand.remove(findUserByNumber(userNr));
+		}		
+		else{
+			//exception
+		}
+	}
 }

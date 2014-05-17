@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 import Valueobjects.Artikel;
+import Valueobjects.MehrfachArtikel;
 
 public class ArtikelVerwaltung {
 	
@@ -15,12 +16,24 @@ public class ArtikelVerwaltung {
 		return ++laufnr;
 	}
 	
-	public Artikel einfuegen(String ArtikelName, int ArtikelBestand, String Beschreibung, double Preis){ 
-		if(Preis<=0||ArtikelBestand<=0) {
+	public Artikel einfuegen(String artikelName, int menge, String beschreibung, double preis){ 
+		if(preis<=0||menge<=0) {
 			//exception
 		} else {
-			int ArtikelNummer = bestimmeNr();
-			Artikel einArtikel = new Artikel(ArtikelNummer, ArtikelName, ArtikelBestand, Beschreibung, Preis);
+			int artikelNummer = bestimmeNr();
+			Artikel einArtikel = new Artikel(artikelNummer, artikelName, menge, beschreibung, preis);
+			artikelBestand.add(einArtikel);
+			return einArtikel;
+		}
+		return null;
+	}
+	
+	public MehrfachArtikel einfuegen(String artikelName, int menge, String beschreibung, double preis, int packungsGroesse){ 
+		if(preis<=0||menge<=0) {
+			//exception
+		} else {
+			int artikelNummer = bestimmeNr();
+			MehrfachArtikel einArtikel = new MehrfachArtikel(artikelNummer, artikelName, menge, beschreibung, preis, packungsGroesse);
 			artikelBestand.add(einArtikel);
 			return einArtikel;
 		}
@@ -64,6 +77,23 @@ public class ArtikelVerwaltung {
 			}			
 		}
 		System.out.println(" ");
+	}
+	
+	public Artikel findArtikelByNumber(int artID){
+		Iterator<Artikel> it = artikelBestand.iterator();
+		// Artikel erstellen
+		Artikel artikel = null;
+		// Artikelverzeichnis durchlaufen
+		while (it.hasNext()) {
+			artikel = it.next();
+			// gesuchte Artikel ID gefunden
+			if(artID==artikel.getArtikelNummer()){
+				return artikel;				
+			} else if (!(artID==artikel.getArtikelNummer())&&!it.hasNext()){ // gesuchte Artikel ID nicht gefunden
+				//exception 
+			}
+		}
+		return null;
 	}
 	
 }
