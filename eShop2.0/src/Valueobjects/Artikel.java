@@ -3,59 +3,59 @@ package Valueobjects;
 public class Artikel {
 	
 	//private static final String ArtikelBeschreibung = null;
-	private int ArtikelNummer;
-	private String ArtikelName;
-	private int ArtikelBestand;
-	private String Beschreibung;
-	private float Preis;
+	private int artikelNummer;
+	private String artikelName;
+	private int menge;
+	private String beschreibung;
+	private double preis;
 	
-	public Artikel(int ArtikelNummer, String ArtikelName, int ArtikelBestand, String Beschreibung, float Preis){
-		this.ArtikelNummer = ArtikelNummer;
-		this.ArtikelName = ArtikelName;
-		this.ArtikelBestand = ArtikelBestand;
-		this.Beschreibung = Beschreibung;
-		this.Preis = Preis;
+	public Artikel(int artikelNummer, String artikelName, int menge, String beschreibung, double preis){
+		this.artikelNummer = artikelNummer;
+		this.artikelName = artikelName;
+		this.menge = menge;
+		this.beschreibung = beschreibung;
+		this.preis = preis;
 		
 	}
 	
 	public int getArtikelNummer(){
-		return this.ArtikelNummer;
+		return this.artikelNummer;
 	}
 	
-	public void setArtikelNummer(int ArtikelNummer){
-		this.ArtikelNummer = ArtikelNummer;
+	public void setArtikelNummer(int artikelNummer){
+		this.artikelNummer = artikelNummer;
 	}
 	
 	public String getArtikelName(){
-		return this.ArtikelName;
+		return this.artikelName;
 	}
 	
-	public void setArtikelName(String ArtikelName){
-		this.ArtikelName = ArtikelName;
+	public void setArtikelName(String artikelName){
+		this.artikelName = artikelName;
 	}
 	
 	public String getBeschreibung(){
-		return this.Beschreibung;
+		return this.beschreibung;
 	}
 	
-	public void setBeschreibung(String Beschreibung){
-		this.Beschreibung = Beschreibung;
+	public void setBeschreibung(String beschreibung){
+		this.beschreibung = beschreibung;
 	}
 	
-	public float getPreis(){
-		return this.Preis;
+	public double getPreis(){
+		return this.preis;
 	}
 	
-	public void setPreis(float Preis){
-		this.Preis = Preis;
+	public void setPreis(double preis){
+		this.preis = preis;
 	}
 	
 	public int getArtikelBestand(){
-		return this.ArtikelBestand;
+		return this.menge;
 	}
 	
-	public void setArtikelBestand(int ArtikelBestand){
-		this.ArtikelBestand = ArtikelBestand;
+	public void setArtikelBestand(int menge){
+		this.menge = menge;
 	}
 	
 }
