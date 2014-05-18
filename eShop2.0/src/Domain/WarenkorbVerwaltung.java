@@ -6,10 +6,11 @@ import Valueobjects.Artikel;
 import Valueobjects.Kunde;
 import Valueobjects.MehrfachArtikel;
 import Valueobjects.User;
+import exceptions.NichtGenugAufLagerException;
 
 public class WarenkorbVerwaltung {
 	
-	public Kunde artikelInWarenkorb(Artikel einArtikel, int menge, Kunde k){		
+	public Kunde artikelInWarenkorb(Artikel einArtikel, int menge, Kunde k) throws NichtGenugAufLagerException{		
 		if(menge<=einArtikel.getArtikelBestand()){
 			if (einArtikel instanceof MehrfachArtikel) {
 				MehrfachArtikel b = (MehrfachArtikel) einArtikel;
@@ -25,7 +26,8 @@ public class WarenkorbVerwaltung {
 				return k;
 			}
 		} else { // gewollte Menge ist größer als die vorhandene Menge
-			//exception
+			//exception NichtGenugAufLagerException
+			throw NichtGenugAufLagerException;
 		}
 		return k;
 	}

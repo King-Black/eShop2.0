@@ -58,7 +58,7 @@ public class ArtikelVerwaltung {
 		if (artikelBestand.contains(a)) {
 			artikelBestand.remove(a);
 		} else {
-			//exception
+			//exception ArtikelNichtGefundenException
 		}
 	}
 	
@@ -90,7 +90,7 @@ public class ArtikelVerwaltung {
 			if(artID==artikel.getArtikelNummer()){
 				return artikel;				
 			} else if (!(artID==artikel.getArtikelNummer())&&!it.hasNext()){ // gesuchte Artikel ID nicht gefunden
-				//exception 
+				//exception ArtikelIdNichtGefundenException
 			}
 		}
 		return null;
