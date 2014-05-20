@@ -2,8 +2,8 @@ package exceptions;
 
 import Valueobjects.Artikel;
 
-public class NichtGenugAufLagerException extends Exception {public NichtGenugAufLagerException(Artikel artikel, int menge) {
-	super("Artikel \"" + artikel.getArtikelName() + "\" ist nicht ausreichend auf Lager! ");
+public class NichtGenugAufLagerException extends Exception {public NichtGenugAufLagerException(Artikel EinArtikel, int menge) {
+	super("Artikel \"" + EinArtikel.getArtikelName() + "\" ist nicht ausreichend auf Lager! ");
 	}
 
 }

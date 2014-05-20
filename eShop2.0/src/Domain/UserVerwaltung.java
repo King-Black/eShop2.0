@@ -68,7 +68,7 @@ public class UserVerwaltung {
 			if(ID==user.getNummer()){
 				return user;				
 			} else if (!(ID==user.getNummer())&&!it.hasNext()){ // gesuchte Artikel ID nicht gefunden
-				//exception 
+				//exception UserIdNichtGefundenException
 			}
 		}
 		return null;
@@ -79,7 +79,7 @@ public class UserVerwaltung {
 			userBestand.remove(findUserByNumber(userNr));
 		}		
 		else{
-			//exception
+			//exception UserNichtVorhandenException
 		}
 	}
 }
