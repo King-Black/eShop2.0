@@ -143,4 +143,19 @@ public class ShopVerwaltung {
 		System.out.println(" ");
 	}
 	
+	public void loescheArtikel(int artID, User aktuellerBenutzer){
+		Artikel a = artVer.findArtikelByNumber(artID);
+		erVer.ereignisEinfuegen(aktuellerBenutzer, a, a.getArtikelBestand(), "Artikel gelöscht.");
+		artVer.loescheArtikel(a);		
+	}
+	
+	public User userLogin(String name, char[] passwort){
+		return userVer.userLogin(name, passwort);
+	}
+
+	public void rechnungErstellen(Kunde aktuellerBenutzer) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
