@@ -311,7 +311,7 @@ public class CUI {
 		}
 	}
 	
-	private String liesEingabe() throws IOException {
+	private String liesEingabe(){
 		return in.readLine();
 	}
 
