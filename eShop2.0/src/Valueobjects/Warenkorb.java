@@ -8,14 +8,16 @@ public class Warenkorb {
 	
 	public void artikelHinzufuegen(Artikel a, int gewuenschteMenge, int mengeNochDa){
 		// Wenn Artikel schon im Warenkorb vorhanden dann Menge erweitern
-		if (warenkorb.containsKey(a)) { // WArenkorb hat hier nichtr den gewünschten artikel drin
+		if (warenkorb.containsKey(a)) { // WArenkorb hat hier nichtr den gewï¿½nschten artikel drin
 			int alteMenge = warenkorb.get(a);
 			if (alteMenge+gewuenschteMenge<=mengeNochDa) {
 				System.out.println("Artikel im Warenkorb");
 				warenkorb.put(a, alteMenge + gewuenschteMenge);	
+			} else{
+				//exception artikelbestand reicht nicht
 			}
 		} else {
-		// Ansonsten neu in Liste hinzufügen
+		// Ansonsten neu in Liste hinzufï¿½gen
 			warenkorb.put(a, gewuenschteMenge);
 		}
 	}	
@@ -23,12 +25,16 @@ public class Warenkorb {
 	public void artikelEntfernen(Artikel a){
 		if(warenkorb.containsKey(a)) {
 			warenkorb.remove(a);
+		} else{
+			//exception warenkorb ist leer
 		}
 	}
 	
 	public void leeren(){
 		if(!warenkorb.isEmpty()){
 			warenkorb.clear();
+		} else {
+			//exception warenkorb ist leer
 		}
 	}
 	

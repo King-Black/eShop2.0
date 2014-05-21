@@ -9,6 +9,10 @@ public class MehrfachArtikel extends Artikel {
 		this.packungsGroesse = packungsGroesse;
 	}
 	
+	public String toString() {
+		return (super.toString() + " Packungsgroesse: " + packungsGroesse);
+	}
+	
 	public int getPackungsgroesse( ) {
 		return packungsGroesse;
 	}
