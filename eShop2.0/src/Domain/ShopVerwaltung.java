@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import exceptions.NichtGenugAufLagerException;
 import Valueobjects.Artikel;
 import Valueobjects.Ereignis;
 import Valueobjects.Kunde;
@@ -46,7 +47,13 @@ public class ShopVerwaltung {
 	public Kunde artikelInWarenkorb(int artID, int menge, Kunde akteur){	
 		Artikel a = artVer.findArtikelByNumber(artID);
 		// überprüfe: sind schon mehr in warenkorb als im bestand?
-		Kunde k = warkoVer.artikelInWarenkorb(a, menge, (Kunde)userVer.findUserByNumber(akteur.getNummer()));
+		Kunde k = null;
+		try {
+			k = warkoVer.artikelInWarenkorb(a, menge, (Kunde)userVer.findUserByNumber(akteur.getNummer()));
+		} catch (NichtGenugAufLagerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return k;
 	}
 	

@@ -27,7 +27,7 @@ public class WarenkorbVerwaltung {
 			}
 		} else { // gewollte Menge ist größer als die vorhandene Menge
 			//exception NichtGenugAufLagerException
-			throw NichtGenugAufLagerException;
+			throw new NichtGenugAufLagerException(einArtikel, menge);
 		}
 		return k;
 	}

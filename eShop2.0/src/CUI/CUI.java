@@ -24,8 +24,9 @@ public class CUI {
 	public static void main(String[] args){
 		
 		CUI shop = new CUI();
-		//shop.shopVer.fuegeArtikelEin("SECHSSTEIN", 9.99, null, 48, 6);
+//shop.shopVer.fuegeArtikelEin("SECHSSTEIN", 9.99, null, 48, 6);
 		shop.run();
+		
 	}
 	
 	public void run() {
