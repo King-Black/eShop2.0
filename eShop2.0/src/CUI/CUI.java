@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import exceptions.ArtikelNichtGefundenException;
 import Valueobjects.Kunde;
 import Valueobjects.User;
 import Domain.ShopVerwaltung;
@@ -44,7 +45,7 @@ public class CUI {
 		}
 	}
 	
-	private void gibMenue() throws IOException{
+	private void gibMenue() throws IOException, ArtikelNichtGefundenException{
 		do{
 			if(!(aktuellerBenutzer == null)){
 				eingeloggt();
@@ -79,7 +80,7 @@ public class CUI {
 		}
 	}
 	
-	private void eingeloggt() throws IOException{
+	private void eingeloggt() throws IOException, ArtikelNichtGefundenException{
 		System.out.println("Herzlich Willkommen im Shop\n" +
 		"wir wünschen einen angenehmen Aufenthalt\n" +
 		"und ein erfolgreiches Kauferlebnis.\n");
@@ -129,7 +130,7 @@ public class CUI {
 		return shopVer.userLogin(name, passwort);
 	}
 	
-	public void menueMitarbeiter() throws IOException{
+	public void menueMitarbeiter() throws IOException, ArtikelNichtGefundenException{
 		System.out.println("n) neuen Artikel anlegen \n" +
 				"m) Artikelmenge aendern\n" +
 				"l) Artikel löschen\n" +
@@ -174,7 +175,7 @@ public class CUI {
 		}
 	}
 	
-	private void artikelLoeschen() throws IOException{
+	private void artikelLoeschen() throws IOException, ArtikelNichtGefundenException{
 		System.out.println("Welchen Artikel willst du löschen?");
 		int artID = Integer.parseInt(liesEingabe());
 		shopVer.loescheArtikel(artID, aktuellerBenutzer);
@@ -262,7 +263,7 @@ public class CUI {
 		}
 	}
 	
-	public void menueKunde() throws IOException{
+	public void menueKunde() throws IOException, ArtikelNichtGefundenException{
 		System.out.println("w) Zum Warenkorb\n" +
 				"m) Artikelmenge im Warenkorb ändern\n" +
 				//"b) Artikelbeschreibung aufrufen\n" +
