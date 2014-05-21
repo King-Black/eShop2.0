@@ -6,6 +6,8 @@ import java.util.Vector;
 
 import Valueobjects.Artikel;
 import Valueobjects.MehrfachArtikel;
+import exceptions.ArtikelNichtGefundenException;
+import exceptions.EinlagernException;
 
 public class ArtikelVerwaltung {
 	
@@ -16,28 +18,32 @@ public class ArtikelVerwaltung {
 		return ++laufnr;
 	}
 	
-	public Artikel einfuegen(String artikelName, int menge, String beschreibung, double preis){ 
+	public Artikel einfuegen(String artikelName, int menge, String beschreibung, double preis) throws EinlagernException{ 
 		if(preis<=0||menge<=0) {
-			//exception
+			//exception EinlagernException
+			EinlagernException e = new EinlagernException();
+			throw e;
 		} else {
 			int artikelNummer = bestimmeNr();
 			Artikel einArtikel = new Artikel(artikelNummer, artikelName, menge, beschreibung, preis);
 			artikelBestand.add(einArtikel);
 			return einArtikel;
 		}
-		return null;
+		//return null;
 	}
 	
-	public MehrfachArtikel einfuegen(String artikelName, int menge, String beschreibung, double preis, int packungsGroesse){ 
+	public MehrfachArtikel einfuegen(String artikelName, int menge, String beschreibung, double preis, int packungsGroesse) throws EinlagernException{ 
 		if(preis<=0||menge<=0) {
-			//exception
+			//exception EinlagernException
+			EinlagernException e = new EinlagernException();
+			throw e;
 		} else {
 			int artikelNummer = bestimmeNr();
 			MehrfachArtikel einArtikel = new MehrfachArtikel(artikelNummer, artikelName, menge, beschreibung, preis, packungsGroesse);
 			artikelBestand.add(einArtikel);
 			return einArtikel;
 		}
-		return null;
+		//return null;
 	}
 	
 	public void setArtikelMenge(int nummer, int anzahl){
@@ -54,11 +60,13 @@ public class ArtikelVerwaltung {
 		return artikelBestand;
 	}
 	
-	public void loescheArtikel(Artikel a){
+	public void loescheArtikel(Artikel a) throws ArtikelNichtGefundenException{
 		if (artikelBestand.contains(a)) {
 			artikelBestand.remove(a);
 		} else {
 			//exception ArtikelNichtGefundenException
+			ArtikelNichtGefundenException e = new ArtikelNichtGefundenException(a);
+			throw e;
 		}
 	}
 	
@@ -79,7 +87,7 @@ public class ArtikelVerwaltung {
 		System.out.println(" ");
 	}
 	
-	public Artikel findArtikelByNumber(int artID){
+	public Artikel findArtikelByNumber(int artID) throws ArtikelNichtGefundenException{
 		Iterator<Artikel> it = artikelBestand.iterator();
 		// Artikel erstellen
 		Artikel artikel = null;
@@ -91,6 +99,8 @@ public class ArtikelVerwaltung {
 				return artikel;				
 			} else if (!(artID==artikel.getArtikelNummer())&&!it.hasNext()){ // gesuchte Artikel ID nicht gefunden
 				//exception ArtikelIdNichtGefundenException
+				ArtikelNichtGefundenException e = new ArtikelNichtGefundenException(artID);
+				throw e;
 			}
 		}
 		return null;

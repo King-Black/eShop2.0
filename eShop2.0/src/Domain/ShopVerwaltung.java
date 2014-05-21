@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import exceptions.ArtikelNichtGefundenException;
+import exceptions.EinlagernException;
 import exceptions.NichtGenugAufLagerException;
 import Valueobjects.Artikel;
 import Valueobjects.Ereignis;
@@ -26,12 +28,12 @@ public class ShopVerwaltung {
 		erVer = new EreignisVerwaltung();
 	}
 	
-	public void fuegeArtikelEin(String artikelName, int menge, String beschreibung, double d, User akteur){ // hier fehlt ArtikelExistiertBereitsException
+	public void fuegeArtikelEin(String artikelName, int menge, String beschreibung, double d, User akteur) throws EinlagernException{ // hier fehlt ArtikelExistiertBereitsException
 		Artikel a = artVer.einfuegen(artikelName, menge, beschreibung, d);
 		erVer.ereignisEinfuegen(akteur, a, a.getArtikelBestand(), "Neuer Artikel erstellt.");
 	}
 	
-	public void fuegeArtikelEin(String artikelName, int menge, String beschreibung, double d, int packungsGroesse, User akteur){ // hier fehlt ArtikelExistiertBereitsException
+	public void fuegeArtikelEin(String artikelName, int menge, String beschreibung, double d, int packungsGroesse, User akteur) throws EinlagernException{ // hier fehlt ArtikelExistiertBereitsException
 		MehrfachArtikel a = artVer.einfuegen(artikelName, menge, beschreibung, d, packungsGroesse);
 		erVer.ereignisEinfuegen(akteur, a, a.getArtikelBestand(), "Neuer Artikel erstellt.");
 	}
@@ -44,7 +46,7 @@ public class ShopVerwaltung {
 		userVer.einfuegen(name, passwort, anrede, vorName, nachName, adresse, plz, ort);	
 	}
 	
-	public Kunde artikelInWarenkorb(int artID, int menge, Kunde akteur){	
+	public Kunde artikelInWarenkorb(int artID, int menge, Kunde akteur) throws ArtikelNichtGefundenException{	
 		Artikel a = artVer.findArtikelByNumber(artID);
 		// überprüfe: sind schon mehr in warenkorb als im bestand?
 		Kunde k = null;
@@ -57,7 +59,7 @@ public class ShopVerwaltung {
 		return k;
 	}
 	
-	public Kunde artikelAusWarenkorb(int artID, Kunde akteur){	
+	public Kunde artikelAusWarenkorb(int artID, Kunde akteur) throws ArtikelNichtGefundenException{	
 		Artikel a = artVer.findArtikelByNumber(artID);
 		Kunde kunde = warkoVer.artikelAusWarenkorb(a, (Kunde)userVer.findUserByNumber(akteur.getNummer()));
 		erVer.ereignisEinfuegen(akteur, a, a.getArtikelBestand(), "Artikel " + a.getArtikelName() + " aus dem Warenkorb entfernt.");
@@ -71,7 +73,7 @@ public class ShopVerwaltung {
 		
 	}
 	
-	public Artikel findArtikelByNumber(int artID){
+	public Artikel findArtikelByNumber(int artID) throws ArtikelNichtGefundenException{
 		return artVer.findArtikelByNumber(artID);
 	}
 	
@@ -95,7 +97,7 @@ public class ShopVerwaltung {
 		return erVer.gibProtokollListe();
 	}
 	
-	public void mengeAendern(int nummer, int anzahl, User akteur){
+	public void mengeAendern(int nummer, int anzahl, User akteur) throws ArtikelNichtGefundenException{
 		Artikel derWars = artVer.findArtikelByNumber(nummer);
 		if (derWars != null) {
 			artVer.setArtikelMenge(nummer, anzahl);		
@@ -129,12 +131,12 @@ public class ShopVerwaltung {
 		warkoVer.getWarenkorbInhalt(user);
 	}
 	
-	public HashMap<Artikel, Integer> artikelMengeImWarenkorbAendern(int artID, int menge, Kunde akteur){			
+	public HashMap<Artikel, Integer> artikelMengeImWarenkorbAendern(int artID, int menge, Kunde akteur) throws ArtikelNichtGefundenException{			
 		Artikel a = artVer.findArtikelByNumber(artID);
 		return warkoVer.setArtikelMenge(a, menge, (Kunde)userVer.findUserByNumber(akteur.getNummer()));
 	}
 	
-	public void einkaufsVerlauf(int artID){
+	public void einkaufsVerlauf(int artID) throws ArtikelNichtGefundenException{
 		Artikel a = artVer.findArtikelByNumber(artID);
 		// die soll ich verwenden und bauen
 		List<Ereignis> liste = erVer.gibEreignisseNachArtikelUndTagen(a); // Liste von Ereignissen
@@ -150,7 +152,7 @@ public class ShopVerwaltung {
 		System.out.println(" ");
 	}
 	
-	public void loescheArtikel(int artID, User aktuellerBenutzer){
+	public void loescheArtikel(int artID, User aktuellerBenutzer) throws ArtikelNichtGefundenException{
 		Artikel a = artVer.findArtikelByNumber(artID);
 		erVer.ereignisEinfuegen(aktuellerBenutzer, a, a.getArtikelBestand(), "Artikel gelöscht.");
 		artVer.loescheArtikel(a);		
