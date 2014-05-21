@@ -6,11 +6,12 @@ import Valueobjects.Artikel;
 import Valueobjects.Kunde;
 import Valueobjects.MehrfachArtikel;
 import Valueobjects.User;
+import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 import exceptions.NichtGenugAufLagerException;
 
 public class WarenkorbVerwaltung {
 	
-	public Kunde artikelInWarenkorb(Artikel einArtikel, int menge, Kunde k) throws NichtGenugAufLagerException{		
+	public Kunde artikelInWarenkorb(Artikel einArtikel, int menge, Kunde k) throws NichtGenugAufLagerException, ArtikelNurInEinheitenVerfuegbarException{		
 		if(menge<=einArtikel.getArtikelBestand()){
 			if (einArtikel instanceof MehrfachArtikel) {
 				MehrfachArtikel b = (MehrfachArtikel) einArtikel;
@@ -19,18 +20,19 @@ public class WarenkorbVerwaltung {
 					k.getWarenkorb().artikelHinzufuegen(einArtikel, menge, einArtikel.getArtikelBestand());
 					return k;
 				} else {
-					//exception
+					ArtikelNurInEinheitenVerfuegbarException x = new ArtikelNurInEinheitenVerfuegbarException(packungsGroesse);
+					throw x;
 				}
 			} else {
 				k.getWarenkorb().artikelHinzufuegen(einArtikel, menge, einArtikel.getArtikelBestand());
 				return k;
 			}
-		} else { // gewollte Menge ist größer als die vorhandene Menge
+		} else { // gewollte Menge ist grï¿½ï¿½er als die vorhandene Menge
 			//exception NichtGenugAufLagerException
 			NichtGenugAufLagerException e = new NichtGenugAufLagerException(einArtikel, menge);
 			throw e;
 		}
-		return k;
+		//return k;
 	}
 
 	public Kunde artikelAusWarenkorb(Artikel artikel, Kunde user){		

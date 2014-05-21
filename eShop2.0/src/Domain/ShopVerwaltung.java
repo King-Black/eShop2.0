@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import exceptions.ArtikelNichtGefundenException;
+import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 import exceptions.EinlagernException;
 import exceptions.NichtGenugAufLagerException;
 import Valueobjects.Artikel;
@@ -46,9 +47,9 @@ public class ShopVerwaltung {
 		userVer.einfuegen(name, passwort, anrede, vorName, nachName, adresse, plz, ort);	
 	}
 	
-	public Kunde artikelInWarenkorb(int artID, int menge, Kunde akteur) throws ArtikelNichtGefundenException{	
+	public Kunde artikelInWarenkorb(int artID, int menge, Kunde akteur) throws ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{	
 		Artikel a = artVer.findArtikelByNumber(artID);
-		// überprüfe: sind schon mehr in warenkorb als im bestand?
+		// ï¿½berprï¿½fe: sind schon mehr in warenkorb als im bestand?
 		Kunde k = null;
 		try {
 			k = warkoVer.artikelInWarenkorb(a, menge, (Kunde)userVer.findUserByNumber(akteur.getNummer()));
@@ -103,7 +104,7 @@ public class ShopVerwaltung {
 			artVer.setArtikelMenge(nummer, anzahl);		
 	
 			// aus nummer und anzahl muss ich den rest herausfinden
-			erVer.ereignisEinfuegen(akteur, derWars, anzahl, "Bestandsanzahl geändert.");
+			erVer.ereignisEinfuegen(akteur, derWars, anzahl, "Bestandsanzahl geï¿½ndert.");
 		}
 	}
 	
@@ -154,7 +155,7 @@ public class ShopVerwaltung {
 	
 	public void loescheArtikel(int artID, User aktuellerBenutzer) throws ArtikelNichtGefundenException{
 		Artikel a = artVer.findArtikelByNumber(artID);
-		erVer.ereignisEinfuegen(aktuellerBenutzer, a, a.getArtikelBestand(), "Artikel gelöscht.");
+		erVer.ereignisEinfuegen(aktuellerBenutzer, a, a.getArtikelBestand(), "Artikel gelï¿½scht.");
 		artVer.loescheArtikel(a);		
 	}
 	

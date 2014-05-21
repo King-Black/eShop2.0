@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import exceptions.ArtikelNichtGefundenException;
+import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 import Valueobjects.Kunde;
 import Valueobjects.User;
 import Domain.ShopVerwaltung;
@@ -45,7 +46,7 @@ public class CUI {
 		}
 	}
 	
-	private void gibMenue() throws IOException, ArtikelNichtGefundenException{
+	private void gibMenue() throws IOException, ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{
 		do{
 			if(!(aktuellerBenutzer == null)){
 				eingeloggt();
@@ -80,9 +81,9 @@ public class CUI {
 		}
 	}
 	
-	private void eingeloggt() throws IOException, ArtikelNichtGefundenException{
+	private void eingeloggt() throws IOException, ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{
 		System.out.println("Herzlich Willkommen im Shop\n" +
-		"wir wünschen einen angenehmen Aufenthalt\n" +
+		"wir wï¿½nschen einen angenehmen Aufenthalt\n" +
 		"und ein erfolgreiches Kauferlebnis.\n");
 		do {
 			System.out.println("Artikelliste:");
@@ -113,7 +114,7 @@ public class CUI {
 		String vorName = liesEingabe();
 		System.out.println("Nachname:");
 		String nachName = liesEingabe();
-		System.out.println("Straße und Hausnr:");
+		System.out.println("Straï¿½e und Hausnr:");
 		String adresse = liesEingabe();
 		System.out.println("Postleitzahl");
 		int plz = Integer.parseInt(liesEingabe());
@@ -133,10 +134,10 @@ public class CUI {
 	public void menueMitarbeiter() throws IOException, ArtikelNichtGefundenException{
 		System.out.println("n) neuen Artikel anlegen \n" +
 				"m) Artikelmenge aendern\n" +
-				"l) Artikel löschen\n" +
+				"l) Artikel lï¿½schen\n" +
 				"u) Alle Benutzer anzeigen\n" +
 				"r) Neuen Mitarbeiter registrieren\n" +
-				"d) Mitarbeiter löschen\n" + 
+				"d) Mitarbeiter lï¿½schen\n" + 
 				"p) Protokoll anzeigen\n" +
 				"c) Artikelmengenverlauf der letzten 30 Tage anzeigen lassen\n" + 
 				"a) Ausloggen");
@@ -176,13 +177,13 @@ public class CUI {
 	}
 	
 	private void artikelLoeschen() throws IOException, ArtikelNichtGefundenException{
-		System.out.println("Welchen Artikel willst du löschen?");
+		System.out.println("Welchen Artikel willst du lï¿½schen?");
 		int artID = Integer.parseInt(liesEingabe());
 		shopVer.loescheArtikel(artID, aktuellerBenutzer);
 	}
 	
 	private void benutzerLoeschen() throws IOException{
-		System.out.println("Welchen Mitarbeiter willst du löschen?");
+		System.out.println("Welchen Mitarbeiter willst du lï¿½schen?");
 		int userNr = Integer.parseInt(liesEingabe());
 		shopVer.loescheUser(userNr, aktuellerBenutzer);
 	}
@@ -215,10 +216,10 @@ public class CUI {
 	private void artikelmengeAendern() throws IOException{
 		System.out.println("Artikelliste:");
 		gibArtikellisteAus();
-		System.out.println("Artikelnummer des zu ändernden Artikel eingeben.");
+		System.out.println("Artikelnummer des zu ï¿½ndernden Artikel eingeben.");
 		eingabe = liesEingabe();
 		int nummer = Integer.parseInt(eingabe);
-		System.out.println("Wieviele moechtest du hinzufügen?");
+		System.out.println("Wieviele moechtest du hinzufï¿½gen?");
 		eingabe = liesEingabe();
 		int anzahl = Integer.parseInt(eingabe);
 		try{
@@ -227,11 +228,11 @@ public class CUI {
 		catch (Exception e) {
 			System.out.println(e);
 		}
-		System.out.println("Artikel wurden hinzugefügt!");
+		System.out.println("Artikel wurden hinzugefï¿½gt!");
 	}
 	
 	private void neuenArtikelAnlegen() throws IOException{
-		System.out.println("Moechtes du einen Mehrfachartikel speichern? (j für ja und n für nein)");
+		System.out.println("Moechtes du einen Mehrfachartikel speichern? (j fï¿½r ja und n fï¿½r nein)");
 		String mehrfach = liesEingabe();
 		int packungsGroesse = 0;
 		System.out.println("Name des Artikels: ");
@@ -246,7 +247,7 @@ public class CUI {
 		double d = Double.parseDouble(eingabe);
 		try{
 			if (mehrfach.equals("j")) {
-				System.out.println("Bitte gib die Portionsgröße ein.");
+				System.out.println("Bitte gib die Portionsgrï¿½ï¿½e ein.");
 				String portion = liesEingabe();
 				packungsGroesse = Integer.parseInt(portion);
 				shopVer.fuegeArtikelEin(artikelName, menge, beschreibung, d, packungsGroesse, aktuellerBenutzer); // mehrfachartikel
@@ -254,7 +255,7 @@ public class CUI {
 				shopVer.fuegeArtikelEin(artikelName, menge, beschreibung, d, aktuellerBenutzer);
 	
 			} else {
-				throw new IOException("Bitte entscheide dich für ja oder nein.");
+				throw new IOException("Bitte entscheide dich fï¿½r ja oder nein.");
 			}
 			System.out.println("wird angelegt!");
 		}
@@ -263,9 +264,9 @@ public class CUI {
 		}
 	}
 	
-	public void menueKunde() throws IOException, ArtikelNichtGefundenException{
+	public void menueKunde() throws IOException, ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{
 		System.out.println("w) Zum Warenkorb\n" +
-				"m) Artikelmenge im Warenkorb ändern\n" +
+				"m) Artikelmenge im Warenkorb ï¿½ndern\n" +
 				//"b) Artikelbeschreibung aufrufen\n" +
 				"n) Artikel nach Namen ordnen\n" +
 				"f) Artikel nach Nummern ordnen\n" +
@@ -282,10 +283,10 @@ public class CUI {
 				//gibArtikellisteAus();
 				break;
 			case "m": 
-				System.out.println("Von welchem Artikel möchtest du die Menge ändern?");
+				System.out.println("Von welchem Artikel mï¿½chtest du die Menge ï¿½ndern?");
 				eingabe = liesEingabe();
 				int artID = Integer.parseInt(eingabe);
-				System.out.println("Wieviel möchtest du hinzufügen oder abziehen?");
+				System.out.println("Wieviel mï¿½chtest du hinzufï¿½gen oder abziehen?");
 				eingabe = liesEingabe();
 				int menge = Integer.parseInt(eingabe);
 				try{
