@@ -15,6 +15,10 @@ public class Kunde extends User {
 		
 	}
 	
+	public String toString() {
+		return ("Kunde Nr: " + nr + " | Benutzername: " + name + " | Anrede: " + anrede + " | Name: " + vorName + " " + nachName + " | Strasse und Nr: " + adresse + " | PLZ: " + plz + " | Ort: " + ort);
+	}
+	
 	public String getAdresse() {
 		return adresse + " \n" + plz + " \n" + ort;
 	}

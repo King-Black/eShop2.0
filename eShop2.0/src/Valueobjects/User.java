@@ -19,6 +19,10 @@ public class User {
 
 	}
 	
+	public String toString() {
+		return null;
+	}
+	
 	public String getName(){
 		return this.name;
 	}

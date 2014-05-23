@@ -18,6 +18,10 @@ public class Artikel {
 		
 	}
 	
+	public String toString() {
+		return ("Nr: " + artikelNummer + " | Titel: " + artikelName + " | Anzahl: " + menge + " | Beschreibung: " + beschreibung + " | Einzelpreis: " + preis);
+	}
+	
 	public int getArtikelNummer(){
 		return this.artikelNummer;
 	}

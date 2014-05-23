@@ -6,4 +6,8 @@ public class Mitarbeiter extends User {
 		super(name, passwort, nr, anrede, vorName, nachName);
 		
 	}
+	
+	public String toString() {
+		return ("Mitarbeiter Nr: " + nr + " | " + "Benutzername: " + name + " | Anrede: " + anrede + " | Name: " + vorName + " " + nachName);
+	}
 }
