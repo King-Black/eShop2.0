@@ -33,14 +33,14 @@ public class CUI {
 	
 	public void run() {
 		try {
-			//shopVer.ladeDaten();
+			shopVer.ladeDaten();
 //			char[] pw = {'1','2','3'};
 //			shopVer.fuegeUserEin("Kunde", pw, "Herr", "Axel Schweiss","Elbenweg 3", 13337, "Bruchtal", "Mittelerde");
 //			shopVer.fuegeUserEin("Mitarbeiter", pw, "Herr", "Voll iDiot");
 
 //			shopVer.fuegeArtikelEin("EINSTEIN", 1.99, null, 12);
 			gibMenue();
-			//shopVer.speichereDaten();
+			shopVer.speichereDaten();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -240,8 +240,8 @@ public class CUI {
 		System.out.println("Menge: ");
 		eingabe = liesEingabe();
 		int menge = Integer.parseInt(eingabe);
-		System.out.println("Beschreibung des Artikels: ");
-		String beschreibung = liesEingabe();
+		//System.out.println("Beschreibung des Artikels: ");
+		//String beschreibung = liesEingabe();
 		System.out.println("Preis: ");
 		eingabe = liesEingabe();
 		double d = Double.parseDouble(eingabe);
@@ -250,9 +250,9 @@ public class CUI {
 				System.out.println("Bitte gib die Portionsgr��e ein.");
 				String portion = liesEingabe();
 				packungsGroesse = Integer.parseInt(portion);
-				shopVer.fuegeArtikelEin(artikelName, menge, beschreibung, d, packungsGroesse, aktuellerBenutzer); // mehrfachartikel
+				shopVer.fuegeArtikelEin(artikelName, menge, d, packungsGroesse, aktuellerBenutzer); // mehrfachartikel
 			} else if (mehrfach.equals("n")) {
-				shopVer.fuegeArtikelEin(artikelName, menge, beschreibung, d, aktuellerBenutzer);
+				shopVer.fuegeArtikelEin(artikelName, menge, d, aktuellerBenutzer);
 	
 			} else {
 				throw new IOException("Bitte entscheide dich f�r ja oder nein.");

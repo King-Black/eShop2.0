@@ -6,20 +6,20 @@ public class Artikel {
 	private int artikelNummer;
 	private String artikelName;
 	private int menge;
-	private String beschreibung;
+	//private String beschreibung;
 	private double preis;
 	
-	public Artikel(int artikelNummer, String artikelName, int menge, String beschreibung, double preis){
+	public Artikel(int artikelNummer, String artikelName, int menge,  double preis){
 		this.artikelNummer = artikelNummer;
 		this.artikelName = artikelName;
 		this.menge = menge;
-		this.beschreibung = beschreibung;
+		//this.beschreibung = beschreibung;
 		this.preis = preis;
 		
 	}
 	
 	public String toString() {
-		return ("Nr: " + artikelNummer + " | Titel: " + artikelName + " | Anzahl: " + menge + " | Beschreibung: " + beschreibung + " | Einzelpreis: " + preis);
+		return ("Nr: " + artikelNummer + " | Titel: " + artikelName + " | Anzahl: " + menge + " | Einzelpreis: " + preis);
 	}
 	
 	public int getArtikelNummer(){
@@ -38,13 +38,13 @@ public class Artikel {
 		this.artikelName = artikelName;
 	}
 	
-	public String getBeschreibung(){
+	/*public String getBeschreibung(){
 		return this.beschreibung;
 	}
 	
 	public void setBeschreibung(String beschreibung){
 		this.beschreibung = beschreibung;
-	}
+	}*/
 	
 	public double getPreis(){
 		return this.preis;

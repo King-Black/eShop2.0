@@ -35,13 +35,13 @@ public class ShopVerwaltung {
 		erVer = new EreignisVerwaltung();
 	}
 	
-	public void fuegeArtikelEin(String artikelName, int menge, String beschreibung, double d, User akteur) throws EinlagernException{ // hier fehlt ArtikelExistiertBereitsException
-		Artikel a = artVer.einfuegen(artikelName, menge, beschreibung, d);
+	public void fuegeArtikelEin(String artikelName, int menge, double d, User akteur) throws EinlagernException{ // hier fehlt ArtikelExistiertBereitsException
+		Artikel a = artVer.einfuegen(artikelName, menge, d);
 		erVer.ereignisEinfuegen(akteur, a, a.getArtikelBestand(), "Neuer Artikel erstellt.");
 	}
 	
-	public void fuegeArtikelEin(String artikelName, int menge, String beschreibung, double d, int packungsGroesse, User akteur) throws EinlagernException{ // hier fehlt ArtikelExistiertBereitsException
-		MehrfachArtikel a = artVer.einfuegen(artikelName, menge, beschreibung, d, packungsGroesse);
+	public void fuegeArtikelEin(String artikelName, int menge, double d, int packungsGroesse, User akteur) throws EinlagernException{ // hier fehlt ArtikelExistiertBereitsException
+		MehrfachArtikel a = artVer.einfuegen(artikelName, menge, d, packungsGroesse);
 		erVer.ereignisEinfuegen(akteur, a, a.getArtikelBestand(), "Neuer Artikel erstellt.");
 	}
 	
