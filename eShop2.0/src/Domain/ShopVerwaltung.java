@@ -1,6 +1,9 @@
 package Domain;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -9,10 +12,13 @@ import exceptions.ArtikelNichtGefundenException;
 import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 import exceptions.EinlagernException;
 import exceptions.NichtGenugAufLagerException;
+import exceptions.UserNichtGefundenException;
+import exceptions.WarenkorbLeerException;
 import Valueobjects.Artikel;
 import Valueobjects.Ereignis;
 import Valueobjects.Kunde;
 import Valueobjects.MehrfachArtikel;
+import Valueobjects.Rechnung;
 import Valueobjects.User;
 import Valueobjects.Warenkorb;
 
@@ -163,9 +169,37 @@ public class ShopVerwaltung {
 		return userVer.userLogin(name, passwort);
 	}
 
-	public void rechnungErstellen(Kunde aktuellerBenutzer) {
-		// TODO Auto-generated method stub
-		
+	public Rechnung rechnungErstellen(Kunde akteur) throws ArtikelNichtGefundenException, WarenkorbLeerException, UserNichtGefundenException{
+		// key == Artikel
+		akteur = (Kunde)userVer.findUserByNumber(akteur.getNummer());
+		HashMap<Artikel, Integer> warenkorb = akteur.getWarenkorb().getInhalt();
+		System.out.println(warenkorb);
+		if(warenkorb.isEmpty()){
+			throw new WarenkorbLeerException();
+		} else {
+			// Artikelmenge im Artikelbestand verringern
+			for(Artikel key : warenkorb.keySet()) {
+				artVer.setArtikelMenge(key.getArtikelNummer(), (warenkorb.get(key)*-(1))); 
+
+				erVer.ereignisEinfuegen(akteur, key, warenkorb.get(key), "Artikel gekauft. (Rechnung wurde erstellt)");
+		    }
+		}
+		Rechnung rechnung = new Rechnung(akteur, akteur.getWarenkorb(), new Date());
+//		warenkorbLeeren(akteur);
+		return rechnung;
+	}
+	
+	public void ladeDaten() throws FileNotFoundException, IOException, ClassNotFoundException {
+		artVer.ladeDaten(); //funktioniert
+		userVer.ladeDaten(); // user objekte
+		erVer.ladeDaten();			
+	
+	}
+	
+	public void speichereDaten() throws FileNotFoundException, IOException {
+		artVer.schreibeDaten();
+		userVer.schreibeDaten(); //user objekte
+		erVer.schreibeDaten();
 	}
 	
 }

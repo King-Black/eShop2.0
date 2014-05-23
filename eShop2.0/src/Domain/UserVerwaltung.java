@@ -1,5 +1,12 @@
 package Domain;
 
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -82,4 +89,55 @@ public class UserVerwaltung {
 			//exception UserNichtVorhandenException
 		}
 	}
+	
+	public void schreibeDaten() throws FileNotFoundException, IOException {
+		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("User.ser")); 
+		// hier schleife in der dir jeweiligen objekte (artikel, user, ereignisse durchgegangen werden
+		
+		Iterator<User> it = userBestand.iterator();
+		// Artikel erstellen
+		User user = null;
+		// Artikelverzeichnis durchlaufen
+		int count = 0;
+		while (it.hasNext()) {
+			user = it.next();
+			// artikel in Datei speichern
+			out.writeObject(user);
+			count ++;
+		}
+		System.out.println(count + " User gespeichert.");
+		// muss aufgerufen werden, bevor der datenstrom zur eingabe verwendet werden soll
+		out.close();
+	}
+	
+	public void ladeDaten() throws FileNotFoundException, IOException, ClassNotFoundException{
+		int count = 0;
+		ObjectInputStream in = new ObjectInputStream(new FileInputStream("User.ser"));
+		userBestand.clear();
+		try {  
+			User u = null;
+			for(;;) {
+				u = (User) in.readObject();
+				count++;
+				userBestand.add(u);
+				if (u.getNummer() > this.laufnr)
+					this.laufnr = u.getNummer();
+			}
+		} catch (EOFException e) { // wg. readObject
+			System.out.println("Es wurden " + count + " User geladen.");
+		} catch (IOException e) {
+			System.out.println(e);
+		} catch (ClassNotFoundException e) { // wg readObject
+			System.out.println(e);
+		} finally {
+			try {
+				if (in!=null) {
+					in.close();
+				} 
+			} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+	}
+	
 }
