@@ -1,8 +1,7 @@
 package GUI;
 
-import javax.swing.JFrame;
-
 public class HauptFenster extends JFrame{
-	
+	public static final String ShopVerwaltung = null;
+	JTabbedPane tabsPanel;
 
 }
