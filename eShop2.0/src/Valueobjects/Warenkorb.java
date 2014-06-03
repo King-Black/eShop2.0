@@ -1,5 +1,6 @@
 package Valueobjects;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class Warenkorb {
@@ -44,6 +45,11 @@ public class Warenkorb {
 	
 	public void setWarenkorb(HashMap<Artikel, Integer> w) {
 		warenkorb = w;
+	}
+
+	public Collection<Position> getPositionen() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
