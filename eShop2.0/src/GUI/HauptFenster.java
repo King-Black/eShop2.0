@@ -5,12 +5,11 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-import eshop.client.domain.EShopVerwaltung;
-import eshop.client.ui.gui.ArtikelPanel;
-import eshop.client.ui.gui.HauptFenster;
-import eshop.client.ui.gui.LagerEreignisPanel;
-import eshop.client.ui.gui.VerwaltungsPanel;
 import Domain.ShopVerwaltung;
+import GUI.ArtikelPanel;
+import GUI.HauptFenster;
+import GUI.LagerEreignisPanel;
+import GUI.VerwaltungsPanel;
 import Valueobjects.Artikel;
 import Valueobjects.User;
 

@@ -16,7 +16,7 @@ import Valueobjects.Warenkorb;
 
 public class WarenkorbTableModel extends AbstractTableModel {
 		//Spaltenüberschriften
-		private static final String[] COLUMN_NAMES = new String[] {"ID", "Artikel", "Menge", "Verkaufseinheit", "Preis", "Stückpreis"};
+		private static final String[] COLUMN_NAMES = new String[] {"Nr.", "Artikel", "Menge", "Verkaufseinheit", "Preis", "Stückpreis"};
 		//Datentypen der Spalten
 		private static final Class<?>[] COLUMN_CLASSES = new Class<?>[]{Integer.class, String.class, Integer.class, String.class, String.class, String.class};
 		private Kunde k;
