@@ -61,5 +61,11 @@ public class Artikel {
 	public void setArtikelBestand(int menge){
 		this.menge = menge;
 	}
+
+	public String getBeschreibung() {
+		// TODO Auto-generated method stub
+		return null;
+		//return this.beschreibung
+	}
 	
 }
