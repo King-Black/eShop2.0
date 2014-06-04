@@ -51,22 +51,22 @@ public class WarenkorbTableModel extends AbstractTableModel {
 			switch(col) {
 			case 0:
 				//1. Spalte: ID
-				return p.getArtikel().getId();
+				return p.getArtikel().getArtikelNummer();
 			case 1:
 				//2. Spalte: Name
-				return p.getArtikel().getName();
+				return p.getArtikel().getArtikelName();
 			case 2:
 				//3. Spalte: Lagerbestand
 				return p.getMenge();
 			case 3:
 				//4. Spalte: Massengut?
-				return massengut ? "" + tmp.getVerkaufsEinheit() : " ";
+				return massengut ? "" + tmp.getPackungsgroesse() : " ";
 			case 4:
 				//5. Spalte: Gesamtpreis
-				return massengut ? (tmp.getVerkaufsEinheit() * p.getArtikel().getStueckPreis()) + "€" : p.getArtikel().getStueckPreis() + "€";
+				return massengut ? (tmp.getPackungsgroesse() * p.getArtikel().getPreis()) + "€" : p.getArtikel().getStueckPreis() + "€";
 			case 5:
 				//6. Spalte: Stückpreis
-				return massengut ?  p.getArtikel().getStueckPreis() + "€" : " ";
+				return massengut ?  p.getArtikel().getPreis() + "€" : " ";
 			default:
 				return null;
 			}

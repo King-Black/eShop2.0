@@ -18,8 +18,6 @@ import javax.swing.JPasswordField;
 
 import exceptions.BereitsEingeloggtException;
 import exceptions.KennwortFalschException;
-import exceptions.PersonIdNichtGefundenException;
-import exceptions.PersonTypNichtGefundenException;
 
 /**
  * Klasse zur Erstellung eines Login-Fensters.
@@ -104,21 +102,13 @@ public class EinloggenFenster extends JDialog {
 				//lässt den Nutzer seine Eingab auch per Enter-Taste bestätigen und loggt ihn ein:
 				if (e.getKeyCode() == KeyEvent.VK_ENTER){
 					try {
-						HauptFenster.benutzer = HauptFenster.shopVerwaltung.einloggen(Integer.parseInt(gui.idText.getText()),
+						HauptFenster.benutzer = HauptFenster.shopVerwaltung.userLogin(Integer.parseInt(gui.idText.getText()),
 								gui.personTypComboBox.getSelectedIndex(), String.valueOf(gui.passwortText.getPassword()));
 						erfolg = true;
 						gui.dispose();
 					} catch (NumberFormatException e1) {
 						JOptionPane dialog = new JOptionPane();
 						JOptionPane.showMessageDialog(EinloggenFenster.this, "Bitte geben Sie eine Zahl ein.", "Error", JOptionPane.ERROR_MESSAGE);
-						dialog.setVisible(true);
-					} catch (PersonIdNichtGefundenException e1) {
-						JOptionPane dialog = new JOptionPane();
-						JOptionPane.showMessageDialog(EinloggenFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-						dialog.setVisible(true);
-					} catch (PersonTypNichtGefundenException e1) {
-						JOptionPane dialog = new JOptionPane();
-						JOptionPane.showMessageDialog(EinloggenFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						dialog.setVisible(true);
 					} catch (KennwortFalschException e1) {
 						JOptionPane dialog = new JOptionPane();
@@ -153,21 +143,13 @@ public class EinloggenFenster extends JDialog {
 			public void actionPerformed(ActionEvent e){
 				//loggt den Benutzer per Klick auf den OK-Button ein und gibt ggf. Fehlermeldungen aus:
 				try {
-					HauptFenster.benutzer = HauptFenster.eShopVerwaltung.einloggen(Integer.parseInt(gui.idText.getText()),
+					HauptFenster.benutzer = HauptFenster.shopVerwaltung.userLogin(Integer.parseInt(gui.idText.getText()),
 							gui.personTypComboBox.getSelectedIndex(), String.valueOf(gui.passwortText.getPassword()));
 					erfolg = true;
 					gui.dispose();
 				} catch (NumberFormatException e1) {
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(EinloggenFenster.this, "Bitte geben Sie eine Zahl ein.", "Error", JOptionPane.ERROR_MESSAGE);
-					dialog.setVisible(true);
-				} catch (PersonIdNichtGefundenException e1) {
-					JOptionPane dialog = new JOptionPane();
-					JOptionPane.showMessageDialog(EinloggenFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-					dialog.setVisible(true);
-				} catch (PersonTypNichtGefundenException e1) {
-					JOptionPane dialog = new JOptionPane();
-					JOptionPane.showMessageDialog(EinloggenFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					dialog.setVisible(true);
 				} catch (KennwortFalschException e1) {
 					JOptionPane dialog = new JOptionPane();
