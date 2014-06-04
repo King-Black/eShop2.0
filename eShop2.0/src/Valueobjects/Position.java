@@ -1,8 +1,6 @@
 package Valueobjects;
 
-import java.io.Serializable;
-
-import eshop.client.valueobjects.Artikel;
+import Valueobjects.Artikel;
 
 public class Position {
 		
