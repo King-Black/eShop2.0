@@ -3,6 +3,9 @@ package Valueobjects;
 import java.util.Collection;
 import java.util.HashMap;
 
+import exceptions.ArtikelNichtGefundenException;
+import exceptions.WarenkorbLeerException;
+
 public class Warenkorb {
 
 	private HashMap<Artikel, Integer> warenkorb = new HashMap<Artikel, Integer>();
@@ -23,19 +26,23 @@ public class Warenkorb {
 		}
 	}	
 	
-	public void artikelEntfernen(Artikel a){
+	public void artikelEntfernen(Artikel a) throws WarenkorbLeerException{
 		if(warenkorb.containsKey(a)) {
 			warenkorb.remove(a);
 		} else{
 			//exception warenkorb ist leer
+			WarenkorbLeerException e = new WarenkorbLeerException();
+			throw e;
 		}
 	}
 	
-	public void leeren(){
+	public void leeren() throws WarenkorbLeerException{
 		if(!warenkorb.isEmpty()){
 			warenkorb.clear();
 		} else {
 			//exception warenkorb ist leer
+			WarenkorbLeerException e = new WarenkorbLeerException();
+			throw e;
 		}
 	}
 	
