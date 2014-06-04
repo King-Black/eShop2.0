@@ -158,12 +158,13 @@ public class VerwaltungsPanel extends JPanel {
 				hauptFenster.pack();
 				//loggt den Benutzer aus und setzt den Benutzer des Hauptfensters auf null:
 				try {
-					HauptFenster.eShopVerwaltung.ausloggen(HauptFenster.benutzer);
+					HauptFenster.shopVerwaltung.ausloggen(HauptFenster.benutzer);
 					HauptFenster.benutzer = null;
 				} catch (NichtEingeloggtException e1) {
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(VerwaltungsPanel.this, "Sie müssen sich erst einloggen, bevor Sie sich ausloggen können.", "Error", JOptionPane.ERROR_MESSAGE);
 					dialog.setVisible(true);
+					//evtl über UserVerwaltung ausloggen?!
 				}
 			}
 		};
@@ -212,8 +213,7 @@ public class VerwaltungsPanel extends JPanel {
 					Kunde k = (Kunde)HauptFenster.benutzer;
 					registrierenFenster.setTitle("Adresse ändern");
 					registrierenFenster.add(registrierenFenster.getAktuelleAdressePanel(), BorderLayout.NORTH);
-					registrierenFenster.aktuelleAdresseText.setText(k.getAdresse().getStrasse() + "\n"
-							+ k.getAdresse().getPLZ() + " " + k.getAdresse().getStadt());
+					registrierenFenster.aktuelleAdresseText.setText(k.getAdresse());
 					registrierenFenster.add(registrierenFenster.getAdressPanel(), BorderLayout.CENTER);
 				}
 				registrierenFenster.pack();

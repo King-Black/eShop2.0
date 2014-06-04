@@ -228,6 +228,7 @@ public class ArtikelPanel extends JPanel {
 				int ausgewaehlteSpalte = artikelTabelle.getSelectedRow();
 				ausgewaehlteArtikelId = (int)artikelTabelle.getModel().getValueAt(ausgewaehlteSpalte, 0);
 				try {
+					//Shopverwaltung findArtikelByNumber
 					ausgewaehlterArtikel = HauptFenster.shopVerwaltung.findeArtikel(ausgewaehlteArtikelId);
 					beschreibungText.setText(ausgewaehlterArtikel.getBeschreibung());
 				} catch (NichtGefundenException e1) {
@@ -376,20 +377,20 @@ public class ArtikelPanel extends JPanel {
 				}
 				
 				//holt sich die neue Artikel-ID aus der EShopVerwaltung:
-				int id = HauptFenster.eShopVerwaltung.getNeueArtikelId();
+				int id = HauptFenster.shopVerwaltung.getNeueArtikelId();
 				Artikel a = null;
 				
 				//prüft, ob der neue Artikel ein Massengut ist oder nicht, legt den Artikel an
 				//und wirft ggf. Exceptions:
 				try {
 					if(einheit > 1){
-						a = new MassengutArtikel(id, name, beschreibung, menge, mindestBestand, preis, einheit);
-						HauptFenster.eShopVerwaltung.artikelAnlegen(a);
+						a = new MehrfachArtikel(artikelName, menge, d, packungsGroesse);
+						HauptFenster.shopVerwaltung.artikelAnlegen(a);
 					}else{
-						a = new Artikel(id, name, beschreibung, menge, mindestBestand, preis);
-						HauptFenster.eShopVerwaltung.artikelAnlegen(a);
+						a = new Artikel(artikelName, menge, d);
+						HauptFenster.shopVerwaltung.fuegeArtikelEin(a);
 					}
-					HauptFenster.eShopVerwaltung.lagerEreignisEinfuegen(1, HauptFenster.benutzer, a, menge);
+					HauptFenster.shopVerwaltung.lagerEreignisEinfuegen(1, HauptFenster.benutzer, a, menge);
 				} catch (BereitsVorhandenException e) {
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(ArtikelPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
