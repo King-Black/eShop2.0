@@ -66,14 +66,14 @@ public class ShopVerwaltung {
 		return k;
 	}
 	
-	public Kunde artikelAusWarenkorb(int artID, Kunde akteur) throws ArtikelNichtGefundenException{	
+	public Kunde artikelAusWarenkorb(int artID, Kunde akteur) throws ArtikelNichtGefundenException, WarenkorbLeerException{	
 		Artikel a = artVer.findArtikelByNumber(artID);
 		Kunde kunde = warkoVer.artikelAusWarenkorb(a, (Kunde)userVer.findUserByNumber(akteur.getNummer()));
 		erVer.ereignisEinfuegen(akteur, a, a.getArtikelBestand(), "Artikel " + a.getArtikelName() + " aus dem Warenkorb entfernt.");
 		return kunde;
 	}
 	
-	public Kunde warenkorbLeeren(Kunde akteur){
+	public Kunde warenkorbLeeren(Kunde akteur) throws WarenkorbLeerException{
 		akteur = (Kunde)userVer.findUserByNumber(akteur.getNummer());
 		akteur.getWarenkorb().leeren();
 		return akteur;

@@ -8,6 +8,7 @@ import Valueobjects.MehrfachArtikel;
 import Valueobjects.User;
 import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 import exceptions.NichtGenugAufLagerException;
+import exceptions.WarenkorbLeerException;
 
 public class WarenkorbVerwaltung {
 	
@@ -35,7 +36,7 @@ public class WarenkorbVerwaltung {
 		//return k;
 	}
 
-	public Kunde artikelAusWarenkorb(Artikel artikel, Kunde user){		
+	public Kunde artikelAusWarenkorb(Artikel artikel, Kunde user) throws WarenkorbLeerException{		
 		user.getWarenkorb().artikelEntfernen(artikel);
 		return user;
 	}
