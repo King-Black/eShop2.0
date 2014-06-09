@@ -91,7 +91,7 @@ public class UserVerwaltung {
 	}
 	
 	public void schreibeDaten() throws FileNotFoundException, IOException {
-		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("User.ser")); 
+		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("User.txt")); 
 		// hier schleife in der dir jeweiligen objekte (artikel, user, ereignisse durchgegangen werden
 		
 		Iterator<User> it = userBestand.iterator();
