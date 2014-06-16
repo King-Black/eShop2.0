@@ -40,7 +40,7 @@ public class WarenkorbTableModel extends AbstractTableModel {
 		@Override
 		public int getRowCount() {
 			return w.getAnzahlPositionen();
-		}
+			}
 		
 		public Object getValueAt(int row, int col) {
 			Position p = this.getPosition(row);
