@@ -37,14 +37,14 @@ public class ShopVerwaltung {
 		erVer = new EreignisVerwaltung();
 	}
 	
-	public void fuegeArtikelEin(String artikelName, int menge, double d, User akteur) throws EinlagernException{ // hier fehlt ArtikelExistiertBereitsException
-		Artikel a = artVer.einfuegen(artikelName, menge, d);
-		erVer.ereignisEinfuegen(akteur, a, a.getArtikelBestand(), "Neuer Artikel erstellt.");
+	public void fuegeArtikelEin(String artikelName, int menge, double d, float stueckPreis) throws EinlagernException{ // hier fehlt ArtikelExistiertBereitsException
+		Artikel a = artVer.einfuegen(artikelName, menge, d, stueckPreis);
+		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Neuer Artikel erstellt.");
 	}
 	
-	public void fuegeArtikelEin(String artikelName, int menge, double d, int packungsGroesse, User akteur) throws EinlagernException{ // hier fehlt ArtikelExistiertBereitsException
-		MehrfachArtikel a = artVer.einfuegen(artikelName, menge, d, packungsGroesse);
-		erVer.ereignisEinfuegen(akteur, a, a.getArtikelBestand(), "Neuer Artikel erstellt.");
+	public void fuegeArtikelEin(String artikelName, int menge, double d, int packungsGroesse, float stueckPreis) throws EinlagernException{ // hier fehlt ArtikelExistiertBereitsException
+		MehrfachArtikel a = artVer.einfuegen(artikelName, menge, d, packungsGroesse, stueckPreis);
+		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Neuer Artikel erstellt.");
 	}
 	
 	public void fuegeUserEin(String name, char[] passwort, String anrede, String vorName, String nachName){
@@ -71,7 +71,7 @@ public class ShopVerwaltung {
 	public Kunde artikelAusWarenkorb(int artID, Kunde akteur) throws ArtikelNichtGefundenException, WarenkorbLeerException{	
 		Artikel a = artVer.findArtikelByNumber(artID);
 		Kunde kunde = warkoVer.artikelAusWarenkorb(a, (Kunde)userVer.findUserByNumber(akteur.getNummer()));
-		erVer.ereignisEinfuegen(akteur, a, a.getArtikelBestand(), "Artikel " + a.getArtikelName() + " aus dem Warenkorb entfernt.");
+		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Artikel " + a.getArtikelName() + " aus dem Warenkorb entfernt.");
 		return kunde;
 	}
 	
@@ -112,7 +112,7 @@ public class ShopVerwaltung {
 			artVer.setArtikelMenge(nummer, anzahl);		
 	
 			// aus nummer und anzahl muss ich den rest herausfinden
-			erVer.ereignisEinfuegen(akteur, derWars, anzahl, "Bestandsanzahl ge�ndert.");
+			erVer.ereignisEinfuegen(derWars, anzahl, "Bestandsanzahl geaendert.");
 		}
 	}
 	
@@ -163,7 +163,7 @@ public class ShopVerwaltung {
 	
 	public void loescheArtikel(int artID, User aktuellerBenutzer) throws ArtikelNichtGefundenException{
 		Artikel a = artVer.findArtikelByNumber(artID);
-		erVer.ereignisEinfuegen(aktuellerBenutzer, a, a.getArtikelBestand(), "Artikel gel�scht.");
+		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Artikel geloescht."); //aktuellerBenutzer,
 		artVer.loescheArtikel(a);		
 	}
 	
@@ -183,11 +183,11 @@ public class ShopVerwaltung {
 			for(Artikel key : warenkorb.keySet()) {
 				artVer.setArtikelMenge(key.getArtikelNummer(), (warenkorb.get(key)*-(1))); 
 
-				erVer.ereignisEinfuegen(akteur, key, warenkorb.get(key), "Artikel gekauft. (Rechnung wurde erstellt)");
+				erVer.ereignisEinfuegen(key, warenkorb.get(key), "Artikel gekauft. (Rechnung wurde erstellt)");
 		    }
 		}
 		Rechnung rechnung = new Rechnung(akteur, akteur.getWarenkorb(), new Date());
-//		warenkorbLeeren(akteur);
+//		warenkorbLeeren,
 		return rechnung;
 	}
 	

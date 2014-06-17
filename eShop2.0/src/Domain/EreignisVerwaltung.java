@@ -21,8 +21,8 @@ public class EreignisVerwaltung {
 	
 	private List<Ereignis> protokoll = new Vector<Ereignis>();
 
-	public void ereignisEinfuegen(User akteur, Artikel derWars, int artikelBestand, String aktion) {
-		Ereignis ereignis = new Ereignis(akteur, derWars, artikelBestand, aktion);
+	public void ereignisEinfuegen(Artikel derWars, int artikelBestand, String aktion) {
+		Ereignis ereignis = new Ereignis(derWars, artikelBestand, aktion);
 		protokoll.add(ereignis);
 	}
 
