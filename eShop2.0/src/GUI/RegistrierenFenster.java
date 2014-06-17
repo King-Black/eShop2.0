@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class RegistrierenFenster extends JFrame{
 
 	public RegistrierenFenster() {
