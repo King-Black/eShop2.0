@@ -7,16 +7,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import exceptions.BereitsEingeloggtException;
-import exceptions.KennwortFalschException;
 import Valueobjects.Kunde;
 import Valueobjects.Mitarbeiter;
 import Valueobjects.User;
+import exceptions.BereitsEingeloggtException;
+import exceptions.KennwortFalschException;
 
 public class UserVerwaltung {
 	private List<User> userBestand = new Vector<User>();
@@ -24,11 +23,13 @@ public class UserVerwaltung {
 	
 	public void einfuegen(String name, char[] passwort, String anrede, String vorName, String nachName){
 		int nr = bestimmeNr();
+		@SuppressWarnings("unused")
 		User einUser = new Mitarbeiter(name, passwort, nr, anrede, vorName, nachName);
 	}
 	
 	public void einfuegen(String name, char[] passwort, String anrede, String vorName, String nachName, String adresse, int plz, String ort){
 		int nr = bestimmeNr();
+		@SuppressWarnings("unused")
 		User einUser = new Kunde(name, passwort, nr, anrede, vorName, nachName, adresse, plz, ort);
 	}
 	

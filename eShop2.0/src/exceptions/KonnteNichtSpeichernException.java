@@ -1,5 +1,6 @@
 package exceptions;
 
+@SuppressWarnings("serial")
 public class KonnteNichtSpeichernException extends Exception {
 	/**
 	 * Wird geworfen, wenn die EShop-Daten nicht in der Datei gespeichert werden konnten.

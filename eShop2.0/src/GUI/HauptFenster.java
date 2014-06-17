@@ -14,6 +14,7 @@ import Valueobjects.Artikel;
 import Valueobjects.User;
 
 
+@SuppressWarnings("serial")
 public class HauptFenster extends JFrame{
 	JTabbedPane tabsPanel;
 	private ArtikelPanel artikelPanel;

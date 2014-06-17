@@ -5,6 +5,7 @@ import Valueobjects.Position;
 import Valueobjects.User;
 //import Valueobjects.LagerEreignis;
 
+@SuppressWarnings("serial")
 public class BereitsVorhandenException extends Exception {
 	
 	/**

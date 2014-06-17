@@ -14,6 +14,7 @@ import Valueobjects.Warenkorb;
  *
  */
 
+@SuppressWarnings("serial")
 public class WarenkorbTableModel extends AbstractTableModel {
 		//Spaltenüberschriften
 		private static final String[] COLUMN_NAMES = new String[] {"Nr.", "Artikel", "Menge", "Verkaufseinheit", "Preis", "Stückpreis"};
@@ -63,7 +64,7 @@ public class WarenkorbTableModel extends AbstractTableModel {
 				return massengut ? "" + tmp.getPackungsgroesse() : " ";
 			case 4:
 				//5. Spalte: Gesamtpreis
-				return massengut ? (tmp.getPackungsgroesse() * p.getArtikel().getPreis()) + "€" : p.getArtikel().getStueckPreis() + "€";
+				return massengut ? (tmp.getPackungsgroesse() * tmp.getStueckPreis()) + "€" : p.getArtikel().getPreis() + "€";
 			case 5:
 				//6. Spalte: Stückpreis
 				return massengut ?  p.getArtikel().getPreis() + "€" : " ";

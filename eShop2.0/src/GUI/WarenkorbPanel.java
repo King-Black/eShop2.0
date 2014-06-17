@@ -16,22 +16,15 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
-
-
+import Valueobjects.Kunde;
+import Valueobjects.Rechnung;
 import exceptions.BereitsVorhandenException;
-import exceptions.FalscherWertException;
-import exceptions.KonnteNichtSpeichernException;
-import GUI.HauptFenster;
-import GUI.RechnungsFenster;
-import GUI.WarenkorbPanel;
-import GUI.WarenkorbTableModel;
 import exceptions.NichtEingeloggtException;
 import exceptions.NichtGenugAufLagerException;
 import exceptions.WarenkorbLeerException;
-import Valueobjects.Kunde;
-import Valueobjects.Rechnung;
 
 
+@SuppressWarnings("serial")
 public class WarenkorbPanel extends JPanel{
 	private JPanel centerPanel;
 	private JPanel eastPanel;
@@ -154,23 +147,23 @@ public class WarenkorbPanel extends JPanel{
 						JOptionPane.showMessageDialog(WarenkorbPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						fehler.setVisible(true);
 						return;
-					} catch (FalscherWertException e) {
+					} /*catch (FalscherWertException e) {
 						JOptionPane fehler = new JOptionPane();
 						JOptionPane.showMessageDialog(WarenkorbPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						fehler.setVisible(true);
 						return;
-					}
+					}*//*Wo soll die Exception geworfen werden?*/
 				}
-
+					
 				//speichern:
-				try {
+			/*	try {
 					HauptFenster.shopVerwaltung.artikelSpeichern();
 					HauptFenster.shopVerwaltung.lagerEreignisseSpeichern();
 				} catch (KonnteNichtSpeichernException e) {
 					JOptionPane dialog2 = new JOptionPane();
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					dialog2.setVisible(true);
-				}
+				}*/
 			}
 		};
 		return kaufen;
@@ -200,7 +193,12 @@ public class WarenkorbPanel extends JPanel{
 						return;
 					}else{
 						//ansonsten Warenkorb leeren und Tabelle updaten:
-						k.getWarenkorb().leeren();
+						try {
+							k.getWarenkorb().leeren();
+						} catch (WarenkorbLeerException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						WarenkorbPanel.this.tableModel.fireTableDataChanged();
 					}
 				}

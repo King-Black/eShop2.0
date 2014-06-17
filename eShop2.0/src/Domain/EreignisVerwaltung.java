@@ -15,7 +15,6 @@ import java.util.Vector;
 
 import Valueobjects.Artikel;
 import Valueobjects.Ereignis;
-import Valueobjects.User;
 
 public class EreignisVerwaltung {
 	

@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import CUI.CUI;
 import exceptions.ArtikelNichtGefundenException;
 import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 import exceptions.BereitsEingeloggtException;
@@ -11,10 +15,11 @@ import exceptions.KennwortFalschException;
 import Valueobjects.Kunde;
 import Valueobjects.User;
 import Domain.ShopVerwaltung;
+import GUI.HauptFenster;
 
 public class CUI {
 	
-	private ShopVerwaltung shopVer;
+	private static  ShopVerwaltung shopVer;
 	private	User aktuellerBenutzer;
 	private String eingabe;
 	private BufferedReader in;
@@ -27,10 +32,23 @@ public class CUI {
 	
 	public static void main(String[] args){
 		
-		CUI shop = new CUI();
+		//CUI shop = new CUI();
 //shop.shopVer.fuegeArtikelEin("SECHSSTEIN", 9.99, null, 48, 6);
-		shop.run();
+		//shop.run();
+		CUI.guiStarten();
 		
+	}
+	
+	private static  void guiStarten() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		@SuppressWarnings("unused")
+		HauptFenster h = new HauptFenster(shopVer);
 	}
 	
 	public void run() {
@@ -122,7 +140,7 @@ public class CUI {
 		int plz = Integer.parseInt(liesEingabe());
 		System.out.println("Ort:");
 		String ort = liesEingabe();
-		this.shopVer.fuegeUserEin(name, passwort.toCharArray(), anrede, vorName, nachName, adresse, plz, ort);
+		CUI.shopVer.fuegeUserEin(name, passwort.toCharArray(), anrede, vorName, nachName, adresse, plz, ort);
 	}
 	
 	private void gibArtikellisteAus() {
@@ -208,7 +226,7 @@ public class CUI {
 		System.out.println("Nachname:");
 		String nachName = liesEingabe();
 		try{	
-			this.shopVer.fuegeUserEin(benutzername, passwort.toCharArray(), anrede, vorName, nachName);
+			CUI.shopVer.fuegeUserEin(benutzername, passwort.toCharArray(), anrede, vorName, nachName);
 		}
 		catch(Exception e) {
 			System.out.println(e);				
@@ -234,9 +252,10 @@ public class CUI {
 	}
 	
 	private void neuenArtikelAnlegen() throws IOException{
-		System.out.println("Moechtes du einen Mehrfachartikel speichern? (j f�r ja und n f�r nein)");
+		System.out.println("Moechtes du einen Mehrfachartikel speichern? (j fuer ja und n fuer nein)");
 		String mehrfach = liesEingabe();
 		int packungsGroesse = 0;
+		float stueckPreis = 0;
 		System.out.println("Name des Artikels: ");
 		String artikelName = liesEingabe();
 		System.out.println("Menge: ");
@@ -246,15 +265,17 @@ public class CUI {
 		//String beschreibung = liesEingabe();
 		System.out.println("Preis: ");
 		eingabe = liesEingabe();
-		double d = Double.parseDouble(eingabe);
+		double preis = Double.parseDouble(eingabe);
 		try{
 			if (mehrfach.equals("j")) {
 				System.out.println("Bitte gib die Portionsgr��e ein.");
 				String portion = liesEingabe();
 				packungsGroesse = Integer.parseInt(portion);
-				shopVer.fuegeArtikelEin(artikelName, menge, d, packungsGroesse, aktuellerBenutzer); // mehrfachartikel
+				String sPreis = liesEingabe();
+				stueckPreis = Float.parseFloat(sPreis);
+				shopVer.fuegeArtikelEin(artikelName, menge, preis, packungsGroesse, stueckPreis); // mehrfachartikel
 			} else if (mehrfach.equals("n")) {
-				shopVer.fuegeArtikelEin(artikelName, menge, d, aktuellerBenutzer);
+				shopVer.fuegeArtikelEin(artikelName, menge, preis);
 	
 			} else {
 				throw new IOException("Bitte entscheide dich f�r ja oder nein.");

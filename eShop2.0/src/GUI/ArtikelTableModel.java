@@ -2,14 +2,13 @@ package GUI;
 
 import javax.swing.table.AbstractTableModel;
 
-import GUI.HauptFenster;
-import Valueobjects.Artikel;
-import Valueobjects.MehrfachArtikel;
-
+@SuppressWarnings("serial")
 public class ArtikelTableModel extends AbstractTableModel{
 	//Spaltenüberschriften
+		@SuppressWarnings("unused")
 		private static final String[] COLUMN_NAMES = new String[] {"Nr.", "Artikel", "Menge", "Verkaufseinheit", "Preis", "Stückpreis"};
 		//Datentypen der Spalten
+		@SuppressWarnings("unused")
 		private static final Class<?>[] COLUMN_CLASSES = new Class<?>[]{Integer.class, String.class, Integer.class, String.class, String.class, String.class};
 		
 		/**

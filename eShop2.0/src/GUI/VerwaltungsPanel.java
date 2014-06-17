@@ -180,7 +180,7 @@ public class VerwaltungsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//erzeugt ein neues RegistrierenFenster und übergibt diesem die Aktion:
-				RegistrierenFenster registrierenFenster = new RegistrierenFenster(hauptFenster, 0);
+				RegistrierenFenster registrierenFenster = new RegistrierenFenster(/*hauptFenster, 0*/);
 				registrierenFenster.add(new JLabel("Nur Kunden können sich selbst registrieren!"), BorderLayout.NORTH);
 				
 				//stellt die benötigten Komponenten des RegistrierenFensters zusammen:
@@ -206,7 +206,7 @@ public class VerwaltungsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//erzeugt ein neues RegistrierenFenster mit der übergebenen Aktion 1:
-				RegistrierenFenster registrierenFenster = new RegistrierenFenster(hauptFenster, 1);
+				RegistrierenFenster registrierenFenster = new RegistrierenFenster(/*hauptFenster, 1*/);
 				//prüft, ob der eingeloggte Benutzer ein Kunde ist und stellt die Komponenten
 				//des RegistrierenFensters zusammen:
 				if(HauptFenster.benutzer != null && HauptFenster.benutzer instanceof Kunde){
@@ -233,7 +233,7 @@ public class VerwaltungsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//erzeugt ein neues RegistrierenFenster mit der übergebenen Aktion 2:
-				RegistrierenFenster registrierenFenster = new RegistrierenFenster(hauptFenster, 2);
+				RegistrierenFenster registrierenFenster = new RegistrierenFenster(/*hauptFenster, 2*/);
 				//prüft, ob der eingeloggte Benutzer ein Mitarbeiter ist und stellt die Komponenten
 				//des RegistrierenFensters zusammen:
 				if(HauptFenster.benutzer != null && HauptFenster.benutzer instanceof Mitarbeiter){

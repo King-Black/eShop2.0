@@ -2,6 +2,7 @@ package exceptions;
 
 import Valueobjects.Position;
 
+@SuppressWarnings("serial")
 public class NichtGefundenException extends Exception {
 	
 	/**

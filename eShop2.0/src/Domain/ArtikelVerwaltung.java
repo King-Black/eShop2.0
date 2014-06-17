@@ -25,14 +25,14 @@ public class ArtikelVerwaltung {
 		return ++laufnr;
 	}
 	
-	public Artikel einfuegen(String artikelName, int menge, double preis, float stueckPreis) throws EinlagernException{ 
+	public Artikel einfuegen(String artikelName, int menge, double preis) throws EinlagernException{ 
 		if(preis<=0||menge<=0) {
 			//exception EinlagernException
 			EinlagernException e = new EinlagernException();
 			throw e;
 		} else {
 			int artikelNummer = bestimmeNr();
-			Artikel einArtikel = new Artikel(artikelNummer, artikelName, menge, preis, stueckPreis);
+			Artikel einArtikel = new Artikel(artikelNummer, artikelName, menge, preis);
 			artikelBestand.add(einArtikel);
 			return einArtikel;
 		}

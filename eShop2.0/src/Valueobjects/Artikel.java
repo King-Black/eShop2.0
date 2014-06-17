@@ -8,15 +8,13 @@ public class Artikel {
 	private int menge;
 	//private String beschreibung;
 	private double preis;
-	private float stueckPreis;
 	
-	public Artikel(int artikelNummer, String artikelName, int menge,  double preis, float stueckPreis){
+	public Artikel(int artikelNummer, String artikelName, int menge,  double preis){
 		this.artikelNummer = artikelNummer;
 		this.artikelName = artikelName;
 		this.menge = menge;
 		//this.beschreibung = beschreibung;
-		this.preis = preis;
-		this.stueckPreis = stueckPreis;		
+		this.preis = preis;	
 	}
 	
 	public String toString() {
@@ -67,14 +65,6 @@ public class Artikel {
 		// TODO Auto-generated method stub
 		return null;
 		//return this.beschreibung
-	}
-	
-	public float getStueckPreis() {
-		return this.stueckPreis;
-	}
-	
-	public void setStueckPreis(float stueckPreis) {
-		this.stueckPreis = stueckPreis;
 	}
 	
 }

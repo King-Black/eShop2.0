@@ -272,7 +272,7 @@ public class ArtikelPanel extends JPanel {
 				//Prüft, ob ein Artikel ausgewählt ist und öffnet bei Erfolg ein Pop-Up, in welchem die Menge
 				//abgefragt wird:
 				if(ausgewaehlterArtikel != null){
-					WarenkorbFenster warenkorbPlus = new WarenkorbFenster(null, ausgewaehlterArtikel);
+					WarenkorbFenster warenkorbPlus = new WarenkorbFenster(/*null, ausgewaehlterArtikel*/);
 					warenkorbPlus.setLocationRelativeTo(hauptFenster);
 					warenkorbPlus.setVisible(true);
 				}else{
@@ -303,7 +303,7 @@ public class ArtikelPanel extends JPanel {
 					return;
 				}
 				//öffnet ein Pop-Up, in welchem die auszuführende Aktion abgefragt wird:
-				ArtikelVerwaltenFenster verwalten = new ArtikelVerwaltenFenster(hauptFenster, ArtikelPanel.this.getAusgewaehlterArtikel());
+				ArtikelVerwaltenFenster verwalten = new ArtikelVerwaltenFenster(/*hauptFenster, ArtikelPanel.this.getAusgewaehlterArtikel()*/);
 				verwalten.setLocationRelativeTo(hauptFenster);
 				verwalten.setVisible(true);
 				//teilt dem TableModel mit, dass sich die Daten geändert haben:
@@ -376,8 +376,8 @@ public class ArtikelPanel extends JPanel {
 					return;
 				}
 				
-				//holt sich die neue Artikel-ID aus der EShopVerwaltung:
-				int id = HauptFenster.shopVerwaltung.getNeueArtikelId();
+				//holt sich die neue Artikel-Nummer aus der EShopVerwaltung:
+				int nummer = HauptFenster.shopVerwaltung.getNeueArtikelNummer();
 				Artikel a = null;
 				
 				//prüft, ob der neue Artikel ein Massengut ist oder nicht, legt den Artikel an

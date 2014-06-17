@@ -8,14 +8,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import exceptions.ArtikelNichtGefundenException;
-import exceptions.ArtikelNurInEinheitenVerfuegbarException;
-import exceptions.BereitsEingeloggtException;
-import exceptions.EinlagernException;
-import exceptions.KennwortFalschException;
-import exceptions.NichtGenugAufLagerException;
-import exceptions.UserNichtGefundenException;
-import exceptions.WarenkorbLeerException;
 import Valueobjects.Artikel;
 import Valueobjects.Ereignis;
 import Valueobjects.Kunde;
@@ -23,6 +15,16 @@ import Valueobjects.MehrfachArtikel;
 import Valueobjects.Rechnung;
 import Valueobjects.User;
 import Valueobjects.Warenkorb;
+import exceptions.ArtikelNichtGefundenException;
+import exceptions.ArtikelNurInEinheitenVerfuegbarException;
+import exceptions.BereitsEingeloggtException;
+import exceptions.BereitsVorhandenException;
+import exceptions.EinlagernException;
+import exceptions.KennwortFalschException;
+import exceptions.NichtEingeloggtException;
+import exceptions.NichtGenugAufLagerException;
+import exceptions.UserNichtGefundenException;
+import exceptions.WarenkorbLeerException;
 
 public class ShopVerwaltung {
 	private ArtikelVerwaltung artVer;
@@ -37,8 +39,8 @@ public class ShopVerwaltung {
 		erVer = new EreignisVerwaltung();
 	}
 	
-	public void fuegeArtikelEin(String artikelName, int menge, double d, float stueckPreis) throws EinlagernException{ // hier fehlt ArtikelExistiertBereitsException
-		Artikel a = artVer.einfuegen(artikelName, menge, d, stueckPreis);
+	public void fuegeArtikelEin(String artikelName, int menge, double d) throws EinlagernException{ // hier fehlt ArtikelExistiertBereitsException
+		Artikel a = artVer.einfuegen(artikelName, menge, d);
 		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Neuer Artikel erstellt.");
 	}
 	
@@ -202,6 +204,11 @@ public class ShopVerwaltung {
 		artVer.schreibeDaten();
 		userVer.schreibeDaten(); //user objekte
 		erVer.schreibeDaten();
+	}
+
+	public Rechnung kaufen(Kunde k) throws NichtEingeloggtException, NichtGenugAufLagerException, BereitsVorhandenException{
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
