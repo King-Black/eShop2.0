@@ -60,7 +60,7 @@ public class EinloggenFenster extends JDialog {
 		this.add(new JLabel(""));
 		this.add(personTypComboBox);
 		this.add(new JLabel("Benutzer-ID:"));
-		this.add(idText);
+		this.add(idText); //ändern
 		this.add(new JLabel("Passwort:"));
 		this.add(passwortText);
 		this.add(okButton);
@@ -102,8 +102,8 @@ public class EinloggenFenster extends JDialog {
 				//lässt den Nutzer seine Eingab auch per Enter-Taste bestätigen und loggt ihn ein:
 				if (e.getKeyCode() == KeyEvent.VK_ENTER){
 					try {
-						HauptFenster.benutzer = HauptFenster.shopVerwaltung.userLogin(Integer.parseInt(gui.idText.getText()),
-								gui.personTypComboBox.getSelectedIndex(), String.valueOf(gui.passwortText.getPassword()));
+						HauptFenster.benutzer = HauptFenster.shopVerwaltung.userLogin(String.valueOf(gui.idText.getText()), //ändern
+								String.valueOf(gui.passwortText.getPassword()));
 						erfolg = true;
 						gui.dispose();
 					} catch (NumberFormatException e1) {
@@ -143,8 +143,8 @@ public class EinloggenFenster extends JDialog {
 			public void actionPerformed(ActionEvent e){
 				//loggt den Benutzer per Klick auf den OK-Button ein und gibt ggf. Fehlermeldungen aus:
 				try {
-					HauptFenster.benutzer = HauptFenster.shopVerwaltung.userLogin(Integer.parseInt(gui.idText.getText()),
-							gui.personTypComboBox.getSelectedIndex(), String.valueOf(gui.passwortText.getPassword()));
+					HauptFenster.benutzer = HauptFenster.shopVerwaltung.userLogin(String.valueOf(gui.idText.getText()),
+							String.valueOf(gui.passwortText.getPassword()));
 					erfolg = true;
 					gui.dispose();
 				} catch (NumberFormatException e1) {

@@ -10,7 +10,9 @@ import java.util.List;
 
 import exceptions.ArtikelNichtGefundenException;
 import exceptions.ArtikelNurInEinheitenVerfuegbarException;
+import exceptions.BereitsEingeloggtException;
 import exceptions.EinlagernException;
+import exceptions.KennwortFalschException;
 import exceptions.NichtGenugAufLagerException;
 import exceptions.UserNichtGefundenException;
 import exceptions.WarenkorbLeerException;
@@ -165,7 +167,7 @@ public class ShopVerwaltung {
 		artVer.loescheArtikel(a);		
 	}
 	
-	public User userLogin(String name, char[] passwort){
+	public User userLogin(String name, String passwort) throws KennwortFalschException, BereitsEingeloggtException{
 		return userVer.userLogin(name, passwort);
 	}
 

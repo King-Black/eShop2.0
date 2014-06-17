@@ -1,5 +1,5 @@
 package exceptions;
 
-public class BereitsEingeloggtException {
+public class BereitsEingeloggtException extends Exception {
 
 }

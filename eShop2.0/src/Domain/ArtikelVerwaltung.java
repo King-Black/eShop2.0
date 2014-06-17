@@ -25,28 +25,28 @@ public class ArtikelVerwaltung {
 		return ++laufnr;
 	}
 	
-	public Artikel einfuegen(String artikelName, int menge, double preis) throws EinlagernException{ 
+	public Artikel einfuegen(String artikelName, int menge, double preis, float stueckPreis) throws EinlagernException{ 
 		if(preis<=0||menge<=0) {
 			//exception EinlagernException
 			EinlagernException e = new EinlagernException();
 			throw e;
 		} else {
 			int artikelNummer = bestimmeNr();
-			Artikel einArtikel = new Artikel(artikelNummer, artikelName, menge, preis);
+			Artikel einArtikel = new Artikel(artikelNummer, artikelName, menge, preis, stueckPreis);
 			artikelBestand.add(einArtikel);
 			return einArtikel;
 		}
 		//return null;
 	}
 	
-	public MehrfachArtikel einfuegen(String artikelName, int menge, double preis, int packungsGroesse) throws EinlagernException{ 
+	public MehrfachArtikel einfuegen(String artikelName, int menge, double preis, int packungsGroesse, float stueckPreis) throws EinlagernException{ 
 		if(preis<=0||menge<=0) {
 			//exception EinlagernException
 			EinlagernException e = new EinlagernException();
 			throw e;
 		} else {
 			int artikelNummer = bestimmeNr();
-			MehrfachArtikel einArtikel = new MehrfachArtikel(artikelNummer, artikelName, menge, preis, packungsGroesse);
+			MehrfachArtikel einArtikel = new MehrfachArtikel(artikelNummer, artikelName, menge, preis, packungsGroesse, stueckPreis);
 			artikelBestand.add(einArtikel);
 			return einArtikel;
 		}

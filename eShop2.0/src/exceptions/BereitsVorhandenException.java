@@ -1,12 +1,11 @@
 package exceptions;
 
 import Valueobjects.Artikel;
-import Valueobjects.Kunde;
-//import Valueobjects.LagerEreignis;
-import Valueobjects.Mitarbeiter;
 import Valueobjects.Position;
+import Valueobjects.User;
+//import Valueobjects.LagerEreignis;
 
-public class BereitsVorhandenException {
+public class BereitsVorhandenException extends Exception {
 	
 	/**
 	 * Wird geworfen, wenn versucht wird einen Mitarbeiter anzulegen 
@@ -25,7 +24,7 @@ public class BereitsVorhandenException {
 	 * @param artikel Der Artikel der eingetragen werden sollte.
 	 */
 	public BereitsVorhandenException(Artikel artikel) {
-		super("Artikel " + artikel.getName() + " mit der Id: " + artikel.getArtikelNummer() + " bereits eingetragen!");
+		super("Artikel " + artikel.getArtikelName() + " mit der Nummer: " + artikel.getArtikelNummer() + " bereits eingetragen!");
 	}
 
 	/**
@@ -33,6 +32,6 @@ public class BereitsVorhandenException {
 	 * @param position Die Position die eingetragen werden sollte.
 	 */
 	public BereitsVorhandenException(Position position) {
-		super("Position mit dem Artikel: " + position.getArtikel().getName() + " bereits eingetragen!");
+		super("Position mit dem Artikel: " + position.getArtikel().getArtikelName() + " bereits eingetragen!");
 	}
 }

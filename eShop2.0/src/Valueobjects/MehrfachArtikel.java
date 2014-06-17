@@ -4,8 +4,8 @@ public class MehrfachArtikel extends Artikel {
 	
 	private int packungsGroesse;
 	
-	public MehrfachArtikel(int artikelNummer, String artikelName, int menge, double preis, int packungsGroesse){
-		super(artikelNummer, artikelName, menge, preis);
+	public MehrfachArtikel(int artikelNummer, String artikelName, int menge, double preis, int packungsGroesse, float stueckPreis){
+		super(artikelNummer, artikelName, menge, preis,stueckPreis);
 		this.packungsGroesse = packungsGroesse;
 	}
 	

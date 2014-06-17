@@ -1,5 +1,5 @@
 package exceptions;
 
-public class KennwortFalschException {
+public class KennwortFalschException extends Exception {
 
 }

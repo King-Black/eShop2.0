@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 
 import exceptions.ArtikelNichtGefundenException;
 import exceptions.ArtikelNurInEinheitenVerfuegbarException;
+import exceptions.BereitsEingeloggtException;
+import exceptions.KennwortFalschException;
 import Valueobjects.Kunde;
 import Valueobjects.User;
 import Domain.ShopVerwaltung;
@@ -67,7 +69,7 @@ public class CUI {
 			System.out.println("Dein Passwort?");	
 			String passwort = liesEingabe();
 			try {
-				aktuellerBenutzer = userLogin(name, passwort.toCharArray());
+				aktuellerBenutzer = userLogin(name, passwort);
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println(e);
@@ -127,7 +129,7 @@ public class CUI {
 		shopVer.gibArtikellisteAus();
 	}
 	
-	private User userLogin(String name, char[] passwort){
+	private User userLogin(String name, String passwort) throws KennwortFalschException, BereitsEingeloggtException{
 		return shopVer.userLogin(name, passwort);
 	}
 	

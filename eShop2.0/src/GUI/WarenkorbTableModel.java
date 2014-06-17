@@ -84,4 +84,10 @@ public class WarenkorbTableModel extends AbstractTableModel {
 			return (Position)(w.getPositionen().toArray())[row];
 		}
 
+		@Override
+		public int getRowCount() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
 }

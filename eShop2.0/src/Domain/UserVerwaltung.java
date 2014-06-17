@@ -12,6 +12,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import exceptions.BereitsEingeloggtException;
+import exceptions.KennwortFalschException;
 import Valueobjects.Kunde;
 import Valueobjects.Mitarbeiter;
 import Valueobjects.User;
@@ -38,12 +40,12 @@ public class UserVerwaltung {
 		return userBestand;
 	}
 	
-	public User userLogin(String name, char[] passwort){
+	public User userLogin(String name, String passwort) throws KennwortFalschException, BereitsEingeloggtException{
 		Iterator<User> it = userBestand.iterator();
 		while  (it.hasNext()) {
 			User user = it.next();
 			if(user.getName().equals(name)){
-				if (Arrays.equals(user.getPasswort(),passwort)) {
+				if (user.getPasswort().equals(passwort)) { //geändert von array equal
 					return user;
 				}
 			}
