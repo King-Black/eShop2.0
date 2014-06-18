@@ -377,7 +377,7 @@ public class ArtikelPanel extends JPanel {
 				}
 				
 				//holt sich die neue Artikel-Nummer aus der EShopVerwaltung:
-				int nummer = HauptFenster.shopVerwaltung.getNeueArtikelNummer();
+				int nummer = HauptFenster.shopVerwaltung.getArtikelNummer();
 				Artikel a = null;
 				
 				//prüft, ob der neue Artikel ein Massengut ist oder nicht, legt den Artikel an
