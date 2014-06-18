@@ -33,7 +33,7 @@ public class CUI {
 	public static void main(String[] args){
 		
 		//CUI shop = new CUI();
-//shop.shopVer.fuegeArtikelEin("SECHSSTEIN", 9.99, null, 48, 6);
+		//shop.shopVer.fuegeArtikelEin("SECHSSTEIN", 9.99, null, 48, 6);
 		//shop.run();
 		CUI.guiStarten();
 		
@@ -54,9 +54,9 @@ public class CUI {
 	public void run() {
 		try {
 			//shopVer.ladeDaten();
-//			char[] pw = {'1','2','3'};
-//			shopVer.fuegeUserEin("Kunde", pw, "Herr", "Axel Schweiss","Elbenweg 3", 13337, "Bruchtal", "Mittelerde");
-//			shopVer.fuegeUserEin("Mitarbeiter", pw, "Herr", "Voll iDiot");
+			char[] pw = {'1','2','3'};
+			shopVer.fuegeUserEin("Kunde", pw, "Frau", "Regina", "Regenbogen","Elbenweg 3", 13337, "Bruchtal");
+			shopVer.fuegeUserEin("Mitarbeiter", pw, "Herr", "Max", "Mustermann");
 
 //			shopVer.fuegeArtikelEin("EINSTEIN", 1.99, null, 12);
 			gibMenue();
