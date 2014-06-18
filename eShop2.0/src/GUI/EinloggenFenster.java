@@ -1,4 +1,3 @@
-package GUI;
 
 import java.awt.GridLayout;
 import java.awt.Window;

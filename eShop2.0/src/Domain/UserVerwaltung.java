@@ -21,16 +21,19 @@ public class UserVerwaltung {
 	private List<User> userBestand = new Vector<User>();
 	private int laufnr = 0;
 	
-	public void einfuegen(String name, char[] passwort, String anrede, String vorName, String nachName){
+	public void einfuegen(String name, String passwort, String anrede, String vorName, String nachName){
 		int nr = bestimmeNr();
 		@SuppressWarnings("unused")
 		User einUser = new Mitarbeiter(name, passwort, nr, anrede, vorName, nachName);
+		userBestand.add(einUser);
 	}
 	
-	public void einfuegen(String name, char[] passwort, String anrede, String vorName, String nachName, String adresse, int plz, String ort){
+	public void einfuegen(String name, String passwort, String anrede, String vorName, String nachName, String adresse, int plz, String ort){
 		int nr = bestimmeNr();
 		@SuppressWarnings("unused")
 		User einUser = new Kunde(name, passwort, nr, anrede, vorName, nachName, adresse, plz, ort);
+		userBestand.add(einUser);
+		
 	}
 	
 	private int bestimmeNr(){
@@ -43,7 +46,10 @@ public class UserVerwaltung {
 	
 	public User userLogin(String name, String passwort) throws KennwortFalschException, BereitsEingeloggtException{
 		Iterator<User> it = userBestand.iterator();
-		while  (it.hasNext()) {
+	
+		System.out.println(name);
+		System.out.println(passwort);
+		while  (it.hasNext()) {	
 			User user = it.next();
 			if(user.getName().equals(name)){
 				if (user.getPasswort().equals(passwort)) { //geändert von array equal

@@ -2,14 +2,14 @@ package Valueobjects;
 
 public class User {	
 	protected String name;
-	protected char[] passwort;
+	protected String passwort;
 	protected int nr;
 	protected String anrede;
 	protected String vorName;
 	protected String nachName;
 
 	
-	public User(String name, char[] passwort, int nr, String anrede, String vorName, String nachName){
+	public User(String name, String passwort, int nr, String anrede, String vorName, String nachName){
 		this.name = name;
 		this.passwort = passwort;
 		this.nr = nr;
@@ -63,11 +63,11 @@ public class User {
 		this.nachName = nachName;
 	}
 	
-	public char[] getPasswort(){
+	public String getPasswort(){
 		return this.passwort;
 	}
 	
-	public void setPasswort(char[] passwort){
+	public void setPasswort(String passwort){
 		this.passwort = passwort;
 	}
 }

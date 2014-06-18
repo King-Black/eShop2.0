@@ -7,7 +7,7 @@ public class Kunde extends User {
 	private String ort;
 	private Warenkorb warenkorb = new Warenkorb();
 	
-	public Kunde(String name, char[] passwort, int nr, String anrede, String vorName, String nachName, String adresse, int plz, String ort){
+	public Kunde(String name, String passwort, int nr, String anrede, String vorName, String nachName, String adresse, int plz, String ort){
 		super(name, passwort, nr, anrede, vorName, nachName);
 		this.adresse = adresse;
 		this.plz = plz;

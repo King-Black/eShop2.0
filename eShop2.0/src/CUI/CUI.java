@@ -17,27 +17,20 @@ import Valueobjects.User;
 import Domain.ShopVerwaltung;
 import GUI.HauptFenster;
 
-public class CUI {
+public class CUI implements Runnable {
 	
 	private static  ShopVerwaltung shopVer;
 	private	User aktuellerBenutzer;
 	private String eingabe;
 	private BufferedReader in;
 	
-	public CUI() { // Konstruktor
-		shopVer = new ShopVerwaltung();
+	public CUI(ShopVerwaltung sv) { // Konstruktor
+		shopVer = sv;
 		aktuellerBenutzer = null;
 		in = new BufferedReader(new InputStreamReader(System.in));
 	}
 	
-	public static void main(String[] args){
-		
-		CUI shop = new CUI();
-		//shop.shopVer.fuegeArtikelEin("SECHSSTEIN", 9.99, null, 48, 6);
-		shop.run();
-		//CUI.guiStarten();
-		
-	}
+	
 	
 	private static  void guiStarten() {
 		try {
@@ -49,15 +42,12 @@ public class CUI {
 		}
 		@SuppressWarnings("unused")
 		HauptFenster h = new HauptFenster(shopVer);
-	}
+		}
 	
 	public void run() {
 		try {
 			//shopVer.ladeDaten();
-			char[] pw = {'1','2','3'};
-			shopVer.fuegeUserEin("Kunde", pw, "Frau", "Regina", "Regenbogen","Elbenweg 3", 13337, "Bruchtal");
-			shopVer.fuegeUserEin("Mitarbeiter", pw, "Herr", "Max", "Mustermann");
-
+		
 //			shopVer.fuegeArtikelEin("EINSTEIN", 1.99, null, 12);
 			gibMenue();
 			shopVer.speichereDaten();
@@ -140,7 +130,7 @@ public class CUI {
 		int plz = Integer.parseInt(liesEingabe());
 		System.out.println("Ort:");
 		String ort = liesEingabe();
-		CUI.shopVer.fuegeUserEin(name, passwort.toCharArray(), anrede, vorName, nachName, adresse, plz, ort);
+		CUI.shopVer.fuegeUserEin(name, passwort, anrede, vorName, nachName, adresse, plz, ort);
 	}
 	
 	private void gibArtikellisteAus() {
@@ -154,10 +144,10 @@ public class CUI {
 	public void menueMitarbeiter() throws IOException, ArtikelNichtGefundenException{
 		System.out.println("n) neuen Artikel anlegen \n" +
 				"m) Artikelmenge aendern\n" +
-				"l) Artikel l�schen\n" +
+				"l) Artikel loeschen\n" +
 				"u) Alle Benutzer anzeigen\n" +
 				"r) Neuen Mitarbeiter registrieren\n" +
-				"d) Mitarbeiter l�schen\n" + 
+				"d) Mitarbeiter loeschen\n" + 
 				"p) Protokoll anzeigen\n" +
 				"c) Artikelmengenverlauf der letzten 30 Tage anzeigen lassen\n" + 
 				"a) Ausloggen");
@@ -226,7 +216,7 @@ public class CUI {
 		System.out.println("Nachname:");
 		String nachName = liesEingabe();
 		try{	
-			CUI.shopVer.fuegeUserEin(benutzername, passwort.toCharArray(), anrede, vorName, nachName);
+			CUI.shopVer.fuegeUserEin(benutzername, passwort, anrede, vorName, nachName);
 		}
 		catch(Exception e) {
 			System.out.println(e);				

@@ -49,11 +49,11 @@ public class ShopVerwaltung {
 		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Neuer Artikel erstellt.");
 	}
 	
-	public void fuegeUserEin(String name, char[] passwort, String anrede, String vorName, String nachName){
+	public void fuegeUserEin(String name, String passwort, String anrede, String vorName, String nachName){
 		userVer.einfuegen(name, passwort, anrede, vorName, nachName);	
 	}
 	
-	public void fuegeUserEin(String name, char[] passwort, String anrede, String vorName, String nachName, String adresse, int plz, String ort){ 
+	public void fuegeUserEin(String name, String passwort, String anrede, String vorName, String nachName, String adresse, int plz, String ort){ 
 		userVer.einfuegen(name, passwort, anrede, vorName, nachName, adresse, plz, ort);	
 	}
 	
