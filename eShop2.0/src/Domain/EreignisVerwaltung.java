@@ -71,7 +71,7 @@ public class EreignisVerwaltung {
 
 	public void ladeDaten() throws FileNotFoundException, IOException, ClassNotFoundException{
 		int count = 0;
-		ObjectInputStream in = new ObjectInputStream(new FileInputStream("Ereignisse.ser"));
+		ObjectInputStream in = new ObjectInputStream(new FileInputStream("Ereignisse.txt"));
 		protokoll.clear();
 		try {  
 			Ereignis er = null;
@@ -99,7 +99,7 @@ public class EreignisVerwaltung {
 	}
 	
 	public void schreibeDaten() throws FileNotFoundException, IOException {
-		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Ereignisse.ser")); 
+		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Ereignisse.txt")); 
 		// hier schleife in der dir jeweiligen objekte (artikel, user, ereignisse durchgegangen werden
 		
 		Iterator<Ereignis> it = protokoll.iterator();

@@ -11,6 +11,7 @@ import CUI.CUI;
 import exceptions.ArtikelNichtGefundenException;
 import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 import exceptions.BereitsEingeloggtException;
+import exceptions.EinlagernException;
 import exceptions.KennwortFalschException;
 import Valueobjects.Kunde;
 import Valueobjects.User;
@@ -24,13 +25,26 @@ public class CUI implements Runnable {
 	private String eingabe;
 	private BufferedReader in;
 	
-	public CUI(ShopVerwaltung sv) { // Konstruktor
-		shopVer = sv;
+	public CUI() { // Konstruktor
+		shopVer = new ShopVerwaltung();
 		aktuellerBenutzer = null;
 		in = new BufferedReader(new InputStreamReader(System.in));
 	}
 	
-	
+public static void main(String[] args) throws EinlagernException {
+		
+		CUI shop = new CUI();
+		shopVer.fuegeArtikelEin("Hose", 48, 6);
+		shopVer.fuegeUserEin("Kunde", "123", "Frau", "Regina", "Regenbogen","Elbenweg 3", 13337, "Bruchtal");
+		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");
+		try {
+			shop.run();
+		}
+		catch (Exception e) {
+			System.out.println("Fehler bei der Eingabe");
+			e.printStackTrace();
+		}		
+	}	
 	
 	private static  void guiStarten() {
 		try {
@@ -46,9 +60,7 @@ public class CUI implements Runnable {
 	
 	public void run() {
 		try {
-			//shopVer.ladeDaten();
-		
-//			shopVer.fuegeArtikelEin("EINSTEIN", 1.99, null, 12);
+//			shopVer.ladeDaten();
 			gibMenue();
 			shopVer.speichereDaten();
 		} catch (Exception e) {
@@ -88,6 +100,8 @@ public class CUI implements Runnable {
 			} catch (Exception e) {
 				System.out.println(e);
 			}					
+		} else if (eingabe.equals("q")){
+			System.exit(0);
 		}
 	}
 	
@@ -180,7 +194,7 @@ public class CUI implements Runnable {
 				shopVer.einkaufsVerlauf(artID);
 				break;
 			case "a":
-				System.out.println("Auf Wiedersehen!");
+				ausloggen();
 				break;
 			default: System.out.println("Falsche Eingabe.");
 		}
@@ -196,6 +210,11 @@ public class CUI implements Runnable {
 		System.out.println("Welchen Mitarbeiter willst du l�schen?");
 		int userNr = Integer.parseInt(liesEingabe());
 		shopVer.loescheUser(userNr, aktuellerBenutzer);
+	}
+	
+	private void ausloggen() throws IOException{
+		System.out.println("Auf Wiedersehen!");
+		menueNichtEingeloggt();
 	}
 	
 	private void mitarbeiterErstellen() throws IOException{

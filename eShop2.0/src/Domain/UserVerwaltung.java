@@ -23,14 +23,12 @@ public class UserVerwaltung {
 	
 	public void einfuegen(String name, String passwort, String anrede, String vorName, String nachName){
 		int nr = bestimmeNr();
-		@SuppressWarnings("unused")
 		User einUser = new Mitarbeiter(name, passwort, nr, anrede, vorName, nachName);
 		userBestand.add(einUser);
 	}
 	
 	public void einfuegen(String name, String passwort, String anrede, String vorName, String nachName, String adresse, int plz, String ort){
 		int nr = bestimmeNr();
-		@SuppressWarnings("unused")
 		User einUser = new Kunde(name, passwort, nr, anrede, vorName, nachName, adresse, plz, ort);
 		userBestand.add(einUser);
 		
@@ -47,8 +45,6 @@ public class UserVerwaltung {
 	public User userLogin(String name, String passwort) throws KennwortFalschException, BereitsEingeloggtException{
 		Iterator<User> it = userBestand.iterator();
 	
-		System.out.println(name);
-		System.out.println(passwort);
 		while  (it.hasNext()) {	
 			User user = it.next();
 			if(user.getName().equals(name)){
@@ -121,7 +117,7 @@ public class UserVerwaltung {
 	
 	public void ladeDaten() throws FileNotFoundException, IOException, ClassNotFoundException{
 		int count = 0;
-		ObjectInputStream in = new ObjectInputStream(new FileInputStream("User.ser"));
+		ObjectInputStream in = new ObjectInputStream(new FileInputStream("User.txt"));
 		userBestand.clear();
 		try {  
 			User u = null;

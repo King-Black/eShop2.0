@@ -5,6 +5,7 @@ import Domain.ShopVerwaltung;
 public class Main {
 	
 	private static  ShopVerwaltung shopVer;
+	private static CUI cui;
 
 	
 public static void main(String[] args){
@@ -15,7 +16,7 @@ public static void main(String[] args){
 		//shop.shopVer.fuegeArtikelEin("SECHSSTEIN", 9.99, null, 48, 6);	
 		shopVer.fuegeUserEin("Kunde", "123", "Frau", "Regina", "Regenbogen","Elbenweg 3", 13337, "Bruchtal");
 		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");
-		shopThread.start();
+		cui.run();
 	
 		
 		

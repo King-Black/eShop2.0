@@ -114,7 +114,7 @@ public class ArtikelVerwaltung {
 	}
 	
 	public void schreibeDaten() throws FileNotFoundException, IOException {
-		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Artikel.ser")); 
+		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Artikel.txt")); 
 		// hier schleife in der dir jeweiligen objekte (artikel, user, ereignisse durchgegangen werden
 		
 		Iterator<Artikel> it = artikelBestand.iterator();
@@ -135,7 +135,7 @@ public class ArtikelVerwaltung {
 	
 	public void ladeDaten() throws FileNotFoundException, IOException, ClassNotFoundException{
 		int count = 0;
-		ObjectInputStream in = new ObjectInputStream(new FileInputStream("Artikel.ser"));
+		ObjectInputStream in = new ObjectInputStream(new FileInputStream("Artikel.txt"));
 		artikelBestand.clear();
 		try {  
 			Artikel a = null;
