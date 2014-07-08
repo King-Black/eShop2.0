@@ -46,6 +46,7 @@ public static void main(String[] args) throws EinlagernException {
 		}		
 	}	
 	
+	@SuppressWarnings("unused")
 	private static  void guiStarten() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
