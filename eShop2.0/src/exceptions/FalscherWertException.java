@@ -1,5 +1,5 @@
 package exceptions;
 
-public class FalscherWertException {
+public class FalscherWertException extends Exception{
 
 }

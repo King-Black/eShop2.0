@@ -49,6 +49,14 @@ public static void main(String[] args){
 	}
 	@SuppressWarnings("unused")
 	private static  void guiStarten() {
+		try {
+			shopVer.fuegeArtikelEin("SECHSSTEIN", 48, 9.99);
+			shopVer.fuegeArtikelEin("Test", 15, 5.99);
+			shopVer.fuegeArtikelEin("Test2", 35, 1.99);
+		} catch (EinlagernException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		shopVer.fuegeUserEin("Kunde", "123", "Frau", "Regina", "Regenbogen","Elbenweg 3", 13337, "Bruchtal");
 		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");
 		

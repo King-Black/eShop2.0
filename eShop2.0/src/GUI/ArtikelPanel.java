@@ -228,12 +228,12 @@ public class ArtikelPanel extends JPanel {
 					//Shopverwaltung findArtikelByNumber
 					ausgewaehlterArtikel = HauptFenster.shopVerwaltung.findArtikelByNumber(ausgewaehlteArtikelId);
 					beschreibungText.setText(ausgewaehlterArtikel.getBeschreibung());
-						
 				} catch (ArtikelNichtGefundenException e1) {
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(ArtikelPanel.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					dialog.setVisible(true);
 				}
+				
 				//Zeigt je nach Benutzer erst nach Auswahl einer Spalte die Buttons an:
 				if(HauptFenster.benutzer == null){
 					ArtikelPanel.this.inDenWarenkorbButton.setVisible(true);
@@ -353,7 +353,7 @@ public class ArtikelPanel extends JPanel {
 				}
 				float stueckPreis = -1.00f;
 				try{
-				 stueckPreis = Float.parseFloat(artikelPreisText.getText().replace(',', '.'));
+					stueckPreis = Float.parseFloat(artikelPreisText.getText().replace(',', '.'));
 				}catch(NumberFormatException e){
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(ArtikelPanel.this, "Sie müssen einen Stückpreis angeben.", "Error", JOptionPane.ERROR_MESSAGE);

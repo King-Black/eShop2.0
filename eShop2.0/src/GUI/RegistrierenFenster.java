@@ -198,7 +198,7 @@ public class RegistrierenFenster extends JDialog {
 			plz = Integer.parseInt(plzText.getText());
 		}catch(NumberFormatException e){
 			JOptionPane dialog = new JOptionPane();
-			JOptionPane.showMessageDialog(RegistrierenFenster.this, "Sie müssen eine Menge angeben.", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(RegistrierenFenster.this, "Sie müssen eine Postleitzahl angeben.", "Error", JOptionPane.ERROR_MESSAGE);
 			dialog.setVisible(true);
 			return;
 		}

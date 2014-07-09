@@ -196,8 +196,10 @@ public class WarenkorbPanel extends JPanel{
 						try {
 							k.getWarenkorb().leeren();
 						} catch (WarenkorbLeerException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							JOptionPane fehler = new JOptionPane();
+							JOptionPane.showMessageDialog(WarenkorbPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+							fehler.setVisible(true);
+							return;
 						}
 						WarenkorbPanel.this.tableModel.fireTableDataChanged();
 					}

@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -96,8 +97,9 @@ public class LagerEreignisPanel extends JPanel {
 				try {
 					a = HauptFenster.shopVerwaltung.findArtikelByNumber(gui.ausgewaehlteArtikelId);
 				} catch (ArtikelNichtGefundenException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane dialog = new JOptionPane();
+					JOptionPane.showMessageDialog(LagerEreignisPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					dialog.setVisible(true);
 				}
 				// 1. alle Ereignisse durchgehen und gucken, welche Ereignisse davon die gleiche
 				// ID haben wie der eben gerade gefundene Artikel, der jetzt in a steht.
