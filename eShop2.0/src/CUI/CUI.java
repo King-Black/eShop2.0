@@ -34,7 +34,8 @@ public class CUI implements Runnable {
 public static void main(String[] args) throws EinlagernException {
 		
 		CUI shop = new CUI();
-		shopVer.fuegeArtikelEin("Hose", 48, 6);
+		//Testzwecke
+//		shopVer.fuegeArtikelEin("Hose", 48, 6);
 		shopVer.fuegeUserEin("Kunde", "123", "Frau", "Regina", "Regenbogen","Elbenweg 3", 13337, "Bruchtal");
 		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");
 		try {
