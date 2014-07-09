@@ -3,6 +3,8 @@ package persistence;
 import java.io.IOException;
 
 import Valueobjects.Artikel;
+import Valueobjects.Ereignis;
+import Valueobjects.Kunde;
 import Valueobjects.Mitarbeiter;
 
 
@@ -19,9 +21,9 @@ public interface PersistenceManager {
 	
 	public Mitarbeiter ladeMitarbeiter() throws IOException;
 	
-	//public Kunde ladeKunden() throws IOException;
+	public Kunde ladeKunden() throws IOException;
 	
-	//public Ereignis ladeEreignis() throws IOException;
+//	public Ereignis ladeEreignis() throws IOException;
 	
 	
 	
@@ -29,7 +31,7 @@ public interface PersistenceManager {
 	
 	public void speichereMitarbeiter(Mitarbeiter m) throws IOException;
 	
-	//public void speicherKunde(Kunde k) throws IOException;
+	public void speichereKunde(Kunde k) throws IOException;
 	
-	//public void speichereEreignisse(Ereignis e) throws IOException;
+//	public void speichereEreignisse(Ereignis e) throws IOException;
 }

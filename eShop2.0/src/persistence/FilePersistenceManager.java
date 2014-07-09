@@ -77,25 +77,31 @@ public class FilePersistenceManager implements PersistenceManager {
 	}	
 
 	
-//	public Kunde ladeKunden() throws IOException {
-//		// Name einlesen
-//		String name = liesZeile();
-//		if (name == null) {
-//			return null;
-//		}
-//			//Passwort einlesen
-//		String passwort = liesZeile();		
-//			// Strasse einlesen ...
-//		String str = liesZeile();				
-//			//PLZ einlesen
-//		String plz = liesZeile();		
-//			// Ort einlesen
-//		String ort = liesZeile();		
-//			//id-nummer einlesen
-//		String id = liesZeile();		
-//			// neuen Kunden anlegen und zurückgeben
-//		return new Kunde(name, passwort, id, new Adresse(str, plz, ort));
-//	}
+	public Kunde ladeKunden() throws IOException {
+		// Name einlesen
+		String name = liesZeile();
+		if (name == null) {
+			return null;
+		}
+			//Passwort einlesen
+		String passwort = liesZeile();
+			// ID einlesen
+		int id = Integer.parseInt(liesZeile());
+			//Anrede einlesen
+		String anrede  = liesZeile();
+			//Vorname einlesen
+		String vorName = liesZeile();
+			//Nachname einlesen
+		String nachName = liesZeile();
+			// Strasse einlesen ...
+		String strasse = liesZeile();				
+			//PLZ einlesen
+		int plz = Integer.parseInt(liesZeile());		
+			// Ort einlesen
+		String ort = liesZeile();		
+			// neuen Kunden anlegen und zurückgeben
+		return new Kunde(name, passwort, id, anrede, vorName, nachName, strasse, plz, ort);
+	}
 	
 	
 	public Mitarbeiter ladeMitarbeiter() throws IOException{
@@ -113,33 +119,34 @@ public class FilePersistenceManager implements PersistenceManager {
 	}
 	
 	
-//	public Ereignis ladeEreignis() throws IOException {
-//		String stringDatum = liesZeile();	
-//		if (stringDatum == null){
-//			return null;
-//		}
-//		Date df = null;
-//		try {
-//			df = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy", Locale.ENGLISH).parse(stringDatum);
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//
-//		String kundenName = liesZeile();
-//		String kundenId = liesZeile();
-//		String artikelBezeichnung = liesZeile();
-//		
-//		int veraenderung = Integer.valueOf(liesZeile());
-//		int artikelNr = Integer.valueOf(liesZeile());
-//		String booleanIstAuslagerung = liesZeile();		
-//		boolean istAuslagerung;
-//		if(booleanIstAuslagerung.equals("t"))
-//			istAuslagerung = true;
-//		else 
-//			istAuslagerung = false;
-//		
-//		return null /*new Ereignis(df, kundenName, kundenId, artikelBezeichnung, veraenderung, artikelNr, istAuslagerung)*/;
-//	}
+/*	public Ereignis ladeEreignis() throws IOException {
+		String stringDatum = liesZeile();	
+		if (stringDatum == null){
+			return null;
+		}
+		Date df = null;
+		try {
+			df = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy", Locale.ENGLISH).parse(stringDatum);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		String kundenName = liesZeile();
+		String kundenId = liesZeile();
+		String artikelBezeichnung = liesZeile();
+		
+		int veraenderung = Integer.valueOf(liesZeile());
+		int artikelNr = Integer.valueOf(liesZeile());
+		String booleanIstAuslagerung = liesZeile();		
+		boolean istAuslagerung;
+		if(booleanIstAuslagerung.equals("t"))
+			istAuslagerung = true;
+		else 
+			istAuslagerung = false;
+		
+		return null //new Ereignis(df, kundenName, kundenId, artikelBezeichnung, veraenderung, artikelNr, istAuslagerung);
+	}
+*/
 	
 	
 	@Override
@@ -152,15 +159,18 @@ public class FilePersistenceManager implements PersistenceManager {
 	
 	
 	
-//	public void speicherKunde(Kunde k)	{
-//		// Name, Kundennr, Adresse schreiben
-//		schreibeZeile(k.getName());
-//		schreibeZeile(k.getPasswort());
-//		schreibeZeile(k.getStr());
-//		schreibeZeile(k.getPlz());
-//		schreibeZeile(k.getOrt());		
-//		schreibeZeile(k.getId());		
-//	}
+	public void speichereKunde(Kunde k)	{
+		// Name, Kundennr, Adresse schreiben
+		schreibeZeile(k.getName());
+		schreibeZeile(k.getPasswort());
+		schreibeZeile(Integer.toString(k.getNummer()));
+		schreibeZeile(k.getAnrede());
+		schreibeZeile(k.getVorName());
+		schreibeZeile(k.getNachName());		
+		schreibeZeile(k.getStrasse());
+		schreibeZeile(Integer.toString(k.getPlz()));
+		schreibeZeile(k.getOrt());
+	}
 	
 	
 	public void speichereMitarbeiter(Mitarbeiter m) throws IOException {
@@ -171,6 +181,9 @@ public class FilePersistenceManager implements PersistenceManager {
 		schreibeZeile(m.getVorName());		
 		schreibeZeile(m.getNachName());		
 	}
+
+		
+
 	
 
 //	@Override
@@ -186,4 +199,5 @@ public class FilePersistenceManager implements PersistenceManager {
 //		else
 //			schreibeZeile("f");		
 //	}
+
 }

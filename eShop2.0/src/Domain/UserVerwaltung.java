@@ -27,7 +27,7 @@ public class UserVerwaltung {
 	public UserVerwaltung(){
 		try {
 			this.ladeDatenMitarbeiter();
-			this.ladeDatenKunden();
+//			this.ladeDatenKunden();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -170,15 +170,16 @@ public class UserVerwaltung {
 	}
 	
 	
-//	public void schreibeDatenKunden() throws IOException  {
-//		pm.openForWriting("Kunden.txt");
-//		if (!kundenListe.isEmpty()) {
-//			for (Kunde kunde : kundenListe){
-//				pm.speicherKunde(kunde);				
-//			}
-//		}
-//		pm.close();
-//	}
+	/*public void schreibeDatenKunden() throws IOException  {
+		pm.openForWriting("Kunden.txt");
+		if (!userBestand.isEmpty()) {
+			for (User user : userBestand){
+				if (user instanceof Kunde)
+				pm.speichereKunde((Kunde)user);				
+			}
+		}
+		pm.close();
+	}*/
 	
 	
 	public void ladeDatenMitarbeiter() throws  IOException {
@@ -193,15 +194,15 @@ public class UserVerwaltung {
 		pm.close();
 	}
 	
-	public void ladeDatenKunden() throws IOException {
+	/*public void ladeDatenKunden() throws IOException {
 		pm.openForReading("Kunden.txt");
 		Kunde kunde;
 		do {
 			kunde = pm.ladeKunden();
 			if (kunde != null) {
-				kundenListe.add(kunde);
+				userBestand.add(kunde);
 			}
 		} while (kunde != null);	
 		pm.close();
-	}
+	}*/
 }
