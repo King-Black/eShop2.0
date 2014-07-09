@@ -98,19 +98,19 @@ public class FilePersistenceManager implements PersistenceManager {
 //	}
 	
 	
-//	public Mitarbeiter ladeMitarbeiter() throws IOException{
-//			// Name einlesen
-//		String name = liesZeile();
-//		if (name == null) {
-//			return null;
-//		}
-//			//Passwort einlesen
-//		String passwort = liesZeile();
-//			//id-nummer einlesen
-//		String id = liesZeile();
-//			//neuen Mitarbeiter Anlegen und zurückgeben
-//		return new Mitarbeiter(name, passwort, id);		
-//	}
+	public Mitarbeiter ladeMitarbeiter() throws IOException{
+			// Name einlesen
+		String name = liesZeile();
+		if (name == null) {
+			return null;
+		}
+		String passwort = liesZeile();
+		int id = Integer.parseInt(liesZeile());
+		String anrede  = liesZeile();
+		String vorName = liesZeile();
+		String nachName = liesZeile();
+		return new Mitarbeiter(name, passwort, id, anrede, vorName, nachName);		
+	}
 	
 	
 //	public Ereignis ladeEreignis() throws IOException {
@@ -163,11 +163,14 @@ public class FilePersistenceManager implements PersistenceManager {
 //	}
 	
 	
-//	public void speicherMitarbeiter(Mitarbeiter m) throws IOException {
-//		schreibeZeile(m.getName());	
-//		schreibeZeile(m.getPasswort());
-//		schreibeZeile(m.getId());		
-//	}
+	public void speichereMitarbeiter(Mitarbeiter m) throws IOException {
+		schreibeZeile(m.getName());	
+		schreibeZeile(m.getPasswort());
+		schreibeZeile(Integer.toString(m.getNummer()));
+		schreibeZeile(m.getAnrede());		
+		schreibeZeile(m.getVorName());		
+		schreibeZeile(m.getNachName());		
+	}
 	
 
 //	@Override

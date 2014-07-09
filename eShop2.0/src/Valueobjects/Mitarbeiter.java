@@ -2,8 +2,8 @@ package Valueobjects;
 
 public class Mitarbeiter extends User {
 	
-	public Mitarbeiter(String name, String passwort, int nr, String anrede, String vorName, String nachName){
-		super(name, passwort, nr, anrede, vorName, nachName);
+	public Mitarbeiter(String benutzerName, String passwort, int nr, String anrede, String vorName, String nachName){
+		super(benutzerName, passwort, nr, anrede, vorName, nachName);
 		
 	}
 	
