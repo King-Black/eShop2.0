@@ -1,3 +1,4 @@
+package GUI;
 
 import java.awt.GridLayout;
 import java.awt.Window;
@@ -14,6 +15,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import exceptions.BereitsEingeloggtException;
 import exceptions.KennwortFalschException;
@@ -27,7 +29,7 @@ public class EinloggenFenster extends JDialog {
 	private JButton okButton;
 	private JButton abbrechenButton;
 	private JPasswordField passwortText;
-	private JFormattedTextField idText;
+	private JTextField idText;
 	private JComboBox<String> personTypComboBox;
 	private boolean erfolg = false;
 	final EinloggenFenster gui = this;
@@ -50,7 +52,7 @@ public class EinloggenFenster extends JDialog {
 		//Layout setzen und Variabeln initialisieren:
 		this.setLayout(new GridLayout(4, 2, 6, 3));
 		personTypComboBox = new JComboBox<String>(new String[] {"Kunde", "Mitarbeiter"});
-		idText = new JFormattedTextField(NumberFormat.getIntegerInstance());
+		idText = new JTextField();
 		passwortText = new JPasswordField();
 		okButton = new JButton("OK");
 		abbrechenButton = new JButton("Abbrechen");

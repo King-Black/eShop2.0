@@ -14,11 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import exceptions.BereitsVorhandenException;
-import exceptions.FalscherWertException;
-import exceptions.KonnteNichtSpeichernException;
-import exceptions.NichtGenugAufLagerException;
 import Valueobjects.Artikel;
+import exceptions.ArtikelNichtGefundenException;
 
 /**
  * Klasse zur Erstellung eines Artikel-Verwaltungs-Fensters.
@@ -124,39 +121,29 @@ public class ArtikelVerwaltenFenster extends JDialog {
 		//versucht Artikel auszulagern, legt ein Lagerereignis an und öffnet ggf. Fehlermeldungen:
 		try{
 			int auslagern = Integer.parseInt(neuerWertText.getText());
-			HauptFenster.shopVerwaltung.artikelAuslagern(artikel, auslagern);
-			HauptFenster.shopVerwaltung.lagerEreignisEinfuegen(0, HauptFenster.benutzer, artikel, auslagern);
+			HauptFenster.shopVerwaltung.mengeAendern(artikel.getArtikelNummer(), -auslagern, HauptFenster.benutzer);
+			//HauptFenster.shopVerwaltung.lagerEreignisEinfuegen(0, HauptFenster.benutzer, artikel, auslagern);
 		}catch(NumberFormatException e){
 			JOptionPane dialog = new JOptionPane();
 			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, "Bitte geben Sie eine Zahl ein.", "Error", JOptionPane.ERROR_MESSAGE);
 			dialog.setVisible(true);
 			return;
-		} catch (NichtGenugAufLagerException e) {
+		} catch (ArtikelNichtGefundenException e) {
 			JOptionPane dialog = new JOptionPane();
-			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			dialog.setVisible(true);
-			return;
-		} catch (FalscherWertException e) {
-			JOptionPane dialog = new JOptionPane();
-			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			dialog.setVisible(true);
-			return;
-		} catch (BereitsVorhandenException e) {
-			JOptionPane dialog = new JOptionPane();
-			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, "Bitte geben Sie eine Zahl ein.", "Error", JOptionPane.ERROR_MESSAGE);
 			dialog.setVisible(true);
 			return;
 		}
 
 		//speichern:
-		try {
+		/*try {
 			HauptFenster.shopVerwaltung.artikelSpeichern();
 			HauptFenster.shopVerwaltung.lagerEreignisseSpeichern();
 		} catch (KonnteNichtSpeichernException e) {
 			JOptionPane dialog = new JOptionPane();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			dialog.setVisible(true);
-		}
+		}*/
 		
 		//Wird bei erfolgreichem Auslagern angezeigt:
 		JOptionPane dialog = new JOptionPane();
@@ -171,19 +158,14 @@ public class ArtikelVerwaltenFenster extends JDialog {
 		//versucht Artikel einzulagern, legt ein Lagerereignis an und öffnet ggf. Fehlermeldungen:
 		try{
 			int einlagern = Integer.parseInt(neuerWertText.getText());
-			HauptFenster.shopVerwaltung.artikelEinlagern(artikel, einlagern);
-			HauptFenster.shopVerwaltung.lagerEreignisEinfuegen(1, HauptFenster.benutzer, artikel, einlagern);
+			HauptFenster.shopVerwaltung.mengeAendern(artikel.getArtikelNummer(), einlagern, HauptFenster.benutzer);
+			//HauptFenster.shopVerwaltung.lagerEreignisEinfuegen(1, HauptFenster.benutzer, artikel, einlagern);
 		}catch(NumberFormatException e){
 			JOptionPane dialog = new JOptionPane();
 			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, "Bitte geben Sie eine Zahl ein.", "Error", JOptionPane.ERROR_MESSAGE);
 			dialog.setVisible(true);
 			return;
-		} catch (FalscherWertException e) {
-			JOptionPane dialog = new JOptionPane();
-			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			dialog.setVisible(true);
-			return;
-		} catch (BereitsVorhandenException e) {
+		} catch (ArtikelNichtGefundenException e) {
 			JOptionPane dialog = new JOptionPane();
 			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			dialog.setVisible(true);
@@ -191,14 +173,14 @@ public class ArtikelVerwaltenFenster extends JDialog {
 		}
 
 		//speichern:
-		try {
+		/*try {
 			HauptFenster.shopVerwaltung.artikelSpeichern();
 			HauptFenster.shopVerwaltung.lagerEreignisseSpeichern();
 		} catch (KonnteNichtSpeichernException e) {
 			JOptionPane dialog = new JOptionPane();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			dialog.setVisible(true);
-		}
+		}*/
 		
 		//Wird bei erfolgreichem Einlagern angezeigt:
 		JOptionPane dialog = new JOptionPane();
@@ -213,7 +195,7 @@ public class ArtikelVerwaltenFenster extends JDialog {
 		//versucht den Preis zu ändern und wirft ggf. eine Exception:
 		try{
 			float preis = Float.parseFloat(neuerWertText.getText().replace(',', '.'));
-			artikel.setStueckPreis(preis);
+			artikel.setPreis(preis);
 		}catch(NumberFormatException e1){
 			JOptionPane dialog = new JOptionPane();
 			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, "Bitte geben Sie eine Zahl ein.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -222,13 +204,13 @@ public class ArtikelVerwaltenFenster extends JDialog {
 		}
 
 		//speichern:
-		try {
+		/*try {
 			HauptFenster.shopVerwaltung.artikelSpeichern();
 		} catch (KonnteNichtSpeichernException e) {
 			JOptionPane dialog = new JOptionPane();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			dialog.setVisible(true);
-		}
+		}*/
 		
 		//Wird bei erfolgreichem Preis ändern angezeigt:
 		JOptionPane dialog = new JOptionPane();

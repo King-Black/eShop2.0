@@ -1,16 +1,13 @@
 package GUI;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import exceptions.NichtEingeloggtException;
 import Valueobjects.Kunde;
 import Valueobjects.Mitarbeiter;
 
@@ -68,13 +65,13 @@ public class VerwaltungsPanel extends JPanel {
 		ausloggenButton.addActionListener(this.ausloggen());
 		ausloggenButton.setVisible(false);
 		
-		registrierenButton.addActionListener(this.registrieren());
+		//registrierenButton.addActionListener(this.registrieren());
 		registrierenButton.setVisible(true);
 		
-		adresseAendernButton.addActionListener(this.adresseAendern());
+		//adresseAendernButton.addActionListener(this.adresseAendern());
 		adresseAendernButton.setVisible(false);
 		
-		mitarbeiterAnlegenButton.addActionListener(this.mitarbeiterAnlegen());
+		//mitarbeiterAnlegenButton.addActionListener(this.mitarbeiterAnlegen());
 		mitarbeiterAnlegenButton.setVisible(false);
 		
 		//fügt die Buttons zum VerwaltungsPanel hinzu:
@@ -156,17 +153,9 @@ public class VerwaltungsPanel extends JPanel {
 					adresseAendernButton.setVisible(false);
 				}
 				hauptFenster.pack();
-				//loggt den Benutzer aus und setzt den Benutzer des Hauptfensters auf null:
-				try {
-					HauptFenster.shopVerwaltung.ausloggen(HauptFenster.benutzer);
-					HauptFenster.benutzer = null;
-				} catch (NichtEingeloggtException e1) {
-					JOptionPane dialog = new JOptionPane();
-					JOptionPane.showMessageDialog(VerwaltungsPanel.this, "Sie müssen sich erst einloggen, bevor Sie sich ausloggen können.", "Error", JOptionPane.ERROR_MESSAGE);
-					dialog.setVisible(true);
-					//evtl über UserVerwaltung ausloggen?!
+				//HauptFenster.shopVerwaltung.ausloggen(HauptFenster.benutzer);
+				HauptFenster.benutzer = null;
 				}
-			}
 		};
 		return ausloggen;
 	}
@@ -175,12 +164,12 @@ public class VerwaltungsPanel extends JPanel {
 	 * Die Methode implementiert den ActionListener für den Registrieren Button und gibt diesen zurück.
 	 * @return Gibt den ActionListener für den RegistrierenButton zurück.
 	 */
-	private ActionListener registrieren(){
+	/*private ActionListener registrieren(){
 		ActionListener registrieren = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//erzeugt ein neues RegistrierenFenster und übergibt diesem die Aktion:
-				RegistrierenFenster registrierenFenster = new RegistrierenFenster(/*hauptFenster, 0*/);
+				RegistrierenFenster registrierenFenster = new RegistrierenFenster(hauptFenster, 0);
 				registrierenFenster.add(new JLabel("Nur Kunden können sich selbst registrieren!"), BorderLayout.NORTH);
 				
 				//stellt die benötigten Komponenten des RegistrierenFensters zusammen:
@@ -195,18 +184,18 @@ public class VerwaltungsPanel extends JPanel {
 			}
 		};
 		return registrieren;
-	}
+	}*/
 	
 	/**
 	 * Die Methode implementiert den ActionListener für den Adresse ändern Button und gibt diesen zurück.
 	 * @return Gibt den ActionListener für den Adresse ändern Button zurück.
 	 */
-	private ActionListener adresseAendern() {
+	/*private ActionListener adresseAendern() {
 		ActionListener adresseAendern = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//erzeugt ein neues RegistrierenFenster mit der übergebenen Aktion 1:
-				RegistrierenFenster registrierenFenster = new RegistrierenFenster(/*hauptFenster, 1*/);
+				RegistrierenFenster registrierenFenster = new RegistrierenFenster(hauptFenster, 1);
 				//prüft, ob der eingeloggte Benutzer ein Kunde ist und stellt die Komponenten
 				//des RegistrierenFensters zusammen:
 				if(HauptFenster.benutzer != null && HauptFenster.benutzer instanceof Kunde){
@@ -222,18 +211,18 @@ public class VerwaltungsPanel extends JPanel {
 			}
 		};
 		return adresseAendern;
-	}
+	}*/
 	
 	/**
 	 * Die Methode implementiert den ActionListener für den Mitarbeiter anlegen Button und gibt diesen zurück.
 	 * @return Gibt den ActionListener für den Mitarbeiter anlegen Button zurück.
 	 */
-	private ActionListener mitarbeiterAnlegen() {
+	/*private ActionListener mitarbeiterAnlegen() {
 		ActionListener mitarbeiterAnlegen = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//erzeugt ein neues RegistrierenFenster mit der übergebenen Aktion 2:
-				RegistrierenFenster registrierenFenster = new RegistrierenFenster(/*hauptFenster, 2*/);
+				RegistrierenFenster registrierenFenster = new RegistrierenFenster(hauptFenster, 2);
 				//prüft, ob der eingeloggte Benutzer ein Mitarbeiter ist und stellt die Komponenten
 				//des RegistrierenFensters zusammen:
 				if(HauptFenster.benutzer != null && HauptFenster.benutzer instanceof Mitarbeiter){
@@ -246,5 +235,5 @@ public class VerwaltungsPanel extends JPanel {
 			}
 		};
 		return mitarbeiterAnlegen;
-	}
+	}*/
 }

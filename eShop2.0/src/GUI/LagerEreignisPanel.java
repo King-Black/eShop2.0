@@ -11,16 +11,15 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import exceptions.NichtGefundenException;
 import Valueobjects.Artikel;
-import Valueobjects.LagerEreignis;
+import Valueobjects.Ereignis;
+import exceptions.ArtikelNichtGefundenException;
 
 /**
  * Klasse zur Erstellung des LagerEreignisPanels.
@@ -62,7 +61,7 @@ public class LagerEreignisPanel extends JPanel {
 		//alle Komponenten des NorthPanel initialisieren und ActionListener zum AnzeigenButton hinzufügen:
 		northPanel = new JPanel();
 		artikelAuswahlBox = new JComboBox<String>(new String[] {"Alle anzeigen"});
-		for(Artikel a: HauptFenster.shopVerwaltung.getArtikel()){
+		for(Artikel a: HauptFenster.shopVerwaltung.gibAlleArtikel()){
 			artikelAuswahlBox.addItem(a.getArtikelName());
 		}
 		anzeigenButton = new JButton("Anzeigen");
@@ -87,40 +86,38 @@ public class LagerEreignisPanel extends JPanel {
 		ActionListener anzeigen = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//sucht den ausgewählten Artikel im EShop und erstellt eine neue Collection mit
-				//den passenden Lagerereignissen:
-				try {
-					String ausgewaehlterArtikel = (String)artikelAuswahlBox.getSelectedItem();
-					for(Artikel a: HauptFenster.eShopVerwaltung.getArtikel()){
-						if(a.getArtikelName().equals(ausgewaehlterArtikel)){
-							ausgewaehlteArtikelId = a.getId();
-						}
+				String ausgewaehlterArtikel = (String)artikelAuswahlBox.getSelectedItem();
+				for(Artikel a: HauptFenster.shopVerwaltung.gibAlleArtikel()){
+					if(a.getArtikelName().equals(ausgewaehlterArtikel)){
+						ausgewaehlteArtikelId = a.getArtikelNummer();
 					}
-					Artikel a = HauptFenster.shopVerwaltung.findeArtikel(gui.ausgewaehlteArtikelId);
-					// 1. alle Ereignisse durchgehen und gucken, welche Ereignisse davon die gleiche
-					// ID haben wie der eben gerade gefundene Artikel, der jetzt in a steht.
-					// 2. alle gefundenen Ereignisse zu diesem Artikel in einer extra Liste zwischenspeichern
-					// 3. dann tablemodel initialisieren und im Konstruktor die neue Collection übergeben
-					// 4. dann tablemodel setzen
-					// 5. im table model getrow nicht mehr getAlleEreignisse aufrufen sondern nurnoch die aus der
-					// neuen Collection die dem tablemodel Konstruktor übergeben wurden
-					Collection<LagerEreignis> ereignisse = new ArrayList<LagerEreignis>();
-					for(LagerEreignis erg: HauptFenster.shopVerwaltung.getLagerEreignisse()){						
-						if(erg.getPosition().getArtikel().getId() == a.getId()){
-							ereignisse.add(erg);
-						}
-					}
-					if(artikelAuswahlBox.getSelectedIndex() == 0){
-						ereignisse = HauptFenster.shopVerwaltung.getLagerEreignisse();
-					}
-					tableModel = new LagerEreignisTableModel(ereignisse);
-					lagerEreignisTabelle.setModel(tableModel);
-					gui.tableModel.fireTableDataChanged();
-				} catch (NichtGefundenException e) {
-					JOptionPane dialog = new JOptionPane();
-					JOptionPane.showMessageDialog(LagerEreignisPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-					dialog.setVisible(true);
 				}
+				Artikel a = null;
+				try {
+					a = HauptFenster.shopVerwaltung.findArtikelByNumber(gui.ausgewaehlteArtikelId);
+				} catch (ArtikelNichtGefundenException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				// 1. alle Ereignisse durchgehen und gucken, welche Ereignisse davon die gleiche
+				// ID haben wie der eben gerade gefundene Artikel, der jetzt in a steht.
+				// 2. alle gefundenen Ereignisse zu diesem Artikel in einer extra Liste zwischenspeichern
+				// 3. dann tablemodel initialisieren und im Konstruktor die neue Collection übergeben
+				// 4. dann tablemodel setzen
+				// 5. im table model getrow nicht mehr getAlleEreignisse aufrufen sondern nurnoch die aus der
+				// neuen Collection die dem tablemodel Konstruktor übergeben wurden
+				Collection<Ereignis> ereignisse = new ArrayList<Ereignis>();
+				for(Ereignis erg: HauptFenster.shopVerwaltung.gibProtokollListe()){						
+					if(erg.getArtikel().getArtikelNummer() == a.getArtikelNummer()){
+						ereignisse.add(erg);
+					}
+				}
+				if(artikelAuswahlBox.getSelectedIndex() == 0){
+					ereignisse = HauptFenster.shopVerwaltung.gibProtokollListe();
+				}
+				tableModel = new LagerEreignisTableModel(ereignisse);
+				lagerEreignisTabelle.setModel(tableModel);
+				gui.tableModel.fireTableDataChanged();
 			}
 		};
 		return anzeigen;
@@ -134,7 +131,7 @@ public class LagerEreignisPanel extends JPanel {
 		centerPanel = new JPanel();
 		centerPanel.setLayout(new GridLayout(1, 1));
 		lagerEreignisTabelle = new JTable();
-		tableModel = new LagerEreignisTableModel(HauptFenster.shopVerwaltung.getLagerEreignisse());
+		tableModel = new LagerEreignisTableModel(HauptFenster.shopVerwaltung.gibProtokollListe());
 		
 		//genaue Definition der LagerEreignisTabelle:
 		lagerEreignisTabelle.setModel(tableModel);

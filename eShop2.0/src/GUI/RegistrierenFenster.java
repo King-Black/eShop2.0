@@ -16,12 +16,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import exceptions.BereitsVorhandenException;
-import exceptions.KonnteNichtSpeichernException;
-import Valueobjects.Adresse;
-import Valueobjects.Kunde;
-import Valueobjects.Mitarbeiter;
-
 /**
  * Klasse zur Erstellung des RegistrierenFensters.
  *
@@ -177,7 +171,7 @@ public class RegistrierenFenster extends JDialog {
 						registrieren();
 						break;
 					case 1:
-						adresseAendern();
+						//adresseAendern();
 						break;
 					case 2:
 						mitarbeiterAnlegen();
@@ -197,15 +191,24 @@ public class RegistrierenFenster extends JDialog {
 		String nachName = nachNameText.getText();
 		String kennwort = kennwortText.getText();
 		String strasse = strasseText.getText();
-		String plz = plzText.getText();
+		int plz = -1;
 		String stadt = stadtText.getText();
+		
+		try{
+			plz = Integer.parseInt(plzText.getText());
+		}catch(NumberFormatException e){
+			JOptionPane dialog = new JOptionPane();
+			JOptionPane.showMessageDialog(RegistrierenFenster.this, "Sie müssen eine Menge angeben.", "Error", JOptionPane.ERROR_MESSAGE);
+			dialog.setVisible(true);
+			return;
+		}
 		
 		//prüft, ob in jedem Feld ein Wert steht:
 		if(vorName.length() == 0 ||
 		   nachName.length() == 0 ||
 		   kennwort.length() == 0 ||
 		   strasse.length() == 0 ||
-		   plz.length() == 0 ||
+		   plzText.getText().length() == 0 ||
 		   stadt.length() == 0){
 			JOptionPane dialog = new JOptionPane();
 			JOptionPane.showMessageDialog(RegistrierenFenster.this, "Sie müssen in jedes Feld einen Wert eintragen.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -214,31 +217,24 @@ public class RegistrierenFenster extends JDialog {
 		}
 		
 		//holt sich eine neue Kunden-ID aus der EShopVerwaltung und legt ein neues Adress-Objekt an:
-		int neueKundenId = HauptFenster.shopVerwaltung.getNeueKundenId();
-		Adresse adresse = new Adresse(plz, stadt, strasse);
+		//int neueKundenId = HauptFenster.shopVerwaltung.getNeueKundenId();
+		//Adresse adresse = new Adresse(plz, stadt, strasse);
 		
-		//versucht einen neuen Kunden anzulegen und gibt ggf. eine Fehlermeldung aus:
-		try {
-			HauptFenster.eShopVerwaltung.kundeAnlegen(new Kunde(neueKundenId, vorName, nachName, kennwort, adresse));
-		} catch (BereitsVorhandenException e) {
-			JOptionPane dialog = new JOptionPane();
-			JOptionPane.showMessageDialog(RegistrierenFenster.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			dialog.setVisible(true);
-			return;
-		}
+		HauptFenster.shopVerwaltung.fuegeUserEin("Test", kennwort, "Herr", vorName, nachName, strasse, plz, stadt);
 
 		//speichern:
-		try {
+		/*try {
 			HauptFenster.shopVerwaltung.kundenSpeichern();
 		} catch (KonnteNichtSpeichernException e) {
 			JOptionPane dialog = new JOptionPane();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			dialog.setVisible(true);
-		}
+		}*/
 		
 		//teilt dem Kunden bei Erfolg seine neue ID mit:
 		JOptionPane dialog = new JOptionPane();
-		JOptionPane.showMessageDialog(RegistrierenFenster.this, "Sie können sich nun mit der ID " + neueKundenId + " und dem von Ihnen gewählten Passwort anmelden.", "Kunde angelegt", JOptionPane.INFORMATION_MESSAGE);
+		//TODO: benutzername
+		JOptionPane.showMessageDialog(RegistrierenFenster.this, "Sie können sich nun mit dem Namen " + "Test" + " und dem von Ihnen gewählten Passwort anmelden.", "Kunde angelegt", JOptionPane.INFORMATION_MESSAGE);
 		dialog.setVisible(true);
 		this.dispose();
 	}
@@ -246,7 +242,7 @@ public class RegistrierenFenster extends JDialog {
 	/**
 	 * Die Methode implementiert das Verhalten des Ok-Buttons für die Aktion 1.
 	 */
-	private void adresseAendern(){
+	/*private void adresseAendern(){
 		//deklariert und initialisiert alle einzulesenden Werte:
 		String strasse = strasseText.getText();
 		String plz = plzText.getText();
@@ -264,10 +260,10 @@ public class RegistrierenFenster extends JDialog {
 		
 		//holt sich den Benutzer des Hauptfensters und legt ein neues Adress-Objekt an:
 		Kunde k = (Kunde)HauptFenster.benutzer;
-		Adresse adresse = new Adresse(plz, stadt, strasse);
+		//Adresse adresse = new Adresse(plz, stadt, strasse);
 		
 		//gibt dem Kunden seine neue Adresse:
-		k.setAdresse(adresse);
+		k.setAdresse();
 
 		//speichern:
 		try {
@@ -283,7 +279,7 @@ public class RegistrierenFenster extends JDialog {
 		JOptionPane.showMessageDialog(RegistrierenFenster.this, "Ihre Adresse wurde erfolgreich geändert.", "Adresse geändert", JOptionPane.INFORMATION_MESSAGE);
 		dialog.setVisible(true);
 		this.dispose();
-	}
+	}*/
 	
 	/**
 	 * Die Methode implementiert das Verhalten des Ok-Buttons für die Aktion 2.
@@ -305,30 +301,23 @@ public class RegistrierenFenster extends JDialog {
 		}
 		
 		//holt sich eine neue Mitarbeiter-ID aus der EShopVerwaltung:
-		int neueMitarbeiterId = HauptFenster.shopVerwaltung.getNeueMitarbeiterId();
+		//int neueMitarbeiterId = HauptFenster.shopVerwaltung.getNeueMitarbeiterId();
 		
-		//versucht einen neuen Mitarbeiter anzulegen und gibt ggf. eine Fehlermeldung aus:
-		try {
-			HauptFenster.shopVerwaltung.mitarbeiterAnlegen(new Mitarbeiter(neueMitarbeiterId, vorName, nachName, kennwort));
-		} catch (BereitsVorhandenException e) {
-			JOptionPane dialog = new JOptionPane();
-			JOptionPane.showMessageDialog(RegistrierenFenster.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			dialog.setVisible(true);
-			return;
-		}
+		HauptFenster.shopVerwaltung.fuegeUserEin("TEST", kennwort, "Frau", vorName, nachName);
 
 		//speichern:
-		try {
+		/*try {
 			HauptFenster.shopVerwaltung.mitarbeiterSpeichern();
 		} catch (KonnteNichtSpeichernException e) {
 			JOptionPane dialog = new JOptionPane();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			dialog.setVisible(true);
-		}
+		}*/
 		
 		//teilt dem Mitarbeiter die neue ID mit:
 		JOptionPane dialog = new JOptionPane();
-		JOptionPane.showMessageDialog(RegistrierenFenster.this, "Der Mitarbeiter kann sich nun mit der ID " + neueMitarbeiterId + " und dem von Ihnen gewählten Passwort anmelden.", "Mitarbeiter angelegt", JOptionPane.INFORMATION_MESSAGE);
+		//TODO: Name
+		JOptionPane.showMessageDialog(RegistrierenFenster.this, "Der Mitarbeiter kann sich nun mit der ID " + "TEST" + " und dem von Ihnen gewählten Passwort anmelden.", "Mitarbeiter angelegt", JOptionPane.INFORMATION_MESSAGE);
 		dialog.setVisible(true);
 		this.dispose();
 	}

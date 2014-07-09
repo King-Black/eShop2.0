@@ -13,11 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import exceptions.BereitsVorhandenException;
 import Valueobjects.Artikel;
 import Valueobjects.Kunde;
 import Valueobjects.MehrfachArtikel;
-import Valueobjects.Position;
 
 
 @SuppressWarnings("serial")
@@ -89,12 +87,12 @@ public class WarenkorbFenster extends JDialog{
 				//legt den Artikel in den Warenkorb und prüft auf Massengut:
 				boolean massengut = artikel instanceof MehrfachArtikel;
 				MehrfachArtikel tmp = massengut ? (MehrfachArtikel)artikel : null;
-				int einheit = massengut ? tmp.getVerkaufsEinheit() : 1;
+				int einheit = massengut ? tmp.getPackungsgroesse() : 1;
 				try {
 					int menge = Integer.parseInt(gui.anzahlText.getText());
 					if(menge % einheit == 0){
 						Kunde k = (Kunde)HauptFenster.benutzer;
-						k.getWarenkorb().positionHinzufuegen(new Position(artikel, menge));
+						k.getWarenkorb().artikelHinzufuegen(artikel, menge, artikel.getArtikelBestand());
 					}else{
 						JOptionPane dialog = new JOptionPane();
 						JOptionPane.showMessageDialog(WarenkorbFenster.this, "Bitte geben Sie " + einheit + " oder ein Vielfaches von " + einheit + " an.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -109,11 +107,6 @@ public class WarenkorbFenster extends JDialog{
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(WarenkorbFenster.this, "Bitte geben Sie eine Zahl ein.", "Error", JOptionPane.ERROR_MESSAGE);
 					dialog.setVisible(true);
-				} catch (BereitsVorhandenException e1) {
-					JOptionPane dialog = new JOptionPane();
-					JOptionPane.showMessageDialog(WarenkorbFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-					dialog.setVisible(true);
-					gui.dispose();
 				}
 			}
 		};

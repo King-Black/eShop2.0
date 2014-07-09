@@ -24,14 +24,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import exceptions.BereitsVorhandenException;
-import exceptions.FalscherWertException;
-import exceptions.KonnteNichtSpeichernException;
-import exceptions.NichtGefundenException;
 import Valueobjects.Artikel;
 import Valueobjects.Kunde;
-import Valueobjects.MehrfachArtikel;
 import Valueobjects.Mitarbeiter;
+import exceptions.ArtikelNichtGefundenException;
+import exceptions.EinlagernException;
 
 /**
  * Klasse zur Erstellung des ArtikelPanels des Hauptfensters.
@@ -229,9 +226,10 @@ public class ArtikelPanel extends JPanel {
 				ausgewaehlteArtikelId = (int)artikelTabelle.getModel().getValueAt(ausgewaehlteSpalte, 0);
 				try {
 					//Shopverwaltung findArtikelByNumber
-					ausgewaehlterArtikel = HauptFenster.shopVerwaltung.findeArtikel(ausgewaehlteArtikelId);
+					ausgewaehlterArtikel = HauptFenster.shopVerwaltung.findArtikelByNumber(ausgewaehlteArtikelId);
 					beschreibungText.setText(ausgewaehlterArtikel.getBeschreibung());
-				} catch (NichtGefundenException e1) {
+						
+				} catch (ArtikelNichtGefundenException e1) {
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(ArtikelPanel.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					dialog.setVisible(true);
@@ -272,7 +270,7 @@ public class ArtikelPanel extends JPanel {
 				//Prüft, ob ein Artikel ausgewählt ist und öffnet bei Erfolg ein Pop-Up, in welchem die Menge
 				//abgefragt wird:
 				if(ausgewaehlterArtikel != null){
-					WarenkorbFenster warenkorbPlus = new WarenkorbFenster(/*null, ausgewaehlterArtikel*/);
+					WarenkorbFenster warenkorbPlus = new WarenkorbFenster(null, ausgewaehlterArtikel);
 					warenkorbPlus.setLocationRelativeTo(hauptFenster);
 					warenkorbPlus.setVisible(true);
 				}else{
@@ -303,7 +301,7 @@ public class ArtikelPanel extends JPanel {
 					return;
 				}
 				//öffnet ein Pop-Up, in welchem die auszuführende Aktion abgefragt wird:
-				ArtikelVerwaltenFenster verwalten = new ArtikelVerwaltenFenster(/*hauptFenster, ArtikelPanel.this.getAusgewaehlterArtikel()*/);
+				ArtikelVerwaltenFenster verwalten = new ArtikelVerwaltenFenster(hauptFenster, ArtikelPanel.this.getAusgewaehlterArtikel());
 				verwalten.setLocationRelativeTo(hauptFenster);
 				verwalten.setVisible(true);
 				//teilt dem TableModel mit, dass sich die Daten geändert haben:
@@ -325,7 +323,7 @@ public class ArtikelPanel extends JPanel {
 				//Die Texte der Exceptions wurden im Folgenden von Hand eingetragen, damit der
 				//Benutzer weiß, wo er einen Fehler gemacht hat.
 				String name = artikelNameText.getText();
-				String beschreibung = artikelBeschreibungText.getText();
+				//String beschreibung = artikelBeschreibungText.getText();
 				int menge = -1;
 				try{
 					menge = Integer.parseInt(artikelMengeText.getText());
@@ -335,7 +333,7 @@ public class ArtikelPanel extends JPanel {
 					dialog.setVisible(true);
 					return;
 				}
-				int mindestBestand = -1;
+				/*int mindestBestand = -1;
 				try{
 					mindestBestand = Integer.parseInt(artikelMindestbestandText.getText());
 				}catch(NumberFormatException e){
@@ -343,7 +341,7 @@ public class ArtikelPanel extends JPanel {
 					JOptionPane.showMessageDialog(ArtikelPanel.this, "Sie müssen einen Mindestbestand angeben.", "Error", JOptionPane.ERROR_MESSAGE);
 					dialog.setVisible(true);
 					return;
-				}
+				}*/
 				int einheit = -1;
 				try{
 					einheit = Integer.parseInt(artikelEinheitText.getText());
@@ -353,9 +351,9 @@ public class ArtikelPanel extends JPanel {
 					dialog.setVisible(true);
 					return;
 				}
-				float preis = -1.00f;
+				float stueckPreis = -1.00f;
 				try{
-				 preis = Float.parseFloat(artikelPreisText.getText().replace(',', '.'));
+				 stueckPreis = Float.parseFloat(artikelPreisText.getText().replace(',', '.'));
 				}catch(NumberFormatException e){
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(ArtikelPanel.this, "Sie müssen einen Stückpreis angeben.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -365,9 +363,9 @@ public class ArtikelPanel extends JPanel {
 				
 				//prüft, ob in jedes Feld ein Wert eingegeben wurde:
 				if(name.length() == 0 ||
-				   beschreibung.length() == 0 ||
+				   /*beschreibung.length() == 0 ||*/
 				   artikelMengeText.getText().length() == 0 ||
-				   artikelMindestbestandText.getText().length() == 0 ||
+				   /*artikelMindestbestandText.getText().length() == 0 ||*/
 				   artikelEinheitText.getText().length() == 0 ||
 				   artikelPreisText.getText().length() == 0){
 					JOptionPane dialog = new JOptionPane();
@@ -377,41 +375,37 @@ public class ArtikelPanel extends JPanel {
 				}
 				
 				//holt sich die neue Artikel-Nummer aus der EShopVerwaltung:
-				int nummer = HauptFenster.shopVerwaltung.getArtikelNummer();
-				Artikel a = null;
+				//int nummer = HauptFenster.shopVerwaltung.getArtikelNummer();
+				//Artikel a = null;
 				
 				//prüft, ob der neue Artikel ein Massengut ist oder nicht, legt den Artikel an
 				//und wirft ggf. Exceptions:
 				try {
 					if(einheit > 1){
-						a = new MehrfachArtikel(artikelName, menge, d, packungsGroesse);
-						HauptFenster.shopVerwaltung.artikelAnlegen(a);
+						HauptFenster.shopVerwaltung.fuegeArtikelEin(name, menge, einheit*stueckPreis, einheit, stueckPreis);
+						/*a = new MehrfachArtikel(artikelName, menge, d, packungsGroesse);
+						HauptFenster.shopVerwaltung.artikelAnlegen(a);*/
 					}else{
-						a = new Artikel(artikelName, menge, d);
-						HauptFenster.shopVerwaltung.fuegeArtikelEin(a);
+						/*a = new Artikel(artikelName, menge, d);
+						HauptFenster.shopVerwaltung.fuegeArtikelEin(a);*/
+						HauptFenster.shopVerwaltung.fuegeArtikelEin(name, menge, stueckPreis);
 					}
-					HauptFenster.shopVerwaltung.lagerEreignisEinfuegen(1, HauptFenster.benutzer, a, menge);
-				} catch (BereitsVorhandenException e) {
+					//HauptFenster.shopVerwaltung.lagerEreignisEinfuegen(1, HauptFenster.benutzer, a, menge);
+				} catch (EinlagernException e) {
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(ArtikelPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					dialog.setVisible(true);
-					return;
-				} catch (FalscherWertException e) {
-					JOptionPane dialog = new JOptionPane();
-					JOptionPane.showMessageDialog(ArtikelPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-					dialog.setVisible(true);
-					return;
 				}
 				
 				//speichern:
-				try {
+				/*try {
 					HauptFenster.shopVerwaltung.artikelSpeichern();
 					HauptFenster.shopVerwaltung.lagerEreignisseSpeichern();
 				} catch (KonnteNichtSpeichernException e) {
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					dialog.setVisible(true);
-				}
+				}*/
 				
 				//Bei Erfolg wird dem Nutzer mitgeteilt, dass der Artikel zum EShop hinzugefügt wurde:
 				JOptionPane dialog = new JOptionPane();

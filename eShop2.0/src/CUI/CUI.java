@@ -31,34 +31,6 @@ public class CUI implements Runnable {
 		in = new BufferedReader(new InputStreamReader(System.in));
 	}
 	
-public static void main(String[] args) throws EinlagernException {
-		
-		CUI shop = new CUI();
-		shopVer.fuegeArtikelEin("Hose", 48, 6);
-		shopVer.fuegeUserEin("Kunde", "123", "Frau", "Regina", "Regenbogen","Elbenweg 3", 13337, "Bruchtal");
-		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");
-		try {
-			shop.run();
-		}
-		catch (Exception e) {
-			System.out.println("Fehler bei der Eingabe");
-			e.printStackTrace();
-		}		
-	}	
-	
-	@SuppressWarnings("unused")
-	private static  void guiStarten() {
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException
-				| IllegalAccessException | UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		@SuppressWarnings("unused")
-		HauptFenster h = new HauptFenster(shopVer);
-		}
-	
 	public void run() {
 		try {
 //			shopVer.ladeDaten();
@@ -71,7 +43,7 @@ public static void main(String[] args) throws EinlagernException {
 	
 	private void gibMenue() throws IOException, ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{
 		do{
-			if(!(aktuellerBenutzer == null)){
+			if(aktuellerBenutzer != null){
 				eingeloggt();
 			} else {
 				menueNichtEingeloggt();

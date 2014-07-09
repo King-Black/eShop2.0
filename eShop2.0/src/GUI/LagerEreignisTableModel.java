@@ -4,10 +4,7 @@ import java.util.Collection;
 
 import javax.swing.table.AbstractTableModel;
 
-import eshop.client.ui.StringHelfer;
-import Valueobjects.LagerEreignis;
-import Valueobjects.Mitarbeiter;
-import Valueobjects.User;
+import Valueobjects.Ereignis;
 
 /**
  * Klasse zur Erstellung eines LagerEreignis-Tabellen-Modells.
@@ -16,15 +13,15 @@ import Valueobjects.User;
 @SuppressWarnings("serial")
 public class LagerEreignisTableModel extends AbstractTableModel {
 	//Spaltenüberschriften
-	private static final String[] COLUMN_NAMES = new String[] {"Art", "Artikel", "Menge", "Datum", "Name", "Typ"};
+	private static final String[] COLUMN_NAMES = new String[] {"Art", "Artikel", "Menge", "Datum"/*, "Name", "Typ"*/};
 	//Datentypen der Spalten
-	private static final Class<?>[] COLUMN_CLASSES = new Class<?>[]{String.class, String.class, Integer.class, String.class, String.class, String.class};
-	private Collection<LagerEreignis> ereignisse;
+	private static final Class<?>[] COLUMN_CLASSES = new Class<?>[]{String.class, String.class, Integer.class, String.class/*, String.class, String.class*/};
+	private Collection<Ereignis> ereignisse;
 	
 	/**
 	 * Initialisiert ein LagerEreignisTableModel-Objekt.
 	 */
-	public LagerEreignisTableModel(Collection<LagerEreignis> ereignisse){
+	public LagerEreignisTableModel(Collection<Ereignis> ereignisse){
 		super();
 		
 		this.ereignisse = ereignisse;
@@ -57,28 +54,30 @@ public class LagerEreignisTableModel extends AbstractTableModel {
 	 */
 	@Override
 	public Object getValueAt(int row, int col) {
-		LagerEreignis l = this.getLagerEreignis(row);
+		Ereignis l = this.getLagerEreignis(row);
 		//Spalten mit Werten belegen
 		switch(col) {
 		case 0:
 			//1. Spalte: Art
-			String aktion = "";
+			/*String aktion = "";
 			if(l.getAktion() == 0){
 				aktion = "Auslagern";
 			}else{
 				aktion = "Einlagern";
 			}
-			return aktion;
+			return aktion;*/
+			return l.getAktion();
 		case 1:
 			//2. Spalte: Artikel
-			return l.getPosition().getArtikel().getName();
+			return l.getArtikel().getArtikelName();
 		case 2:
 			//3. Spalte: Menge
-			return l.getPosition().getMenge();
+			return l.getMenge();
 		case 3:
 			//4. Spalte: Datum
-			return StringHelfer.einfachesDatum(l.getDatum());
-		case 4:
+			return l.getDate();
+		//keine Personen in den Ereignissen
+		/*case 4:
 			//5. Spalte: Name
 			String person = l.getPerson().getVorName() + " " + l.getPerson().getNachName();
 			return person;
@@ -91,7 +90,7 @@ public class LagerEreignisTableModel extends AbstractTableModel {
 			}else{
 				typ = "Kunde";
 			}
-			return typ;
+			return typ;*/
 		default:
 			return null;
 		}
@@ -118,8 +117,8 @@ public class LagerEreignisTableModel extends AbstractTableModel {
 	 * @param row Aus dieser Spalte soll das LagerEreignis zurückgegeben werden.
 	 * @return Gibt das LagerEreignis in der übergebenen Zeile zurück.
 	 */
-	public LagerEreignis getLagerEreignis(int row) {
-		return (LagerEreignis)this.ereignisse.toArray()[row];
+	public Ereignis getLagerEreignis(int row) {
+		return (Ereignis)this.ereignisse.toArray()[row];
 	}
 }
 
