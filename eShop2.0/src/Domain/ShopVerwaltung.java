@@ -202,8 +202,8 @@ public class ShopVerwaltung {
 	
 	public void speichereDaten() throws FileNotFoundException, IOException {
 		artVer.schreibeDaten();
-		userVer.schreibeDaten(); //user objekte
-		erVer.schreibeDaten();
+//		userVer.schreibeDaten(); //user objekte
+//		erVer.schreibeDaten();
 	}
 
 	public Rechnung kaufen(Kunde k) throws NichtEingeloggtException, NichtGenugAufLagerException, BereitsVorhandenException{

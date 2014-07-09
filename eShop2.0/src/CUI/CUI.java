@@ -102,6 +102,7 @@ public static void main(String[] args) throws EinlagernException {
 				System.out.println(e);
 			}					
 		} else if (eingabe.equals("q")){
+			shopVer.speichereDaten();
 			System.exit(0);
 		}
 	}
