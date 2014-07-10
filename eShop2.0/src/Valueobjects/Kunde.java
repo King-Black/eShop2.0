@@ -27,4 +27,15 @@ public class Kunde extends User {
 		return warenkorb;
 	}
 	
+	public String getStrasse() {
+		return adresse;
+	}
+	
+	public int getPlz() {
+		return plz;
+	}
+	
+	public String getOrt(){
+		return ort;
+	}
 }

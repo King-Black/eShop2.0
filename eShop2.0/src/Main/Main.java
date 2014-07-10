@@ -11,7 +11,6 @@ import GUI.HauptFenster;
 public class Main {
 	
 	private static  ShopVerwaltung shopVer;
-	private static CUI cui;
 
 	
 public static void main(String[] args){
@@ -29,16 +28,13 @@ public static void main(String[] args){
 		
 	}
 
+	@SuppressWarnings("unused")
 	private static void cuiStarten(){
 		CUI shop = new CUI();
-		try {
-			shopVer.fuegeArtikelEin("Hose", 48, 6);
-		} catch (EinlagernException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		//Testzwecke
+//		shopVer.fuegeArtikelEin("Hose", 48, 6);
 		shopVer.fuegeUserEin("Kunde", "123", "Frau", "Regina", "Regenbogen","Elbenweg 3", 13337, "Bruchtal");
-		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");
+//		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");
 		try {
 			shop.run();
 		}
@@ -47,9 +43,10 @@ public static void main(String[] args){
 			e.printStackTrace();
 		}		
 	}
+	
 	@SuppressWarnings("unused")
 	private static  void guiStarten() {
-		try {
+		/*try {
 			shopVer.fuegeArtikelEin("SECHSSTEIN", 48, 9.99);
 			shopVer.fuegeArtikelEin("Test", 15, 5.99);
 			shopVer.fuegeArtikelEin("Test2", 35, 1.99);
@@ -58,7 +55,7 @@ public static void main(String[] args){
 			e1.printStackTrace();
 		}
 		shopVer.fuegeUserEin("Kunde", "123", "Frau", "Regina", "Regenbogen","Elbenweg 3", 13337, "Bruchtal");
-		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");
+		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");*/
 		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -67,7 +64,7 @@ public static void main(String[] args){
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		@SuppressWarnings("unused")
+		
 		HauptFenster h = new HauptFenster(shopVer);
 	}
 }

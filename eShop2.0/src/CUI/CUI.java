@@ -4,19 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
-import CUI.CUI;
+import Domain.ShopVerwaltung;
+import Valueobjects.Kunde;
+import Valueobjects.User;
 import exceptions.ArtikelNichtGefundenException;
 import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 import exceptions.BereitsEingeloggtException;
-import exceptions.EinlagernException;
 import exceptions.KennwortFalschException;
-import Valueobjects.Kunde;
-import Valueobjects.User;
-import Domain.ShopVerwaltung;
-import GUI.HauptFenster;
 
 public class CUI implements Runnable {
 	
@@ -74,6 +68,7 @@ public class CUI implements Runnable {
 				System.out.println(e);
 			}					
 		} else if (eingabe.equals("q")){
+			shopVer.speichereDaten();
 			System.exit(0);
 		}
 	}
