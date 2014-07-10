@@ -31,6 +31,7 @@ public class ShopVerwaltung {
 	private UserVerwaltung userVer;
 	private WarenkorbVerwaltung warkoVer;
 	public EreignisVerwaltung erVer;
+	private User eingeloggterUser;
 	
 	public ShopVerwaltung(){
 		artVer = new ArtikelVerwaltung();
@@ -41,12 +42,12 @@ public class ShopVerwaltung {
 	
 	public void fuegeArtikelEin(String artikelName, int menge, double d) throws EinlagernException{ // hier fehlt ArtikelExistiertBereitsException
 		Artikel a = artVer.einfuegen(artikelName, menge, d);
-		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Neuer Artikel erstellt.");
+		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Neuer Artikel erstellt.", eingeloggterUser);
 	}
 	
 	public void fuegeArtikelEin(String artikelName, int menge, double d, int packungsGroesse, float stueckPreis) throws EinlagernException{ // hier fehlt ArtikelExistiertBereitsException
 		MehrfachArtikel a = artVer.einfuegen(artikelName, menge, d, packungsGroesse, stueckPreis);
-		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Neuer Artikel erstellt.");
+		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Neuer Artikel erstellt.", eingeloggterUser);
 	}
 	
 	public void fuegeUserEin(String name, String passwort, String anrede, String vorName, String nachName){
@@ -62,7 +63,7 @@ public class ShopVerwaltung {
 		// �berpr�fe: sind schon mehr in warenkorb als im bestand?
 		Kunde k = null;
 		try {
-			k = warkoVer.artikelInWarenkorb(a, menge, (Kunde)userVer.findUserByNumber(akteur.getNummer()));
+			k = warkoVer.artikelInWarenkorb(a, menge, akteur/*(Kunde)userVer.findUserByNumber(akteur.getNummer())*/);
 		} catch (NichtGenugAufLagerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,7 +74,7 @@ public class ShopVerwaltung {
 	public Kunde artikelAusWarenkorb(int artID, Kunde akteur) throws ArtikelNichtGefundenException, WarenkorbLeerException{	
 		Artikel a = artVer.findArtikelByNumber(artID);
 		Kunde kunde = warkoVer.artikelAusWarenkorb(a, (Kunde)userVer.findUserByNumber(akteur.getNummer()));
-		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Artikel " + a.getArtikelName() + " aus dem Warenkorb entfernt.");
+		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Artikel " + a.getArtikelName() + " aus dem Warenkorb entfernt.", eingeloggterUser);
 		return kunde;
 	}
 	
@@ -114,7 +115,7 @@ public class ShopVerwaltung {
 			artVer.setArtikelMenge(nummer, anzahl);		
 	
 			// aus nummer und anzahl muss ich den rest herausfinden
-			erVer.ereignisEinfuegen(derWars, anzahl, "Bestandsanzahl geaendert.");
+			erVer.ereignisEinfuegen(derWars, anzahl, "Bestandsanzahl geaendert.", eingeloggterUser);
 		}
 	}
 	
@@ -165,12 +166,13 @@ public class ShopVerwaltung {
 	
 	public void loescheArtikel(int artID, User aktuellerBenutzer) throws ArtikelNichtGefundenException{
 		Artikel a = artVer.findArtikelByNumber(artID);
-		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Artikel geloescht."); //aktuellerBenutzer,
+		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Artikel geloescht.", eingeloggterUser); //aktuellerBenutzer,
 		artVer.loescheArtikel(a);		
 	}
 	
 	public User userLogin(String name, String passwort) throws KennwortFalschException, BereitsEingeloggtException{
-		return userVer.userLogin(name, passwort);
+		eingeloggterUser = userVer.userLogin(name, passwort);
+		return eingeloggterUser;
 	}
 
 	public Rechnung rechnungErstellen(Kunde akteur) throws ArtikelNichtGefundenException, WarenkorbLeerException, UserNichtGefundenException{
@@ -185,7 +187,7 @@ public class ShopVerwaltung {
 			for(Artikel key : warenkorb.keySet()) {
 				artVer.setArtikelMenge(key.getArtikelNummer(), (warenkorb.get(key)*-(1))); 
 
-				erVer.ereignisEinfuegen(key, warenkorb.get(key), "Artikel gekauft. (Rechnung wurde erstellt)");
+				erVer.ereignisEinfuegen(key, warenkorb.get(key), "Artikel gekauft. (Rechnung wurde erstellt)", eingeloggterUser);
 		    }
 		}
 		Rechnung rechnung = new Rechnung(akteur, akteur.getWarenkorb(), new Date());

@@ -58,7 +58,7 @@ public class UserVerwaltung {
 	public User userLogin(String name, String passwort) throws KennwortFalschException, BereitsEingeloggtException{
 		Iterator<User> it = userBestand.iterator();
 	
-		while  (it.hasNext()) {	
+		while(it.hasNext()) {	
 			User user = it.next();
 			if(user.getName().equals(name)){
 				if (user.getPasswort().equals(passwort)) { //geändert von array equal

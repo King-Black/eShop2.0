@@ -39,9 +39,9 @@ public class WarenkorbTableModel extends AbstractTableModel {
 		}
 		
 		@Override
-		//public int getRowCount() {
-			//return w.getAnzahlPositionen();
-			//}
+		public int getRowCount() {
+			return w.getAnzahlPositionen();
+		}
 		
 		public Object getValueAt(int row, int col) {
 			Position p = this.getPosition(row);
@@ -83,12 +83,6 @@ public class WarenkorbTableModel extends AbstractTableModel {
 
 		public Position getPosition(int row) {
 			return (Position)(w.getPositionen().toArray())[row];
-		}
-
-		@Override
-		public int getRowCount() {
-			// TODO Auto-generated method stub
-			return 0;
 		}
 
 }

@@ -158,7 +158,7 @@ public class ArtikelVerwaltung {
 		pm.openForReading("Artikel.txt");
 		Artikel a;
 		do {
-			a = pm.ladeArtikel();;
+			a = pm.ladeArtikel();
 			if (a != null) {
 				artikelBestand.add(a);
 			}				

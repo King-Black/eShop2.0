@@ -1,15 +1,15 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
 import Domain.ShopVerwaltung;
-import GUI.ArtikelPanel;
-import GUI.HauptFenster;
-import GUI.LagerEreignisPanel;
-import GUI.VerwaltungsPanel;
 import Valueobjects.Artikel;
 import Valueobjects.User;
 
@@ -35,7 +35,23 @@ public class HauptFenster extends JFrame{
 		this.pack();
 		this.setLocationRelativeTo(this.getParent());
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
+        this.addWindowListener(new WindowAdapter() {
+               public void windowClosing(WindowEvent event) {
+                    try {
+						shopVerwaltung.speichereDaten();
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+                    System.exit(1);
+               }
+           }
+        );
 	}
 	
 	private void initialisieren() {

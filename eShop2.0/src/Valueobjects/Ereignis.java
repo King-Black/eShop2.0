@@ -8,13 +8,15 @@ public class Ereignis {
 	private Artikel artikel;
 	private String aktion;
 	private int anzahl;
+	private User nutzer;
 	
-	public Ereignis(Artikel artikel, int anzahl	, String aktion) {
+	public Ereignis(Artikel artikel, int anzahl	, String aktion, User nutzer) {
 		
 		this.datum = new Date();
 		this.artikel = artikel;
 		this.anzahl = anzahl;
 		this.aktion = aktion;
+		this.nutzer = nutzer;
 	}
 	
 	public Artikel getArtikel() {
@@ -34,8 +36,12 @@ public class Ereignis {
 		return aktion;
 	}
 	
+	public User getNutzer(){
+		return nutzer;
+	}
+	
 	public String toString() {
-		return ("Datum: " + this.datum + " Artikel: " + artikel.getArtikelName() + " | Anzahl: " + anzahl + " | " + " Aktion: " + aktion);
+		return ("Datum: " + this.datum + " Artikel: " + artikel.getArtikelName() + " | Anzahl: " + anzahl + " | Aktion: " + aktion + " | Benutzer: " + nutzer.getVorName() + nutzer.getNachName());
 	}
 
 }

@@ -5,6 +5,8 @@ import java.util.Collection;
 import javax.swing.table.AbstractTableModel;
 
 import Valueobjects.Ereignis;
+import Valueobjects.Mitarbeiter;
+import Valueobjects.User;
 
 /**
  * Klasse zur Erstellung eines LagerEreignis-Tabellen-Modells.
@@ -13,9 +15,9 @@ import Valueobjects.Ereignis;
 @SuppressWarnings("serial")
 public class LagerEreignisTableModel extends AbstractTableModel {
 	//Spaltenüberschriften
-	private static final String[] COLUMN_NAMES = new String[] {"Art", "Artikel", "Menge", "Datum"/*, "Name", "Typ"*/};
+	private static final String[] COLUMN_NAMES = new String[] {"Art", "Artikel", "Menge", "Datum", "Nutzer", "Typ"};
 	//Datentypen der Spalten
-	private static final Class<?>[] COLUMN_CLASSES = new Class<?>[]{String.class, String.class, Integer.class, String.class/*, String.class, String.class*/};
+	private static final Class<?>[] COLUMN_CLASSES = new Class<?>[]{String.class, String.class, Integer.class, String.class, String.class, String.class};
 	private Collection<Ereignis> ereignisse;
 	
 	/**
@@ -77,20 +79,20 @@ public class LagerEreignisTableModel extends AbstractTableModel {
 			//4. Spalte: Datum
 			return l.getDate();
 		//keine Personen in den Ereignissen
-		/*case 4:
+		case 4:
 			//5. Spalte: Name
-			String person = l.getPerson().getVorName() + " " + l.getPerson().getNachName();
+			String person = l.getNutzer().getVorName() + " " + l.getNutzer().getNachName();
 			return person;
 		case 5:
 			//6. Spalte: Typ
 			String typ = "";
-			Person p = l.getPerson();
+			User p = l.getNutzer();
 			if(p instanceof Mitarbeiter){
 				typ = "Mitarbeiter";
 			}else{
 				typ = "Kunde";
 			}
-			return typ;*/
+			return typ;
 		default:
 			return null;
 		}

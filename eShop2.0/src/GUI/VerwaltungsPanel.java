@@ -1,10 +1,12 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -65,13 +67,13 @@ public class VerwaltungsPanel extends JPanel {
 		ausloggenButton.addActionListener(this.ausloggen());
 		ausloggenButton.setVisible(false);
 		
-		//registrierenButton.addActionListener(this.registrieren());
+		registrierenButton.addActionListener(this.registrieren());
 		registrierenButton.setVisible(true);
 		
 		//adresseAendernButton.addActionListener(this.adresseAendern());
 		adresseAendernButton.setVisible(false);
 		
-		//mitarbeiterAnlegenButton.addActionListener(this.mitarbeiterAnlegen());
+		mitarbeiterAnlegenButton.addActionListener(this.mitarbeiterAnlegen());
 		mitarbeiterAnlegenButton.setVisible(false);
 		
 		//fügt die Buttons zum VerwaltungsPanel hinzu:
@@ -164,7 +166,7 @@ public class VerwaltungsPanel extends JPanel {
 	 * Die Methode implementiert den ActionListener für den Registrieren Button und gibt diesen zurück.
 	 * @return Gibt den ActionListener für den RegistrierenButton zurück.
 	 */
-	/*private ActionListener registrieren(){
+	private ActionListener registrieren(){
 		ActionListener registrieren = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -184,7 +186,7 @@ public class VerwaltungsPanel extends JPanel {
 			}
 		};
 		return registrieren;
-	}*/
+	}
 	
 	/**
 	 * Die Methode implementiert den ActionListener für den Adresse ändern Button und gibt diesen zurück.
@@ -217,7 +219,7 @@ public class VerwaltungsPanel extends JPanel {
 	 * Die Methode implementiert den ActionListener für den Mitarbeiter anlegen Button und gibt diesen zurück.
 	 * @return Gibt den ActionListener für den Mitarbeiter anlegen Button zurück.
 	 */
-	/*private ActionListener mitarbeiterAnlegen() {
+	private ActionListener mitarbeiterAnlegen() {
 		ActionListener mitarbeiterAnlegen = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -235,5 +237,5 @@ public class VerwaltungsPanel extends JPanel {
 			}
 		};
 		return mitarbeiterAnlegen;
-	}*/
+	}
 }

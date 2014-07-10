@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -25,9 +26,11 @@ public class RegistrierenFenster extends JDialog {
 	private JPanel registrierenPanel;
 	private JButton okButton;
 	private JButton abbrechenButton;
+	private JTextField benutzerNameText;
+	private JTextField anredeText;
 	private JTextField vorNameText;
 	private JTextField nachNameText;
-	private JTextField kennwortText;
+	private JPasswordField kennwortText;
 	private JPanel adressPanel;
 	private JTextField strasseText;
 	private JTextField plzText;
@@ -63,12 +66,18 @@ public class RegistrierenFenster extends JDialog {
 	private JPanel registrierenPanelErzeugen(){
 		//initialisiert alle Komponenten des RegistrierenPanel und setzt das Layout:
 		registrierenPanel = new JPanel();
-		registrierenPanel.setLayout(new GridLayout(3, 2, 6, 3));
+		registrierenPanel.setLayout(new GridLayout(5, 2, 6, 3));
+		benutzerNameText = new JTextField();
+		anredeText = new JTextField();
 		vorNameText = new JTextField();
 		nachNameText = new JTextField();
-		kennwortText = new JTextField();
+		kennwortText = new JPasswordField();
 		
 		//fügt alle Komponenten in das Layout ein:
+		registrierenPanel.add(new JLabel("Benutzername:"));
+	    registrierenPanel.add(benutzerNameText);
+	    registrierenPanel.add(new JLabel("Anrede:"));
+	    registrierenPanel.add(anredeText);
 	    registrierenPanel.add(new JLabel("Vorname:"));
 	    registrierenPanel.add(vorNameText);
 	    registrierenPanel.add(new JLabel("Nachname:"));
@@ -187,6 +196,8 @@ public class RegistrierenFenster extends JDialog {
 	 */
 	private void registrieren(){
 		//Deklariert und initialisiert alle einzulesenden Werte:
+		String benutzerName = benutzerNameText.getText();
+		String anrede = anredeText.getText();
 		String vorName = vorNameText.getText();
 		String nachName = nachNameText.getText();
 		String kennwort = kennwortText.getText();
@@ -204,7 +215,9 @@ public class RegistrierenFenster extends JDialog {
 		}
 		
 		//prüft, ob in jedem Feld ein Wert steht:
-		if(vorName.length() == 0 ||
+		if(benutzerName.length() == 0 ||
+		   anrede.length() == 0 ||
+		   vorName.length() == 0 ||
 		   nachName.length() == 0 ||
 		   kennwort.length() == 0 ||
 		   strasse.length() == 0 ||
@@ -216,11 +229,7 @@ public class RegistrierenFenster extends JDialog {
 			return;
 		}
 		
-		//holt sich eine neue Kunden-ID aus der EShopVerwaltung und legt ein neues Adress-Objekt an:
-		//int neueKundenId = HauptFenster.shopVerwaltung.getNeueKundenId();
-		//Adresse adresse = new Adresse(plz, stadt, strasse);
-		
-		HauptFenster.shopVerwaltung.fuegeUserEin("Test", kennwort, "Herr", vorName, nachName, strasse, plz, stadt);
+		HauptFenster.shopVerwaltung.fuegeUserEin(benutzerName, kennwort, anrede, vorName, nachName, strasse, plz, stadt);
 
 		//speichern:
 		/*try {
@@ -234,7 +243,7 @@ public class RegistrierenFenster extends JDialog {
 		//teilt dem Kunden bei Erfolg seine neue ID mit:
 		JOptionPane dialog = new JOptionPane();
 		//TODO: benutzername
-		JOptionPane.showMessageDialog(RegistrierenFenster.this, "Sie können sich nun mit dem Namen " + "Test" + " und dem von Ihnen gewählten Passwort anmelden.", "Kunde angelegt", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(RegistrierenFenster.this, "Sie können sich nun mit dem Namen " + benutzerName + " und dem von Ihnen gewählten Passwort anmelden.", "Kunde angelegt", JOptionPane.INFORMATION_MESSAGE);
 		dialog.setVisible(true);
 		this.dispose();
 	}
@@ -286,12 +295,16 @@ public class RegistrierenFenster extends JDialog {
 	 */
 	private void mitarbeiterAnlegen(){
 		//deklariert und initialisiert alle einzulesenden Werte:
+		String benutzerName = benutzerNameText.getText();
+		String anrede = anredeText.getText();
 		String vorName = vorNameText.getText();
 		String nachName = nachNameText.getText();
 		String kennwort = kennwortText.getText();
 		
 		//prüft, ob in jedem Feld ein Wert steht:
-		if(vorName.length() == 0 ||
+		if(benutzerName.length() == 0 ||
+		   anrede.length() == 0 ||
+		   vorName.length() == 0 ||
 		   nachName.length() == 0 ||
 		   kennwort.length() == 0){
 			JOptionPane dialog = new JOptionPane();
@@ -303,7 +316,7 @@ public class RegistrierenFenster extends JDialog {
 		//holt sich eine neue Mitarbeiter-ID aus der EShopVerwaltung:
 		//int neueMitarbeiterId = HauptFenster.shopVerwaltung.getNeueMitarbeiterId();
 		
-		HauptFenster.shopVerwaltung.fuegeUserEin("TEST", kennwort, "Frau", vorName, nachName);
+		HauptFenster.shopVerwaltung.fuegeUserEin(benutzerName, kennwort, anrede, vorName, nachName);
 
 		//speichern:
 		/*try {
@@ -316,8 +329,7 @@ public class RegistrierenFenster extends JDialog {
 		
 		//teilt dem Mitarbeiter die neue ID mit:
 		JOptionPane dialog = new JOptionPane();
-		//TODO: Name
-		JOptionPane.showMessageDialog(RegistrierenFenster.this, "Der Mitarbeiter kann sich nun mit der ID " + "TEST" + " und dem von Ihnen gewählten Passwort anmelden.", "Mitarbeiter angelegt", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(RegistrierenFenster.this, "Der Mitarbeiter kann sich nun mit dem Benutzernamen " + benutzerName + " und dem von Ihnen gewählten Passwort anmelden.", "Mitarbeiter angelegt", JOptionPane.INFORMATION_MESSAGE);
 		dialog.setVisible(true);
 		this.dispose();
 	}

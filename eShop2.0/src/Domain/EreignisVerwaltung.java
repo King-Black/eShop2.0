@@ -15,13 +15,14 @@ import java.util.Vector;
 
 import Valueobjects.Artikel;
 import Valueobjects.Ereignis;
+import Valueobjects.User;
 
 public class EreignisVerwaltung {
 	
 	private List<Ereignis> protokoll = new Vector<Ereignis>();
 
-	public void ereignisEinfuegen(Artikel derWars, int artikelBestand, String aktion) {
-		Ereignis ereignis = new Ereignis(derWars, artikelBestand, aktion);
+	public void ereignisEinfuegen(Artikel derWars, int artikelBestand, String aktion, User nutzer) {
+		Ereignis ereignis = new Ereignis(derWars, artikelBestand, aktion, nutzer);
 		protokoll.add(ereignis);
 	}
 

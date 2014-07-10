@@ -3,13 +3,14 @@ package Valueobjects;
 import java.util.Collection;
 import java.util.HashMap;
 
+import exceptions.NichtGenugAufLagerException;
 import exceptions.WarenkorbLeerException;
 
 public class Warenkorb {
 
 	private HashMap<Artikel, Integer> warenkorb = new HashMap<Artikel, Integer>();
 	
-	public void artikelHinzufuegen(Artikel a, int gewuenschteMenge, int mengeNochDa){
+	public void artikelHinzufuegen(Artikel a, int gewuenschteMenge, int mengeNochDa) throws NichtGenugAufLagerException{
 		// Wenn Artikel schon im Warenkorb vorhanden dann Menge erweitern
 		if (warenkorb.containsKey(a)) { // WArenkorb hat hier nichtr den gew�nschten artikel drin
 			int alteMenge = warenkorb.get(a);
@@ -18,6 +19,8 @@ public class Warenkorb {
 				warenkorb.put(a, alteMenge + gewuenschteMenge);	
 			} else{
 				//exception artikelbestand reicht nicht
+				NichtGenugAufLagerException e = new NichtGenugAufLagerException(a);
+				throw e;
 			}
 		} else {
 		// Ansonsten neu in Liste hinzuf�gen

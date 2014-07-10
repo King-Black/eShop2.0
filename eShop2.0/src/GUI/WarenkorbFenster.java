@@ -15,7 +15,8 @@ import javax.swing.JPanel;
 
 import Valueobjects.Artikel;
 import Valueobjects.Kunde;
-import Valueobjects.MehrfachArtikel;
+import exceptions.ArtikelNichtGefundenException;
+import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 
 
 @SuppressWarnings("serial")
@@ -84,21 +85,13 @@ public class WarenkorbFenster extends JDialog{
 		final WarenkorbFenster gui = this;
 		ActionListener ok = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				//legt den Artikel in den Warenkorb und prüft auf Massengut:
-				boolean massengut = artikel instanceof MehrfachArtikel;
-				MehrfachArtikel tmp = massengut ? (MehrfachArtikel)artikel : null;
-				int einheit = massengut ? tmp.getPackungsgroesse() : 1;
 				try {
 					int menge = Integer.parseInt(gui.anzahlText.getText());
-					if(menge % einheit == 0){
-						Kunde k = (Kunde)HauptFenster.benutzer;
-						k.getWarenkorb().artikelHinzufuegen(artikel, menge, artikel.getArtikelBestand());
-					}else{
-						JOptionPane dialog = new JOptionPane();
-						JOptionPane.showMessageDialog(WarenkorbFenster.this, "Bitte geben Sie " + einheit + " oder ein Vielfaches von " + einheit + " an.", "Error", JOptionPane.ERROR_MESSAGE);
-						dialog.setVisible(true);
-						return;
-					}
+					
+					Kunde k = (Kunde)HauptFenster.benutzer;
+					//k.getWarenkorb().artikelHinzufuegen(artikel, menge, artikel.getArtikelBestand());
+					HauptFenster.shopVerwaltung.artikelInWarenkorb(artikel.getArtikelNummer(), menge, k);
+						
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(WarenkorbFenster.this, "Folgender Artikel befindet sich jetzt in Ihrem Warenkorb: " + artikel.getArtikelName() + ".", "Artikel im Warenkorb", JOptionPane.INFORMATION_MESSAGE);
 					dialog.setVisible(true);
@@ -107,6 +100,16 @@ public class WarenkorbFenster extends JDialog{
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(WarenkorbFenster.this, "Bitte geben Sie eine Zahl ein.", "Error", JOptionPane.ERROR_MESSAGE);
 					dialog.setVisible(true);
+				} catch (ArtikelNichtGefundenException e1) {
+					JOptionPane dialog = new JOptionPane();
+					JOptionPane.showMessageDialog(WarenkorbFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					dialog.setVisible(true);
+					return;
+				} catch (ArtikelNurInEinheitenVerfuegbarException e1) {
+					JOptionPane dialog = new JOptionPane();
+					JOptionPane.showMessageDialog(WarenkorbFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					dialog.setVisible(true);
+					return;
 				}
 			}
 		};

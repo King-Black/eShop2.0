@@ -30,7 +30,6 @@ public class EinloggenFenster extends JDialog {
 	private JButton abbrechenButton;
 	private JPasswordField passwortText;
 	private JTextField idText;
-	private JComboBox<String> personTypComboBox;
 	private boolean erfolg = false;
 	final EinloggenFenster gui = this;
 	
@@ -50,17 +49,14 @@ public class EinloggenFenster extends JDialog {
 	 */
 	public void initialisieren() {
 		//Layout setzen und Variabeln initialisieren:
-		this.setLayout(new GridLayout(4, 2, 6, 3));
-		personTypComboBox = new JComboBox<String>(new String[] {"Kunde", "Mitarbeiter"});
+		this.setLayout(new GridLayout(3, 2, 6, 3));
 		idText = new JTextField();
 		passwortText = new JPasswordField();
 		okButton = new JButton("OK");
 		abbrechenButton = new JButton("Abbrechen");
 		
 		//Komponenten ins Layout einfügen:
-		this.add(new JLabel(""));
-		this.add(personTypComboBox);
-		this.add(new JLabel("Benutzer-ID:"));
+		this.add(new JLabel("Benutzer-Name:"));
 		this.add(idText); //ändern
 		this.add(new JLabel("Passwort:"));
 		this.add(passwortText);
@@ -107,10 +103,6 @@ public class EinloggenFenster extends JDialog {
 								String.valueOf(gui.passwortText.getPassword()));
 						erfolg = true;
 						gui.dispose();
-					} catch (NumberFormatException e1) {
-						JOptionPane dialog = new JOptionPane();
-						JOptionPane.showMessageDialog(EinloggenFenster.this, "Bitte geben Sie eine Zahl ein.", "Error", JOptionPane.ERROR_MESSAGE);
-						dialog.setVisible(true);
 					} catch (KennwortFalschException e1) {
 						JOptionPane dialog = new JOptionPane();
 						JOptionPane.showMessageDialog(EinloggenFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -148,10 +140,6 @@ public class EinloggenFenster extends JDialog {
 							String.valueOf(gui.passwortText.getPassword()));
 					erfolg = true;
 					gui.dispose();
-				} catch (NumberFormatException e1) {
-					JOptionPane dialog = new JOptionPane();
-					JOptionPane.showMessageDialog(EinloggenFenster.this, "Bitte geben Sie eine Zahl ein.", "Error", JOptionPane.ERROR_MESSAGE);
-					dialog.setVisible(true);
 				} catch (KennwortFalschException e1) {
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(EinloggenFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

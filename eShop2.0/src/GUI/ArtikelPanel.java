@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
@@ -43,11 +42,9 @@ public class ArtikelPanel extends JPanel {
 	private JPanel buttonPanel;
 	JButton inDenWarenkorbButton;
 	private ArtikelTableModel tableModel;
-	private JTextArea beschreibungText;
 	private int ausgewaehlteArtikelId = -1;
 	private Artikel ausgewaehlterArtikel = null;
 	private JTextField artikelNameText;
-	private JTextField artikelBeschreibungText;
 	private JFormattedTextField artikelMengeText;
 	private JFormattedTextField artikelMindestbestandText;
 	private JFormattedTextField artikelEinheitText;
@@ -117,7 +114,6 @@ public class ArtikelPanel extends JPanel {
 		eastPanel = new JPanel();
 		buttonPanel = new JPanel();
 		inDenWarenkorbButton = new JButton("In den Warenkorb");
-		beschreibungText = new JTextArea();
 		artikelVerwaltenButton = new JButton("Artikel verwalten");
 		
 		//Die Größe und das Layout des EastPanel festlegen:
@@ -126,15 +122,6 @@ public class ArtikelPanel extends JPanel {
 		eastPanel.setPreferredSize(d);
 		eastPanel.setMaximumSize(d);
 		eastPanel.setLayout(new GridLayout(2,1));
-		
-		//Die Artikel-Beschreibung formatieren:
-		TitledBorder tBorderBeschreibung = BorderFactory.createTitledBorder("Beschreibung");
-		beschreibungText.setBorder(tBorderBeschreibung);
-		beschreibungText.setEditable(false);
-		beschreibungText.setWrapStyleWord(true);
-		beschreibungText.setLineWrap(true);
-		beschreibungText.setOpaque(false);
-		beschreibungText.setFont(new JLabel().getFont());
 
 	    //ActionListener auf die Buttons anwenden und die Buttons hinzufügen:
 		inDenWarenkorbButton.addActionListener(this.warenkorbListener());
@@ -144,7 +131,6 @@ public class ArtikelPanel extends JPanel {
 		artikelVerwaltenButton.setVisible(false);
 		
 		//Artikel-Beschreibung und Button-Panel in das Layout einfügen:
-		eastPanel.add(beschreibungText);
 		eastPanel.add(buttonPanel);
 		buttonPanel.add(inDenWarenkorbButton);
 		buttonPanel.add(artikelVerwaltenButton);
@@ -163,7 +149,6 @@ public class ArtikelPanel extends JPanel {
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(2, 6, 6, 3));
 		artikelNameText = new JTextField();
-		artikelBeschreibungText = new JTextField();
 		artikelMengeText = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		artikelMindestbestandText = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		artikelEinheitText = new JFormattedTextField(NumberFormat.getIntegerInstance());
@@ -178,14 +163,12 @@ public class ArtikelPanel extends JPanel {
 		
 		//Komponenten zum SouthPanel hinzufügen:
 		southPanel.add(new JLabel("Artikelname:"));
-		southPanel.add(new JLabel("Artikelbeschreibung:"));
 		southPanel.add(new JLabel("Bestand:"));
 		southPanel.add(new JLabel("Mindestbestand:"));
 		southPanel.add(new JLabel("Verkaufseinheit:"));
 		southPanel.add(new JLabel("Stückpreis:"));
 		southPanel.add(new JLabel());
 		southPanel.add(artikelNameText);
-		southPanel.add(artikelBeschreibungText);
 		southPanel.add(artikelMengeText);
 		southPanel.add(artikelMindestbestandText);
 		southPanel.add(artikelEinheitText);
@@ -227,7 +210,6 @@ public class ArtikelPanel extends JPanel {
 				try {
 					//Shopverwaltung findArtikelByNumber
 					ausgewaehlterArtikel = HauptFenster.shopVerwaltung.findArtikelByNumber(ausgewaehlteArtikelId);
-					beschreibungText.setText(ausgewaehlterArtikel.getBeschreibung());
 				} catch (ArtikelNichtGefundenException e1) {
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(ArtikelPanel.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -323,7 +305,6 @@ public class ArtikelPanel extends JPanel {
 				//Die Texte der Exceptions wurden im Folgenden von Hand eingetragen, damit der
 				//Benutzer weiß, wo er einen Fehler gemacht hat.
 				String name = artikelNameText.getText();
-				//String beschreibung = artikelBeschreibungText.getText();
 				int menge = -1;
 				try{
 					menge = Integer.parseInt(artikelMengeText.getText());
@@ -363,7 +344,6 @@ public class ArtikelPanel extends JPanel {
 				
 				//prüft, ob in jedes Feld ein Wert eingegeben wurde:
 				if(name.length() == 0 ||
-				   /*beschreibung.length() == 0 ||*/
 				   artikelMengeText.getText().length() == 0 ||
 				   /*artikelMindestbestandText.getText().length() == 0 ||*/
 				   artikelEinheitText.getText().length() == 0 ||
@@ -383,11 +363,7 @@ public class ArtikelPanel extends JPanel {
 				try {
 					if(einheit > 1){
 						HauptFenster.shopVerwaltung.fuegeArtikelEin(name, menge, einheit*stueckPreis, einheit, stueckPreis);
-						/*a = new MehrfachArtikel(artikelName, menge, d, packungsGroesse);
-						HauptFenster.shopVerwaltung.artikelAnlegen(a);*/
 					}else{
-						/*a = new Artikel(artikelName, menge, d);
-						HauptFenster.shopVerwaltung.fuegeArtikelEin(a);*/
 						HauptFenster.shopVerwaltung.fuegeArtikelEin(name, menge, stueckPreis);
 					}
 					//HauptFenster.shopVerwaltung.lagerEreignisEinfuegen(1, HauptFenster.benutzer, a, menge);

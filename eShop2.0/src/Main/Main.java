@@ -53,9 +53,9 @@ public static void main(String[] args){
 		} catch (EinlagernException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}*/
 		shopVer.fuegeUserEin("Kunde", "123", "Frau", "Regina", "Regenbogen","Elbenweg 3", 13337, "Bruchtal");
-		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");*/
+		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");
 		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
