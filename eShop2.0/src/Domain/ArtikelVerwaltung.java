@@ -164,6 +164,8 @@ public class ArtikelVerwaltung {
 			}				
 		} while (a != null);	
 		pm.close();
+		this.laufnr = this.artikelBestand.get(this.artikelBestand.size()-1).getArtikelNummer();
+			
 	
 //		int count = 0;
 //		ObjectInputStream in = new ObjectInputStream(new FileInputStream("Artikel.txt"));
