@@ -81,9 +81,10 @@ public class WarenkorbPanel extends JPanel{
 		this.add(centerPanel, BorderLayout.CENTER);
 	}
 	
-	public void addArtikel(){
-		this.warenkorbTabelle.
-	}
+	//TODO 
+	//public void addArtikel(){
+		//this.warenkorbTabelle.
+	//}
 	
 	private void eastPanelErzeugen(){
 		//die Komponenten des EastPanels erzeugen:
