@@ -10,6 +10,8 @@ import persistence.FilePersistenceManager;
 import persistence.PersistenceManager;
 import Valueobjects.Artikel;
 import Valueobjects.MehrfachArtikel;
+import Valueobjects.Mitarbeiter;
+import Valueobjects.User;
 import exceptions.ArtikelNichtGefundenException;
 import exceptions.EinlagernException;
 
@@ -25,7 +27,8 @@ public class ArtikelVerwaltung {
 	
 	public ArtikelVerwaltung(){
 		try {
-			ladeDaten();
+			this.ladeDatenArtikel();
+			this.ladeDatenMehrfachArtikel();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,35 +129,29 @@ public class ArtikelVerwaltung {
 		return null;
 	}
 	
-	public void schreibeDaten() throws FileNotFoundException, IOException {		
-		pm.openForWriting("Artikel.txt");
-		for (Artikel a : this.artikelBestand){
-			pm.speichereArtikel(a);
+	public void schreibeDatenMehrfachartikel() throws FileNotFoundException, IOException {		
+		pm.openForWriting("Mehrfachartikel.txt");
+		if (!artikelBestand.isEmpty()) {
+			for (Artikel artikel : artikelBestand) {
+				if (artikel instanceof MehrfachArtikel)
+					pm.speichereMehrfachArtikel((MehrfachArtikel)artikel);				
+			}
 		}
 		pm.close();
-//		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Artikel.txt")); 
-//		// hier schleife in der dir jeweiligen objekte (artikel, user, ereignisse durchgegangen werden
-//		for (Artikel a : artikelBestand){
-//			
-//		}
-//		
-//		Iterator<Artikel> it = artikelBestand.iterator();
-//		// Artikel erstellen
-//		Artikel artikel = null;
-//		// Artikelverzeichnis durchlaufen
-//		int count = 0;
-//		while (it.hasNext()) {
-//			artikel = it.next();
-//			// artikel in Datei speichern
-//			out.writeObject(artikel);
-//			count ++;
-//		}
-//		System.out.println(count + " Artikel gespeichert.");
-//		// muss aufgerufen werden, bevor der datenstrom zur eingabe verwendet werden soll
-//		out.close();
 	}
 	
-	public void ladeDaten() throws FileNotFoundException, IOException, ClassNotFoundException{
+	public void schreibeDatenArtikel() throws IOException  {
+		pm.openForWriting("Artikel.txt");
+		if (!artikelBestand.isEmpty()) {
+			for (Artikel artikel : artikelBestand) {
+				if (artikel instanceof Artikel)
+					pm.speichereArtikel((Artikel)artikel);				
+			}
+		}
+		pm.close();
+	}
+	
+	public void ladeDatenArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
 		pm.openForReading("Artikel.txt");
 		Artikel a;
 		do {
@@ -166,34 +163,20 @@ public class ArtikelVerwaltung {
 		pm.close();
 		this.laufnr = this.artikelBestand.get(this.artikelBestand.size()-1).getArtikelNummer();
 			
+	}
 	
-//		int count = 0;
-//		ObjectInputStream in = new ObjectInputStream(new FileInputStream("Artikel.txt"));
-//		artikelBestand.clear();
-//		try {  
-//			Artikel a = null;
-//			for(;;) {
-//				a = (Artikel) in.readObject();
-//				count++;
-//				artikelBestand.add(a);
-//				if (a.getArtikelNummer() > this.laufnr)
-//					this.laufnr = a.getArtikelNummer();
-//			}
-//		} catch (EOFException e) { // wg. readObject
-//			System.out.println("Es wurden " + count + " Artikel geladen.");
-//		} catch (IOException e) {
-//			System.out.println(e);
-//		} catch (ClassNotFoundException e) { // wg readObject
-//			System.out.println(e);
-//		} finally {
-//			try {
-//				if (in!=null) {
-//					in.close();
-//				} 
-//			} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//		}
+	public void ladeDatenMehrfachArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
+		pm.openForReading("Mehrfachartikel.txt");
+		MehrfachArtikel a;
+		do {
+			a = pm.ladeMehrfachArtikel();
+			if (a != null) {
+				artikelBestand.add(a);
+			}				
+		} while (a != null);	
+		pm.close();
+		this.laufnr = this.artikelBestand.get(this.artikelBestand.size()-1).getArtikelNummer();
+			
 	}
 	
 }

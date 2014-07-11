@@ -15,6 +15,7 @@ import java.util.Locale;
 import Valueobjects.Artikel;
 import Valueobjects.Ereignis;
 import Valueobjects.Kunde;
+import Valueobjects.MehrfachArtikel;
 import Valueobjects.Mitarbeiter;
 
 /**
@@ -74,7 +75,20 @@ public class FilePersistenceManager implements PersistenceManager {
 		double preis = Double.parseDouble(liesZeile());
 		int menge = Integer.parseInt(liesZeile());		
 		return new Artikel(artikelNr, titel, menge, preis);
-	}	
+	}
+	
+	public MehrfachArtikel ladeMehrfachArtikel() throws IOException {
+		String titel = liesZeile();
+		if (titel == null) {
+			return null;
+		}
+		int artikelNr = Integer.parseInt(liesZeile());
+		double preis = Double.parseDouble(liesZeile());
+		int menge = Integer.parseInt(liesZeile());
+		int groesse = Integer.parseInt(liesZeile());
+		float stueckpreis = Float.parseFloat(liesZeile());
+		return new MehrfachArtikel(artikelNr, titel, menge, preis, groesse, stueckpreis);
+	}
 
 	
 	public Kunde ladeKunden() throws IOException {
@@ -157,6 +171,15 @@ public class FilePersistenceManager implements PersistenceManager {
 		schreibeZeile(a.getArtikelBestand() + "");	
 	}
 	
+	public void speichereMehrfachArtikel(MehrfachArtikel m) {
+		schreibeZeile(m.getArtikelName());
+		schreibeZeile(m.getArtikelNummer() + "");
+		schreibeZeile(m.getPreis() + "");
+		schreibeZeile(m.getArtikelBestand() + "");
+		schreibeZeile(m.getPackungsgroesse() + "");
+		schreibeZeile(m.getStueckPreis() + "");
+	}
+	
 	
 	
 	public void speichereKunde(Kunde k)	{
@@ -181,8 +204,6 @@ public class FilePersistenceManager implements PersistenceManager {
 		schreibeZeile(m.getVorName());		
 		schreibeZeile(m.getNachName());		
 	}
-
-		
 
 	
 

@@ -197,8 +197,10 @@ public class ShopVerwaltung {
 	
 	
 	public void speichereDaten() throws FileNotFoundException, IOException {
-		artVer.schreibeDaten();
-		userVer.schreibeDatenMitarbeiter(); //user objekte
+		artVer.schreibeDatenMehrfachartikel();
+		artVer.schreibeDatenArtikel();
+		userVer.schreibeDatenMitarbeiter();
+		userVer.schreibeDatenKunden();
 //		erVer.schreibeDaten();
 	}
 
