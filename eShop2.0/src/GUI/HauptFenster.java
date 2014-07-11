@@ -22,9 +22,9 @@ public class HauptFenster extends JFrame{
 	private VerwaltungsPanel verwaltungsPanel;
 	private LagerEreignisPanel lagerPanel;
 	
-	/*public static User benutzer = null;
+	public static User benutzer = null;
 	public static ShopVerwaltung shopVerwaltung = null;
-	public static Artikel artikel = null;*/
+	public static Artikel artikel = null;
 	
 	public HauptFenster(ShopVerwaltung esv) {
 		super("eShop");

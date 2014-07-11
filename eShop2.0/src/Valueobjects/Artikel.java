@@ -37,10 +37,10 @@ public class Artikel {
 		this.artikelName = artikelName;
 	}
 	
-	/*public String getBeschreibung(){
-		return this.beschreibung;
+	public String getBeschreibung(){
+		return null;
 	}
-	
+	/*
 	public void setBeschreibung(String beschreibung){
 		this.beschreibung = beschreibung;
 	}*/
@@ -59,12 +59,6 @@ public class Artikel {
 	
 	public void setArtikelBestand(int menge){
 		this.menge = menge;
-	}
-
-	public String getBeschreibung() {
-		// TODO Auto-generated method stub
-		return null;
-		//return this.beschreibung
 	}
 	
 }

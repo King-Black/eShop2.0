@@ -195,16 +195,10 @@ public class ShopVerwaltung {
 		return rechnung;
 	}
 	
-	/*public void ladeDaten() throws FileNotFoundException, IOException, ClassNotFoundException {
-		artVer.ladeDaten(); //funktioniert
-		userVer.ladeDaten(); // user objekte
-		erVer.ladeDaten();			
-	
-	}*/
 	
 	public void speichereDaten() throws FileNotFoundException, IOException {
 		artVer.schreibeDaten();
-//		userVer.schreibeDaten(); //user objekte
+		userVer.schreibeDatenMitarbeiter(); //user objekte
 //		erVer.schreibeDaten();
 	}
 

@@ -23,8 +23,8 @@ public static void main(String[] args){
 		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");
 		cui.run();*/
 	
-		//cuiStarten();
-		guiStarten();
+		cuiStarten();
+		//guiStarten();
 		
 	}
 
