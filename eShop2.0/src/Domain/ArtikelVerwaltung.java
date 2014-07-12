@@ -40,7 +40,10 @@ public class ArtikelVerwaltung {
 			e.printStackTrace();
 		}
 	}
-	
+	//Methode zum einfügen von Artikeln.
+	//Wenn Menge oder Preis kleiner 0 oder 0 ist wird eine EinlagernException geworfen.
+	//Wenn richtig eingetragen, bekommt der Artikel eine Artikelnummer -> bestimmeNr. wird hochgezählt.
+	//und der Artikelbestand wird erhöht.
 	public Artikel einfuegen(String artikelName, int menge, double preis) throws EinlagernException{ 
 		if(preis<=0||menge<=0) {
 			//exception EinlagernException
@@ -54,7 +57,7 @@ public class ArtikelVerwaltung {
 		}
 		//return null;
 	}
-	
+	//Methode zum einfügen von Mehrfachartikeln
 	public MehrfachArtikel einfuegen(String artikelName, int menge, double preis, int packungsGroesse, float stueckPreis) throws EinlagernException{ 
 		if(preis<=0||menge<=0) {
 			//exception EinlagernException
@@ -82,7 +85,7 @@ public class ArtikelVerwaltung {
 	public List<Artikel> getArtikelBestand() {
 		return artikelBestand;
 	}
-	
+	//Methode zum löschen von Artikeln
 	public void loescheArtikel(Artikel a) throws ArtikelNichtGefundenException{
 		if (artikelBestand.contains(a)) {
 			artikelBestand.remove(a);
@@ -109,7 +112,7 @@ public class ArtikelVerwaltung {
 		}
 		System.out.println(" ");
 	}
-	
+	//Methode zum finden von Artikeln anhand der Artikelnummer
 	public Artikel findArtikelByNumber(int artID) throws ArtikelNichtGefundenException{
 		Iterator<Artikel> it = artikelBestand.iterator();
 		// Artikel erstellen

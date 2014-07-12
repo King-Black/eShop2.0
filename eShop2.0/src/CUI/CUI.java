@@ -34,7 +34,7 @@ public class CUI implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+	//Wenn Benutzer nicht eingeloggt ist, wir "menueNichtEingeloggt" ausgeführt. Solange nicht q für Quit eingegeben wird.
 	private void gibMenue() throws IOException, ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{
 		do{
 			if(aktuellerBenutzer != null){
@@ -44,7 +44,10 @@ public class CUI implements Runnable {
 			}
 		} while (!eingabe.equals("q"));
 	}
-	
+	//Gibt Startmenue aus wenn kein Benutzer eingeloggt ist.
+	//Wenn e eingegeben wird kommt das Einloggmenue und fragt nach Benutzernamen und PW.
+	//Wenn r eingegeben wird kann sich eine Kunde registrieren.
+	//Wenn q gedrückt wird werden die bisherigen Daten gespeichert und der eShop beendet.
 	private void menueNichtEingeloggt() throws IOException {
 		System.out.println("e) Einloggen\n" +
 				"r) Registriere Kunden Account\n" +
@@ -72,10 +75,10 @@ public class CUI implements Runnable {
 			System.exit(0);
 		}
 	}
-	
+	//Wenn Kunde eingeloggt ist kommt Willkommenstext und Artikelliste.
 	private void eingeloggt() throws IOException, ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{
 		System.out.println("Herzlich Willkommen im Shop\n" +
-		"wir wï¿½nschen einen angenehmen Aufenthalt\n" +
+		"wir wuenschen einen angenehmen Aufenthalt\n" +
 		"und ein erfolgreiches Kauferlebnis.\n");
 		do {
 			System.out.println("Artikelliste:");
@@ -88,7 +91,7 @@ public class CUI implements Runnable {
 		} while (!eingabe.equals("a"));
 		aktuellerBenutzer = null;
 	}
-	
+	//Metode zum Registrieren eines Kunden
 	public void userRegistrieren() throws IOException{
 		System.out.println("Waehle deinen Benutzernamen:");
 		String name = liesEingabe();
@@ -122,7 +125,7 @@ public class CUI implements Runnable {
 	private User userLogin(String name, String passwort) throws KennwortFalschException, BereitsEingeloggtException{
 		return shopVer.userLogin(name, passwort);
 	}
-	
+	//Ist das Menue wenn User als Mitarbeiter eingeloggt ist
 	public void menueMitarbeiter() throws IOException, ArtikelNichtGefundenException{
 		System.out.println("n) neuen Artikel anlegen \n" +
 				"m) Artikelmenge aendern\n" +
@@ -167,15 +170,16 @@ public class CUI implements Runnable {
 			default: System.out.println("Falsche Eingabe.");
 		}
 	}
-	
+	//Methode zum löschen von Artikeln.
+	//In der Shopverwaltung wird "loescheArtikel" aufgerufen und Artikel wird mit Artikel ID und dem Beutzer der den Artikel gelöscht hat gespeichert
 	private void artikelLoeschen() throws IOException, ArtikelNichtGefundenException{
-		System.out.println("Welchen Artikel willst du lï¿½schen?");
+		System.out.println("Welchen Artikel willst du loeschen?");
 		int artID = Integer.parseInt(liesEingabe());
 		shopVer.loescheArtikel(artID, aktuellerBenutzer);
 	}
-	
+	//Methode zum löschen eines Mitarbeiters
 	private void benutzerLoeschen() throws IOException{
-		System.out.println("Welchen Mitarbeiter willst du lï¿½schen?");
+		System.out.println("Welchen Mitarbeiter willst du loeschen?");
 		int userNr = Integer.parseInt(liesEingabe());
 		shopVer.loescheUser(userNr, aktuellerBenutzer);
 	}
@@ -184,7 +188,7 @@ public class CUI implements Runnable {
 		System.out.println("Auf Wiedersehen!");
 		menueNichtEingeloggt();
 	}
-	
+	//Methode zum Erstellen eines eines Mitarbeiters
 	private void mitarbeiterErstellen() throws IOException{
 		System.out.println("Waehle deinen Benutzernamen:");
 		String benutzername = liesEingabe();
@@ -209,14 +213,14 @@ public class CUI implements Runnable {
 			System.out.println(e);				
 		}
 	}
-	
+	//Methode zum ändern der Artikelmenge
 	private void artikelmengeAendern() throws IOException{
 		System.out.println("Artikelliste:");
 		gibArtikellisteAus();
-		System.out.println("Artikelnummer des zu ï¿½ndernden Artikel eingeben.");
+		System.out.println("Artikelnummer des zu aendernden Artikel eingeben.");
 		eingabe = liesEingabe();
 		int nummer = Integer.parseInt(eingabe);
-		System.out.println("Wieviele moechtest du hinzufï¿½gen?");
+		System.out.println("Wieviele moechtest du hinzufuegen?");
 		eingabe = liesEingabe();
 		int anzahl = Integer.parseInt(eingabe);
 		try{
@@ -225,9 +229,9 @@ public class CUI implements Runnable {
 		catch (Exception e) {
 			System.out.println(e);
 		}
-		System.out.println("Artikel wurden hinzugefï¿½gt!");
+		System.out.println("Artikel wurden hinzugefuegt!");
 	}
-	
+	//Methode zum anlegen eines neuen Artikels
 	private void neuenArtikelAnlegen() throws IOException{
 		System.out.println("Moechtes du einen Mehrfachartikel speichern? (j fuer ja und n fuer nein)");
 		String mehrfach = liesEingabe();
@@ -245,7 +249,7 @@ public class CUI implements Runnable {
 		double preis = Double.parseDouble(eingabe);
 		try{
 			if (mehrfach.equals("j")) {
-				System.out.println("Bitte gib die Portionsgrï¿½ï¿½e ein.");
+				System.out.println("Bitte gib die Portionsgroesse ein.");
 				String portion = liesEingabe();
 				packungsGroesse = Integer.parseInt(portion);
 				String sPreis = liesEingabe();
@@ -263,7 +267,7 @@ public class CUI implements Runnable {
 			System.out.println(e);
 		}
 	}
-	
+	//Anzeige des Menues wenn man als Kunde eingeloggt ist.
 	public void menueKunde() throws IOException, ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{
 		System.out.println("w) Zum Warenkorb\n" +
 				"m) Artikelmenge im Warenkorb ï¿½ndern\n" +
@@ -275,7 +279,7 @@ public class CUI implements Runnable {
 				"e) Warenkorb leeren\n" +
 				"k) Zur Kasse\n" +
 				"a) Ausloggen");
-		
+		//Ruft einzelen Unterpunkte im Kundenmenue auf
 			eingabe = liesEingabe();
 		switch(eingabe) {
 			case "w": 
@@ -283,10 +287,10 @@ public class CUI implements Runnable {
 				//gibArtikellisteAus();
 				break;
 			case "m": 
-				System.out.println("Von welchem Artikel mï¿½chtest du die Menge ï¿½ndern?");
+				System.out.println("Von welchem Artikel moechtest du die Menge aendern?");
 				eingabe = liesEingabe();
 				int artID = Integer.parseInt(eingabe);
-				System.out.println("Wieviel mï¿½chtest du hinzufï¿½gen oder abziehen?");
+				System.out.println("Wieviel moechtest du hinzufuegen oder abziehen?");
 				eingabe = liesEingabe();
 				int menge = Integer.parseInt(eingabe);
 				try{
@@ -347,7 +351,7 @@ public class CUI implements Runnable {
 		}
 		
 	}
-	
+	//Methode ruft on Shopverwaltung die Methode rechnungErstellen auf
 	public void zurKasse(){
 		try {
 			shopVer.rechnungErstellen((Kunde)aktuellerBenutzer);
@@ -355,7 +359,7 @@ public class CUI implements Runnable {
 			System.out.println(e);
 		}
 	}
-	
+	//Methode zum einlesen der Eingaben
 	private String liesEingabe() throws IOException{
 		return in.readLine();
 	}

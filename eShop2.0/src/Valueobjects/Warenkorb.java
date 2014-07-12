@@ -23,11 +23,11 @@ public class Warenkorb {
 				throw e;
 			}
 		} else {
-		// Ansonsten neu in Liste hinzuf�gen
+		// Ansonsten neu in Liste hinzufuegen
 			warenkorb.put(a, gewuenschteMenge);
 		}
 	}	
-	
+	//Artikel aus Warenkorb entfernen
 	public void artikelEntfernen(Artikel a) throws WarenkorbLeerException{
 		if(warenkorb.containsKey(a)) {
 			warenkorb.remove(a);
@@ -37,7 +37,7 @@ public class Warenkorb {
 			throw e;
 		}
 	}
-	
+	//Warenkorb leeren
 	public void leeren() throws WarenkorbLeerException{
 		if(!warenkorb.isEmpty()){
 			warenkorb.clear();
