@@ -3,6 +3,12 @@ package Valueobjects;
 import java.util.Date;
 import java.util.HashMap;
 
+/**
+ * Klasse zur Repräsentation einer Rechnung.
+ * @author Imke Schneider
+ *
+ */
+
 public class Rechnung {
 
 	private Kunde kunde;
@@ -10,6 +16,12 @@ public class Rechnung {
 	private Date datum;
 	private double gesamtpreis;
 	
+	/**
+	 * Initalisiert ein Rechnungsobjekt.
+	 * @param kunde Kunde, der einkauft.
+	 * @param warenkorb Warenkorb der zum Kauf bestätigt wurde.
+	 * @param datum Datum, an dem der Kauf stattfindet.
+	 */
 	public Rechnung(Kunde kunde, Warenkorb warenkorb, Date datum) {
 		this.kunde = kunde;
 		this.datum = datum;

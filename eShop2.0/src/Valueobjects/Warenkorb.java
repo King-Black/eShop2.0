@@ -5,6 +5,12 @@ import java.util.HashMap;
 import exceptions.NichtGenugAufLagerException;
 import exceptions.WarenkorbLeerException;
 
+/**
+ * Klasse zur Repräsentation des Warenkorbs.
+ * @author Imke Schneider
+ *
+ */
+
 public class Warenkorb {
 
 	private HashMap<Artikel, Integer> warenkorb = new HashMap<Artikel, Integer>();
@@ -26,6 +32,12 @@ public class Warenkorb {
 			warenkorb.put(a, gewuenschteMenge);
 		}
 	}	
+	
+	/**
+	 * Eine Methode zum leeren des Warenkorbs.
+	 * @param a Gibt den Artikel wieder der entfernt wurde.
+	 * @throws WarenkorbLeerException wird geworfen, wenn kein Artikel zum löschen im WK ist.
+	 */
 	//Artikel aus Warenkorb entfernen
 	public void artikelEntfernen(Artikel a) throws WarenkorbLeerException{
 		if(warenkorb.containsKey(a)) {
@@ -36,6 +48,11 @@ public class Warenkorb {
 			throw e;
 		}
 	}
+	
+	/**
+	 * Eine Methode zum leere des Warenkorbs.
+	 * @throws WarenkorbLeerException wird geworfen wenn kein Artikel im Warenkorb zum löschen ist.
+	 */
 	//Warenkorb leeren
 	public void leeren() throws WarenkorbLeerException{
 		if(!warenkorb.isEmpty()){
