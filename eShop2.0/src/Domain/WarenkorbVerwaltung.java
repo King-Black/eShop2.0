@@ -12,6 +12,15 @@ import exceptions.WarenkorbLeerException;
 
 public class WarenkorbVerwaltung {
 	
+/**
+ * Diese Methode gibt die Artikel im Warkenkorb wieder die der Kunde in den Warenkorb gelegt hat.
+ * @param einArtikel
+ * @param menge
+ * @param k
+ * @return
+ * @throws NichtGenugAufLagerException wird geworfen, wenn nicht genügend Artikel des ausgeählten Produkts auf Lager sind.
+ * @throws ArtikelNurInEinheitenVerfuegbarException wird geworfen, wenn es sich um einen Artikel mit bestimmter Packungsgröße handelt.
+ */
 	public Kunde artikelInWarenkorb(Artikel einArtikel, int menge, Kunde k) throws NichtGenugAufLagerException, ArtikelNurInEinheitenVerfuegbarException{		
 		if(menge<=einArtikel.getArtikelBestand()){
 			if (einArtikel instanceof MehrfachArtikel) {
@@ -34,19 +43,34 @@ public class WarenkorbVerwaltung {
 		}
 		//return k;
 	}
-
+/**
+ * Die Methode wird aufgerufen, wenn ein Kunde einen Artikel aus dem Warenkorb entfernt.
+ * @param artikel
+ * @param user
+ * @return 
+ * @throws WarenkorbLeerException wird geworfen, wenn der Warenkorb schon leer ist.
+ */
 	public Kunde artikelAusWarenkorb(Artikel artikel, Kunde user) throws WarenkorbLeerException{		
 		user.getWarenkorb().artikelEntfernen(artikel);
 		return user;
 	}
-	
+	/**
+	 * 
+	 * @param a
+	 * @param anzahl
+	 * @param user
+	 * @return
+	 */
 	public HashMap<Artikel, Integer> setArtikelMenge(Artikel a, int anzahl, Kunde user) {
 		HashMap<Artikel, Integer> w = user.getWarenkorb().getInhalt();
 		int alteMenge = w.remove(a);
 		w.put(a, alteMenge+anzahl);
 		return w;
 	}
-	
+	/**
+	 * Diese Methode gibt in einer Hashmap den Inahlt des Warenkorbs wieder.
+	 * @param user
+	 */
 	public void getWarenkorbInhalt(User user){
 		HashMap<Artikel, Integer> warenkorb = ((Kunde) user).getWarenkorb().getInhalt();
 		//wenn warenkorb leer ist

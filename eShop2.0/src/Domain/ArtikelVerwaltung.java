@@ -40,6 +40,15 @@ public class ArtikelVerwaltung {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Methode zum einfügen von einfachen Artikel.
+	 * @param artikelName
+	 * @param menge
+	 * @param preis
+	 * @return Artikel
+	 * @throws EinlagernException
+	 */
 	//Methode zum einfügen von Artikeln.
 	//Wenn Menge oder Preis kleiner 0 oder 0 ist wird eine EinlagernException geworfen.
 	//Wenn richtig eingetragen, bekommt der Artikel eine Artikelnummer -> bestimmeNr. wird hochgezählt.
@@ -57,6 +66,17 @@ public class ArtikelVerwaltung {
 		}
 		//return null;
 	}
+	
+	/**
+	 * Methode zum einfügen von Mehrfachartikeln.
+	 * @param artikelName
+	 * @param menge
+	 * @param preis
+	 * @param packungsGroesse
+	 * @param stueckPreis
+	 * @return Artikel
+	 * @throws EinlagernException
+	 */
 	//Methode zum einfügen von Mehrfachartikeln
 	public MehrfachArtikel einfuegen(String artikelName, int menge, double preis, int packungsGroesse, float stueckPreis) throws EinlagernException{ 
 		if(preis<=0||menge<=0) {
@@ -85,6 +105,11 @@ public class ArtikelVerwaltung {
 	public List<Artikel> getArtikelBestand() {
 		return artikelBestand;
 	}
+	/**
+	 * Mathode zum löschen von Artikeln.
+	 * @param a
+	 * @throws ArtikelNichtGefundenException wird geworfen, wenn es den zu löschenden Artikel gar nicht gibt.
+	 */
 	//Methode zum löschen von Artikeln
 	public void loescheArtikel(Artikel a) throws ArtikelNichtGefundenException{
 		if (artikelBestand.contains(a)) {
@@ -112,6 +137,12 @@ public class ArtikelVerwaltung {
 		}
 		System.out.println(" ");
 	}
+	/**
+	 * Methode findet Artikel anhand der Artikelnummer.
+	 * @param artID
+	 * @return artikel
+	 * @throws ArtikelNichtGefundenException
+	 */
 	//Methode zum finden von Artikeln anhand der Artikelnummer
 	public Artikel findArtikelByNumber(int artID) throws ArtikelNichtGefundenException{
 		Iterator<Artikel> it = artikelBestand.iterator();
