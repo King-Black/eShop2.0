@@ -1,6 +1,5 @@
 package exceptions;
 
-import Valueobjects.Position;
 
 @SuppressWarnings("serial")
 public class NichtGefundenException extends Exception {
@@ -18,7 +17,7 @@ public class NichtGefundenException extends Exception {
 	 * Wird geworfen, wenn nach einer Position gesucht wird und dieser nicht gefunden wurde.
 	 * @param position Die Position nach der gesucht wurde.
 	 */
-	public NichtGefundenException(Position position) {
+	/*public NichtGefundenException(Position position) {
 		super("Position mit dem Artikel: " + position.getArtikel().getArtikelName() + " nicht gefunden!");
-	}
+	}*/
 }

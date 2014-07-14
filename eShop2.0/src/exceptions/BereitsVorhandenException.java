@@ -1,7 +1,6 @@
 package exceptions;
 
 import Valueobjects.Artikel;
-import Valueobjects.Position;
 import Valueobjects.User;
 //import Valueobjects.LagerEreignis;
 
@@ -32,7 +31,7 @@ public class BereitsVorhandenException extends Exception {
 	 * Wird geworfen, wenn eine Position bzw. im Warenkorb eingetragen werden soll und diese dort bereits eingetragen ist.
 	 * @param position Die Position die eingetragen werden sollte.
 	 */
-	public BereitsVorhandenException(Position position) {
+/*	public BereitsVorhandenException(Position position) {
 		super("Position mit dem Artikel: " + position.getArtikel().getArtikelName() + " bereits eingetragen!");
-	}
+	}*/
 }

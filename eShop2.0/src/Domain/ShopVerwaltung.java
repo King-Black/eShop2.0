@@ -177,7 +177,7 @@ public class ShopVerwaltung {
 
 	public Rechnung rechnungErstellen(Kunde akteur) throws ArtikelNichtGefundenException, WarenkorbLeerException, UserNichtGefundenException{
 		// key == Artikel
-		akteur = (Kunde)userVer.findUserByNumber(akteur.getNummer());
+		//akteur = (Kunde)userVer.findUserByNumber(akteur.getNummer());
 		HashMap<Artikel, Integer> warenkorb = akteur.getWarenkorb().getInhalt();
 		System.out.println(warenkorb);
 		if(warenkorb.isEmpty()){

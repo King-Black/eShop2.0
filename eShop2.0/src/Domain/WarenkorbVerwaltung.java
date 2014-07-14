@@ -28,8 +28,7 @@ public class WarenkorbVerwaltung {
 				k.getWarenkorb().artikelHinzufuegen(einArtikel, menge, einArtikel.getArtikelBestand());
 				return k;
 			}
-		} else { // gewollte Menge ist gr��er als die vorhandene Menge
-			//exception NichtGenugAufLagerException
+		} else { 
 			NichtGenugAufLagerException e = new NichtGenugAufLagerException(einArtikel);
 			throw e;
 		}

@@ -68,7 +68,7 @@ public class FilePersistenceManager implements PersistenceManager {
 	@Override
 	public Artikel ladeArtikel() throws IOException {
 		String titel = liesZeile();
-		if (titel == null) {
+		if (titel == null || titel.length() == 0) {
 			return null;
 		}
 		int artikelNr = Integer.parseInt(liesZeile());

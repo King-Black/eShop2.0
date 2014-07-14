@@ -191,7 +191,7 @@ public class WarenkorbPanel extends JPanel{
 				//falls ja ausgewählt wurde:
 				if(aktion == JOptionPane.YES_OPTION){
 					//wenn keine Artikel im Warenkorb sind Fehlermeldung:
-					if(k.getWarenkorb().getAnzahlPositionen() == 0){
+					if(k.getWarenkorb().getInhalt().size() == 0){
 						JOptionPane fehler = new JOptionPane();
 						JOptionPane.showMessageDialog(WarenkorbPanel.this, "Es befinden sich keine Artikel zum Löschen in Ihrem Warenkorb!", "Error", JOptionPane.ERROR_MESSAGE);
 						fehler.setVisible(true);
