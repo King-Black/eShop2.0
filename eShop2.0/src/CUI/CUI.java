@@ -24,7 +24,6 @@ public class CUI implements Runnable {
 		aktuellerBenutzer = null;
 		in = new BufferedReader(new InputStreamReader(System.in));
 	}
-	
 	public void run() {
 		try {
 //			shopVer.ladeDaten();
@@ -34,6 +33,12 @@ public class CUI implements Runnable {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * 
+	 * @throws IOException
+	 * @throws ArtikelNichtGefundenException
+	 * @throws ArtikelNurInEinheitenVerfuegbarException
+	 */
 	//Wenn Benutzer nicht eingeloggt ist, wir "menueNichtEingeloggt" ausgeführt. Solange nicht q für Quit eingegeben wird.
 	private void gibMenue() throws IOException, ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{
 		do{
@@ -44,6 +49,11 @@ public class CUI implements Runnable {
 			}
 		} while (!eingabe.equals("q"));
 	}
+	
+	/**
+	 * Die Methode gibt das Startmenü aus, so als wenn noch kein User angemeldet ist.
+	 * @throws IOException
+	 */
 	//Gibt Startmenue aus wenn kein Benutzer eingeloggt ist.
 	//Wenn e eingegeben wird kommt das Einloggmenue und fragt nach Benutzernamen und PW.
 	//Wenn r eingegeben wird kann sich eine Kunde registrieren.
@@ -75,6 +85,12 @@ public class CUI implements Runnable {
 			System.exit(0);
 		}
 	}
+	/**
+	 * Diese Methode gibt das Menü aus, dass erscheint wenn ein Kunde eingeloggt ist.
+	 * @throws IOException
+	 * @throws ArtikelNichtGefundenException
+	 * @throws ArtikelNurInEinheitenVerfuegbarException
+	 */
 	//Wenn Kunde eingeloggt ist kommt Willkommenstext und Artikelliste.
 	private void eingeloggt() throws IOException, ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{
 		System.out.println("Herzlich Willkommen im Shop\n" +
@@ -91,6 +107,10 @@ public class CUI implements Runnable {
 		} while (!eingabe.equals("a"));
 		aktuellerBenutzer = null;
 	}
+	/**
+	 * Dies Methode ist zum registrieren eines Kunden.
+	 * @throws IOException
+	 */
 	//Metode zum Registrieren eines Kunden
 	public void userRegistrieren() throws IOException{
 		System.out.println("Waehle deinen Benutzernamen:");
@@ -125,6 +145,11 @@ public class CUI implements Runnable {
 	private User userLogin(String name, String passwort) throws KennwortFalschException, BereitsEingeloggtException{
 		return shopVer.userLogin(name, passwort);
 	}
+	/**
+	 * Diese Methode gibt das Menü aus wenn der User als Mitarbeiter eingeloggt ist.
+	 * @throws IOException
+	 * @throws ArtikelNichtGefundenException
+	 */
 	//Ist das Menue wenn User als Mitarbeiter eingeloggt ist
 	public void menueMitarbeiter() throws IOException, ArtikelNichtGefundenException{
 		System.out.println("n) neuen Artikel anlegen \n" +
@@ -170,6 +195,11 @@ public class CUI implements Runnable {
 			default: System.out.println("Falsche Eingabe.");
 		}
 	}
+	/**
+	 * Diese Methode ist zum löschen der Artikel.
+	 * @throws IOException
+	 * @throws ArtikelNichtGefundenException
+	 */
 	//Methode zum löschen von Artikeln.
 	//In der Shopverwaltung wird "loescheArtikel" aufgerufen und Artikel wird mit Artikel ID und dem Beutzer der den Artikel gelöscht hat gespeichert
 	private void artikelLoeschen() throws IOException, ArtikelNichtGefundenException{
@@ -213,6 +243,10 @@ public class CUI implements Runnable {
 			System.out.println(e);				
 		}
 	}
+	/**
+	 * Diese Methode dient zum ändern der Artikelmenge in die Artikelliste.
+	 * @throws IOException
+	 */
 	//Methode zum ändern der Artikelmenge
 	private void artikelmengeAendern() throws IOException{
 		System.out.println("Artikelliste:");
