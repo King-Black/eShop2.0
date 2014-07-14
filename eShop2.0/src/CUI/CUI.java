@@ -34,7 +34,7 @@ public class CUI implements Runnable {
 		}
 	}
 	/**
-	 * 
+	 * Die Methode ptüft, welches Menü ausgegeben werden soll.
 	 * @throws IOException
 	 * @throws ArtikelNichtGefundenException
 	 * @throws ArtikelNurInEinheitenVerfuegbarException
@@ -108,7 +108,7 @@ public class CUI implements Runnable {
 		aktuellerBenutzer = null;
 	}
 	/**
-	 * Dies Methode ist zum registrieren eines Kunden.
+	 * Diese Methode gibt Menü zum registrieren eines Kunden aus.
 	 * @throws IOException
 	 */
 	//Metode zum Registrieren eines Kunden
@@ -137,11 +137,20 @@ public class CUI implements Runnable {
 		String ort = liesEingabe();
 		CUI.shopVer.fuegeUserEin(name, passwort, anrede, vorName, nachName, adresse, plz, ort);
 	}
-	
+	/**
+	 * Methode gibt eine Artikelliste aus die sie in der Shopverwaltung aufruft.
+	 */
 	private void gibArtikellisteAus() {
 		shopVer.gibArtikellisteAus();
 	}
-	
+	/**
+	 * Die Methode gibt den eingeloggten benutzer mit Namen und PW wieder.
+	 * @param name
+	 * @param passwort
+	 * @return eingeloggten Benuter
+	 * @throws KennwortFalschException
+	 * @throws BereitsEingeloggtException
+	 */
 	private User userLogin(String name, String passwort) throws KennwortFalschException, BereitsEingeloggtException{
 		return shopVer.userLogin(name, passwort);
 	}
@@ -198,7 +207,7 @@ public class CUI implements Runnable {
 	/**
 	 * Diese Methode ist zum löschen der Artikel.
 	 * @throws IOException
-	 * @throws ArtikelNichtGefundenException
+	 * @throws ArtikelNichtGefundenException wird geworfen, wenn der Artikel nicht existiert.
 	 */
 	//Methode zum löschen von Artikeln.
 	//In der Shopverwaltung wird "loescheArtikel" aufgerufen und Artikel wird mit Artikel ID und dem Beutzer der den Artikel gelöscht hat gespeichert
@@ -207,6 +216,10 @@ public class CUI implements Runnable {
 		int artID = Integer.parseInt(liesEingabe());
 		shopVer.loescheArtikel(artID, aktuellerBenutzer);
 	}
+	/**
+	 * Diese Methode ist zum löschen von Mitarebitern gedacht.
+	 * @throws IOException
+	 */
 	//Methode zum löschen eines Mitarbeiters
 	private void benutzerLoeschen() throws IOException{
 		System.out.println("Welchen Mitarbeiter willst du loeschen?");
@@ -214,10 +227,18 @@ public class CUI implements Runnable {
 		shopVer.loescheUser(userNr, aktuellerBenutzer);
 	}
 	
+	/**
+	 * Die Methode wird aufgerufen, wenn sich ein User ausloggt.
+	 * @throws IOException
+	 */
 	private void ausloggen() throws IOException{
 		System.out.println("Auf Wiedersehen!");
 		menueNichtEingeloggt();
 	}
+	/**
+	 * Diese Methode wird zum erstellen eines Mitarbeiters aufgerufen.
+	 * @throws IOException
+	 */
 	//Methode zum Erstellen eines eines Mitarbeiters
 	private void mitarbeiterErstellen() throws IOException{
 		System.out.println("Waehle deinen Benutzernamen:");
@@ -265,6 +286,10 @@ public class CUI implements Runnable {
 		}
 		System.out.println("Artikel wurden hinzugefuegt!");
 	}
+	/**
+	 * Diese Methode wird zum Anelgen von neuen Artikeln aufgerufen.
+	 * @throws IOException
+	 */
 	//Methode zum anlegen eines neuen Artikels
 	private void neuenArtikelAnlegen() throws IOException{
 		System.out.println("Moechtes du einen Mehrfachartikel speichern? (j fuer ja und n fuer nein)");
@@ -301,6 +326,12 @@ public class CUI implements Runnable {
 			System.out.println(e);
 		}
 	}
+	/**
+	 * Diese Methode wird aufgerufen wenn ein Kunde eingeloggt ist und zeigt das Kundenmenü.
+	 * @throws IOException
+	 * @throws ArtikelNichtGefundenException
+	 * @throws ArtikelNurInEinheitenVerfuegbarException
+	 */
 	//Anzeige des Menues wenn man als Kunde eingeloggt ist.
 	public void menueKunde() throws IOException, ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{
 		System.out.println("w) Zum Warenkorb\n" +
@@ -385,6 +416,9 @@ public class CUI implements Runnable {
 		}
 		
 	}
+	/**
+	 * Diese Methode erstellt eine Rechnung aus der Shopverwaltung.
+	 */
 	//Methode ruft on Shopverwaltung die Methode rechnungErstellen auf
 	public void zurKasse(){
 		try {
@@ -393,6 +427,11 @@ public class CUI implements Runnable {
 			System.out.println(e);
 		}
 	}
+	/**
+	 * Diese Methode liest Eingaben ein.
+	 * @return
+	 * @throws IOException
+	 */
 	//Methode zum einlesen der Eingaben
 	private String liesEingabe() throws IOException{
 		return in.readLine();
