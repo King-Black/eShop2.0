@@ -317,26 +317,6 @@ public class ShopVerwaltung {
 		eingeloggterUser = userVer.userLogin(name, passwort);
 		return eingeloggterUser;
 	}
-
-	/*public Rechnung rechnungErstellen(Kunde akteur) throws ArtikelNichtGefundenException, WarenkorbLeerException, UserNichtGefundenException{
-		// key == Artikel
-		//akteur = (Kunde)userVer.findUserByNumber(akteur.getNummer());
-		HashMap<Artikel, Integer> warenkorb = akteur.getWarenkorb().getInhalt();
-		System.out.println(warenkorb);
-		if(warenkorb.isEmpty()){
-			throw new WarenkorbLeerException();
-		} else {
-			// Artikelmenge im Artikelbestand verringern
-			for(Artikel key : warenkorb.keySet()) {
-				artVer.setArtikelMenge(key.getArtikelNummer(), (warenkorb.get(key)*-(1))); 
-
-				erVer.ereignisEinfuegen(key, warenkorb.get(key), "Artikel gekauft. (Rechnung wurde erstellt)", eingeloggterUser);
-		    }
-		}
-		Rechnung rechnung = new Rechnung(akteur, akteur.getWarenkorb(), new Date());
-//		warenkorbLeeren,
-		return rechnung;
-	}*/
 	
 	/**
 	 * Methode leitet an Speichermethoden in den anderen Verwaltungen weiter.
