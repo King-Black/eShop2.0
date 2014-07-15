@@ -6,18 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.text.NumberFormat;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import exceptions.BereitsEingeloggtException;
 import exceptions.KennwortFalschException;
 
 /**
@@ -107,11 +103,7 @@ public class EinloggenFenster extends JDialog {
 						JOptionPane dialog = new JOptionPane();
 						JOptionPane.showMessageDialog(EinloggenFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						dialog.setVisible(true);
-					} catch (BereitsEingeloggtException e1) {
-						JOptionPane dialog = new JOptionPane();
-						JOptionPane.showMessageDialog(EinloggenFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-						dialog.setVisible(true);
-					}				
+					} 			
 				}
 			}
 			
@@ -144,11 +136,7 @@ public class EinloggenFenster extends JDialog {
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(EinloggenFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					dialog.setVisible(true);
-				} catch (BereitsEingeloggtException e1) {
-					JOptionPane dialog = new JOptionPane();
-					JOptionPane.showMessageDialog(EinloggenFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-					dialog.setVisible(true);
-				}				
+				} 				
 			}
 		};
 		return ok;

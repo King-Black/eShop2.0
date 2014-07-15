@@ -9,7 +9,6 @@ import Valueobjects.Kunde;
 import Valueobjects.User;
 import exceptions.ArtikelNichtGefundenException;
 import exceptions.ArtikelNurInEinheitenVerfuegbarException;
-import exceptions.BereitsEingeloggtException;
 import exceptions.KennwortFalschException;
 
 
@@ -161,7 +160,7 @@ public class CUI implements Runnable {
 	 * @throws KennwortFalschException
 	 * @throws BereitsEingeloggtException
 	 */
-	private User userLogin(String name, String passwort) throws KennwortFalschException, BereitsEingeloggtException{
+	private User userLogin(String name, String passwort) throws KennwortFalschException{
 		return shopVer.userLogin(name, passwort);
 	}
 	

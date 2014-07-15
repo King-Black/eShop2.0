@@ -5,7 +5,7 @@ public class ArtikelNurInEinheitenVerfuegbarException extends Exception {
 	
 	/**
 	 * Wird geworfen, wenn ein Artikel nur in bestimmten Packungsgrößen verfügbar ist.
-	 * @param packungsGroesse 
+	 * @param packungsGroesse Die Einheit in die der Artikel verpackt wird.
 	 */
 	
 	public ArtikelNurInEinheitenVerfuegbarException(int packungsGroesse) {

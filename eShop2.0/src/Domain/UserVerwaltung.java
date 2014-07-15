@@ -1,12 +1,6 @@
 package Domain;
 
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -16,7 +10,6 @@ import persistence.PersistenceManager;
 import Valueobjects.Kunde;
 import Valueobjects.Mitarbeiter;
 import Valueobjects.User;
-import exceptions.BereitsEingeloggtException;
 import exceptions.KennwortFalschException;
 
 public class UserVerwaltung {
@@ -55,7 +48,7 @@ public class UserVerwaltung {
 		return userBestand;
 	}
 	
-	public User userLogin(String name, String passwort) throws KennwortFalschException, BereitsEingeloggtException{
+	public User userLogin(String name, String passwort) throws KennwortFalschException{
 		Iterator<User> it = userBestand.iterator();
 	
 		while(it.hasNext()) {	

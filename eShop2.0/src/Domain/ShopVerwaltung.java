@@ -17,13 +17,11 @@ import Valueobjects.User;
 import Valueobjects.Warenkorb;
 import exceptions.ArtikelNichtGefundenException;
 import exceptions.ArtikelNurInEinheitenVerfuegbarException;
-import exceptions.BereitsEingeloggtException;
 import exceptions.BereitsVorhandenException;
 import exceptions.EinlagernException;
 import exceptions.KennwortFalschException;
 import exceptions.NichtEingeloggtException;
 import exceptions.NichtGenugAufLagerException;
-import exceptions.UserNichtGefundenException;
 import exceptions.WarenkorbLeerException;
 
 /**
@@ -317,7 +315,7 @@ public class ShopVerwaltung {
 	 * @throws KennwortFalschException
 	 * @throws BereitsEingeloggtException
 	 */
-	public User userLogin(String name, String passwort) throws KennwortFalschException, BereitsEingeloggtException{
+	public User userLogin(String name, String passwort) throws KennwortFalschException{
 		eingeloggterUser = userVer.userLogin(name, passwort);
 		return eingeloggterUser;
 	}
