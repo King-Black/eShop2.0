@@ -2,8 +2,6 @@ package persistence;
 
 import java.io.IOException;
 
-import Valueobjects.Artikel;
-import Valueobjects.Ereignis;
 import Valueobjects.Kunde;
 import Valueobjects.MehrfachArtikel;
 import Valueobjects.Mitarbeiter;

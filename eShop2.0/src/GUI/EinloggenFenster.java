@@ -15,6 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import exceptions.KennwortFalschException;
+import exceptions.UserNichtGefundenException;
 
 /**
  * Klasse zur Erstellung eines Login-Fensters.
@@ -103,6 +104,10 @@ public class EinloggenFenster extends JDialog {
 						JOptionPane dialog = new JOptionPane();
 						JOptionPane.showMessageDialog(EinloggenFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						dialog.setVisible(true);
+					} catch (UserNichtGefundenException e1) {
+						JOptionPane dialog = new JOptionPane();
+						JOptionPane.showMessageDialog(EinloggenFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						dialog.setVisible(true);
 					} 			
 				}
 			}
@@ -133,6 +138,10 @@ public class EinloggenFenster extends JDialog {
 					erfolg = true;
 					gui.dispose();
 				} catch (KennwortFalschException e1) {
+					JOptionPane dialog = new JOptionPane();
+					JOptionPane.showMessageDialog(EinloggenFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					dialog.setVisible(true);
+				} catch (UserNichtGefundenException e1) {
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(EinloggenFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					dialog.setVisible(true);

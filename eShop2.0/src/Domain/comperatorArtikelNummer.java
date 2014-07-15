@@ -8,12 +8,12 @@ import Valueobjects.Artikel;
  *
  */
 public class comperatorArtikelNummer implements Comparator<Artikel> {
-		/**
-		 * Methode zum sortieren nach ArtikelNummern.
-		 */
 		public comperatorArtikelNummer() {
 			super();
 		}
+		/**
+		 * Methode zum sortieren nach ArtikelNummern.
+		 */
 		public int compare(Artikel arg0, Artikel arg1) {
 				if (arg0.getArtikelNummer() > arg1.getArtikelNummer()) {
 					return 1;

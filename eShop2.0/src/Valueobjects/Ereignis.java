@@ -18,7 +18,7 @@ public class Ereignis {
 	 * Initalisiert ein Lagerereignisobjekt.
 	 * @param artikel Artikel der am Lagerereignis beteiligt ist.
 	 * @param anzahl Gibt Anzahl an die ein-/ausgelagert wurde. Bzw wie viel von einem Artikel vorhanden ist.
-	 * @param aktion Aktion die Ausgeführt wird. (Ein-/Auslagern)
+	 * @param aktion Aktion die Ausgeführt wird. (Ein-/Auslagern).
 	 * @param nutzer Nutzer, der das Lagerereignis ausführt.
 	 */
 	public Ereignis(Artikel artikel, int anzahl	, String aktion, User nutzer) {

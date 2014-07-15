@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class Rechnung {
 
 	private Kunde kunde;
+	@SuppressWarnings("unused")
 	private Warenkorb warenkorb;
 	private Date datum;
 	private double gesamtpreis;

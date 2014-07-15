@@ -10,8 +10,6 @@ import persistence.FilePersistenceManager;
 import persistence.PersistenceManager;
 import Valueobjects.Artikel;
 import Valueobjects.MehrfachArtikel;
-import Valueobjects.Mitarbeiter;
-import Valueobjects.User;
 import exceptions.ArtikelNichtGefundenException;
 import exceptions.EinlagernException;
 
@@ -38,32 +36,25 @@ public class ArtikelVerwaltung {
 //			this.ladeDatenArtikel();
 			this.ladeDatenMehrfachArtikel();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	/**
-	 * Methode zum einfügen von einfachen Artikel.
-	 * @param artikelName
-	 * @param menge
-	 * @param preis
-	 * @return Artikel
-	 * @throws EinlagernException
+	 * Methode zum einfügen von einfachen Artikel. Wenn richtig eingetragen, 
+	 * bekommt der Artikel eine Artikelnummer -> bestimmeNr. wird hochgezählt und der Artikelbestand wird erhöht.
+	 * @param artikelName Name des einzufügenden Artikel.
+	 * @param menge Menge des Artikels.
+	 * @param preis Preis des Artikels.
+	 * @return Artikel Gibt den neu erstellten Artikel zurück.
+	 * @throws EinlagernException wird geworfen, wenn Menge oder Preis kleiner oder gleich 0 sind.
 	 */
-	//Methode zum einfügen von Artikeln.
-	//Wenn Menge oder Preis kleiner 0 oder 0 ist wird eine EinlagernException geworfen.
-	//Wenn richtig eingetragen, bekommt der Artikel eine Artikelnummer -> bestimmeNr. wird hochgezählt.
-	//und der Artikelbestand wird erhöht.
 	public Artikel einfuegen(String artikelName, int menge, double preis) throws EinlagernException{ 
 		if(preis<=0||menge<=0) {
-			//exception EinlagernException
 			EinlagernException e = new EinlagernException();
 			throw e;
 		} else {
@@ -72,23 +63,20 @@ public class ArtikelVerwaltung {
 			artikelBestand.add(einArtikel);
 			return einArtikel;
 		}
-		//return null;
 	}
 	
 	/**
 	 * Methode zum einfügen von Mehrfachartikeln.
-	 * @param artikelName
-	 * @param menge
-	 * @param preis
-	 * @param packungsGroesse
-	 * @param stueckPreis
-	 * @return Artikel
-	 * @throws EinlagernException
+	 * @param artikelName Name des einzufügenden Artikel.
+	 * @param menge Menge des Artikels.
+	 * @param preis Preis des Artikels.
+	 * @param packungsGroesse Packungsgröße des Artikels.
+	 * @param stueckPreis Stückpreis des Artikels.
+	 * @return Artikel Gibt den neu erstellten Artikel zurück.
+	 * @throws EinlagernException wird geworfen, wenn Menge oder Preis kleiner oder gleich 0 sind.
 	 */
-	//Methode zum einfügen von Mehrfachartikeln
 	public MehrfachArtikel einfuegen(String artikelName, int menge, double preis, int packungsGroesse, float stueckPreis) throws EinlagernException{ 
 		if(preis<=0||menge<=0) {
-			//exception EinlagernException
 			EinlagernException e = new EinlagernException();
 			throw e;
 		} else {
@@ -97,14 +85,13 @@ public class ArtikelVerwaltung {
 			artikelBestand.add(einArtikel);
 			return einArtikel;
 		}
-		//return null;
 	}
 	
 	
 	/**
 	 * Methode zum ändern der Artikelmenge
 	 * @param nummer Artikel ID
-	 * @param anzahl
+	 * @param anzahl Menge die ein-/ausgelagert werden soll.
 	 */
 	public void setArtikelMenge(int nummer, int anzahl){
 		Iterator<Artikel> it = artikelBestand.iterator();
@@ -118,7 +105,7 @@ public class ArtikelVerwaltung {
 	
 	/**
 	 * Methode, die die Artikelliste übergibt.
-	 * @return
+	 * @return Gibt die Artikelliste zurück.
 	 */
 	public List<Artikel> getArtikelBestand() {
 		return artikelBestand;
@@ -126,15 +113,13 @@ public class ArtikelVerwaltung {
 	
 	/**
 	 * Methode zum löschen von Artikeln.
-	 * @param a
+	 * @param a Artikel der gelöscht werden soll.
 	 * @throws ArtikelNichtGefundenException wird geworfen, wenn es den zu löschenden Artikel gar nicht gibt.
 	 */
-	//Methode zum löschen von Artikeln
 	public void loescheArtikel(Artikel a) throws ArtikelNichtGefundenException{
 		if (artikelBestand.contains(a)) {
 			artikelBestand.remove(a);
 		} else {
-			//exception ArtikelNichtGefundenException
 			ArtikelNichtGefundenException e = new ArtikelNichtGefundenException(a);
 			throw e;
 		}
@@ -162,11 +147,10 @@ public class ArtikelVerwaltung {
 	
 	/**
 	 * Methode findet Artikel anhand der Artikelnummer.
-	 * @param artID
-	 * @return artikel
-	 * @throws ArtikelNichtGefundenException
+	 * @param artID Nummer des Artikels.
+	 * @return artikel Artikel der gefunden wurde.
+	 * @throws ArtikelNichtGefundenException wird geworfen, wenn es den gesuchten Artikel nicht gibt.
 	 */
-	//Methode zum finden von Artikeln anhand der Artikelnummer
 	public Artikel findArtikelByNumber(int artID) throws ArtikelNichtGefundenException{
 		Iterator<Artikel> it = artikelBestand.iterator();
 		// Artikel erstellen
@@ -178,7 +162,6 @@ public class ArtikelVerwaltung {
 			if(artID==artikel.getArtikelNummer()){
 				return artikel;				
 			} else if (!(artID==artikel.getArtikelNummer())&&!it.hasNext()){ // gesuchte Artikel ID nicht gefunden
-				//exception ArtikelIdNichtGefundenException
 				ArtikelNichtGefundenException e = new ArtikelNichtGefundenException(artID);
 				throw e;
 			}
@@ -186,6 +169,11 @@ public class ArtikelVerwaltung {
 		return null;
 	}
 	
+	/**
+	 * Methode speichert alle Mehrfachartikel in einer Textdatei.
+	 * @throws FileNotFoundException wird geworfen, wenn Datei nicht gefunden wurde.
+	 * @throws IOException wenn es einen fehler beim schreiben gab.
+	 */
 	public void schreibeDatenMehrfachartikel() throws FileNotFoundException, IOException {		
 		pm.openForWriting("Mehrfachartikel.txt");
 		if (!artikelBestand.isEmpty()) {
@@ -197,6 +185,11 @@ public class ArtikelVerwaltung {
 		pm.close();
 	}
 	
+	/**
+	 * Methode speichert alle Artikel in einer Textdatei.
+	 * @throws FileNotFoundException wird geworfen, wenn Datei nicht gefunden wurde.
+	 * @throws IOException wenn es einen fehler beim schreiben gab.
+	 */
 /*	public void schreibeDatenArtikel() throws IOException  {
 		pm.openForWriting("Artikel.txt");
 		if (!artikelBestand.isEmpty()) {
@@ -207,7 +200,12 @@ public class ArtikelVerwaltung {
 		}
 		pm.close();
 	}*/
-	
+	/**
+	 * Methode läd alle Artikel aus einer Textdatei.
+	 * @throws FileNotFoundException wird geworfen, wenn Datei nicht gefunden wurde.
+	 * @throws IOException wenn es einen fehler beim lesen gab.
+	 * @throws ClassNotFoundException
+	 */
 /*	public void ladeDatenArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
 		pm.openForReading("Artikel.txt");
 		Artikel a;
@@ -222,6 +220,12 @@ public class ArtikelVerwaltung {
 			
 	}*/
 	
+	/**
+	 * Methode läd alle Mehrfachartikel aus einer Textdatei.
+	 * @throws FileNotFoundException wird geworfen, wenn Datei nicht gefunden wurde.
+	 * @throws IOException wenn es einen fehler beim lesen gab.
+	 * @throws ClassNotFoundException
+	 */
 	public void ladeDatenMehrfachArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
 		pm.openForReading("Mehrfachartikel.txt");
 		MehrfachArtikel a;

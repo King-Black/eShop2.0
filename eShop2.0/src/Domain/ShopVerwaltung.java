@@ -17,14 +17,14 @@ import Valueobjects.User;
 import Valueobjects.Warenkorb;
 import exceptions.ArtikelNichtGefundenException;
 import exceptions.ArtikelNurInEinheitenVerfuegbarException;
-import exceptions.BereitsVorhandenException;
 import exceptions.EinlagernException;
 import exceptions.KennwortFalschException;
 import exceptions.NichtGenugAufLagerException;
+import exceptions.UserNichtGefundenException;
 import exceptions.WarenkorbLeerException;
 
 /**
- * Klasse zur allgemeinen ShopVerwaltung. beinhaltet die Logik und besitzt die ArtikelVerwaltung, UserVerwaltung, WarenkorbVerwaltung und EreignisVerwaltung.
+ * Klasse zur allgemeinen ShopVerwaltung beinhaltet die Logik und besitzt die ArtikelVerwaltung, UserVerwaltung, WarenkorbVerwaltung und EreignisVerwaltung.
  *
  */
 public class ShopVerwaltung {
@@ -45,90 +45,86 @@ public class ShopVerwaltung {
 	}
 	
 	/**
-	 * Methode die einen neuen Artikel einfügt und den Auftrag an die Artikelverwaltung weiterreicht.
-	 * @param artikelName
-	 * @param menge
-	 * @param d
-	 * @throws EinlagernException
-	 * @throws BereitsVorhandenException
+	 * Methode leitet weiter an Methode in Artikelverwaltung 
+	 * @param artikelName Name des einzufügenden Artikel.
+	 * @param menge Menge des Artikels.
+	 * @param d Preis des Artikels.
+	 * @throws EinlagernException wird geworfen, wenn Menge oder Preis kleiner oder gleich 0 sind.
 	 */
-	public void fuegeArtikelEin(String artikelName, int menge, double d) throws EinlagernException, BereitsVorhandenException{
+	public void fuegeArtikelEin(String artikelName, int menge, double d) throws EinlagernException{
 		Artikel a = artVer.einfuegen(artikelName, menge, d);
 		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Neuer Artikel erstellt.", eingeloggterUser);
 	}
 	
 	/**
-	 * Methode die einen neuen MehrfachArtikel einfügt und den Auftrag an die Artikelverwaltung weiterreicht.
-	 * @param artikelName
-	 * @param menge
-	 * @param d
-	 * @param packungsGroesse
-	 * @param stueckPreis
-	 * @throws EinlagernException
-	 * @throws BereitsVorhandenException
+	 * Methode leitet weiter an Methode in Artikelverwaltung.
+	 * @param artikelName Name des einzufügenden Artikel.
+	 * @param menge Menge des Artikels.
+	 * @param d Preis des Artikels.
+	 * @param packungsGroesse Packungsgröße des Artikels.
+	 * @param stueckPreis Stückpreis des Artikels.
+	 * @throws EinlagernException wird geworfen, wenn Menge oder Preis kleiner oder gleich 0 sind.
 	 */
-	public void fuegeArtikelEin(String artikelName, int menge, double d, int packungsGroesse, float stueckPreis) throws EinlagernException, BereitsVorhandenException{ 
+	public void fuegeArtikelEin(String artikelName, int menge, double d, int packungsGroesse, float stueckPreis) throws EinlagernException{ 
 		MehrfachArtikel a = artVer.einfuegen(artikelName, menge, d, packungsGroesse, stueckPreis);
 		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Neuer Artikel erstellt.", eingeloggterUser);
 	}
 	
 	/**
-	 * Methode zum erstellen eines Mitarbeiters.
-	 * @param name
-	 * @param passwort
-	 * @param anrede
-	 * @param vorName
-	 * @param nachName
+	 * Methode leitet weiter an Methode in Userverwaltung. 
+	 * @param name Benutzername des Mitarbeiters.
+	 * @param passwort Passwort des Mitarbeiters.
+	 * @param anrede Anrede des Mitarbeiters.
+	 * @param vorName Vorname des Mitarbeiters.
+	 * @param nachName Nachname des Mitarbeiters.
 	 */
 	public void fuegeUserEin(String name, String passwort, String anrede, String vorName, String nachName){
 		userVer.einfuegen(name, passwort, anrede, vorName, nachName);	
 	}
 	
 	/**
-	 * Methode zum erstellen eines Kunden.
-	 * @param name
-	 * @param passwort
-	 * @param anrede
-	 * @param vorName
-	 * @param nachName
-	 * @param adresse
-	 * @param plz
-	 * @param ort
+	 * Methode leitet weiter an Methode in Userverwaltung.
+	 * @param name Benutzername des Kunden.
+	 * @param passwort Passwort des Kunden.
+	 * @param anrede Anrede des Kunden.
+	 * @param vorName Vorname des Kunden.
+	 * @param nachName Nachname des Kunden.
+	 * @param adresse Straße und Hausnr. des Kunden.
+	 * @param plz Postleitzahl des Kunden.
+	 * @param ort Ort des Kunden.
 	 */
 	public void fuegeUserEin(String name, String passwort, String anrede, String vorName, String nachName, String adresse, int plz, String ort){ 
 		userVer.einfuegen(name, passwort, anrede, vorName, nachName, adresse, plz, ort);	
 	}
 	
 	/**
-	 * Methode die einen neuen Artikel in der Warenkorb ein und den Auftrag an die Warenkorbverwaltung weiterreicht.
-	 * @param artID
-	 * @param menge
-	 * @param akteur
-	 * @return Kunde
-	 * @throws ArtikelNichtGefundenException
-	 * @throws ArtikelNurInEinheitenVerfuegbarException
+	 * Methode leitet weiter an Methode in Warenkorbverwaltung.
+	 * @param einArtikel Der Artikel der in den WK gelegt wurde.
+	 * @param menge Menge des Artikels der in den WK gelegt wurde.
+	 * @param k Der zur zeit eingeloggte Kunde der etwas in den WK legt.
+	 * @return Gibt eingeloggten Kunden zurück.
+	 * @throws ArtikelNichtGefundenException wird geworfen, wenn der Artikel nicht gefunden wurde.
+	 * @throws NichtGenugAufLagerException wird geworfen, wenn nicht genügend Artikel des ausgeählten Produkts auf Lager sind.
+	 * @throws ArtikelNurInEinheitenVerfuegbarException wird geworfen, wenn es sich um einen Artikel mit bestimmter Packungsgröße handelt.
 	 */
-	public Kunde artikelInWarenkorb(int artID, int menge, Kunde akteur) throws ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{	
+	public Kunde artikelInWarenkorb(int artID, int menge, Kunde akteur) throws ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException, NichtGenugAufLagerException{	
 		Artikel a = artVer.findArtikelByNumber(artID);
 		// überprüfe: sind schon mehr in warenkorb als im bestand?
 		Kunde k = null;
-		try {
-			k = warkoVer.artikelInWarenkorb(a, menge, akteur/*(Kunde)userVer.findUserByNumber(akteur.getNummer())*/);
-		} catch (NichtGenugAufLagerException e) {
-			e.printStackTrace();
-		}
+			k = warkoVer.artikelInWarenkorb(a, menge, akteur);
 		return k;
 	}
 	
 	/**
-	 * Methode die einen Artikel einliest und an die Warenkorbverwaltung durchreicht.
-	 * @param artID
-	 * @param akteur
-	 * @return Kunde
-	 * @throws ArtikelNichtGefundenException
-	 * @throws WarenkorbLeerException
+	 * Die Methode wird aufgerufen, wenn ein Kunde einen Artikel aus dem Warenkorb entfernt.
+	 * @param artID Die Id des Artikels der gelöscht werden soll.
+	 * @param akteur Der Kunder der eingeloggt ist.
+	 * @return Kunde der eingeloggt ist.
+	 * @throws ArtikelNichtGefundenException wird geworfen, wenn der Artikel nicht gefunden werden konnte.
+	 * @throws WarenkorbLeerException wird geworfen, wenn kein Artikel im WK ist.
+	 * @throws UserNichtGefundenException wird geworfen, wenn User nicht gefunden wurde.
 	 */
-	public Kunde artikelAusWarenkorb(int artID, Kunde akteur) throws ArtikelNichtGefundenException, WarenkorbLeerException{	
+	public Kunde artikelAusWarenkorb(int artID, Kunde akteur) throws ArtikelNichtGefundenException, WarenkorbLeerException, UserNichtGefundenException{	
 		Artikel a = artVer.findArtikelByNumber(artID);
 		Kunde kunde = warkoVer.artikelAusWarenkorb(a, (Kunde)userVer.findUserByNumber(akteur.getNummer()));
 		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Artikel " + a.getArtikelName() + " aus dem Warenkorb entfernt.", eingeloggterUser);
@@ -137,11 +133,12 @@ public class ShopVerwaltung {
 	
 	/**
 	 * Methode, um den Warenkorb des Kunden zu leeren.
-	 * @param akteur
-	 * @return
-	 * @throws WarenkorbLeerException
+	 * @param akteur Der eingeloggte Kunde
+	 * @return eingeloggte Kunde
+	 * @throws WarenkorbLeerException wird geworfen, wenn keine Artikel im WK sind.
+	 * @throws UserNichtGefundenException wird geworfen, wenn User nicht gefunden wurde.
 	 */
-	public Kunde warenkorbLeeren(Kunde akteur) throws WarenkorbLeerException{
+	public Kunde warenkorbLeeren(Kunde akteur) throws WarenkorbLeerException, UserNichtGefundenException{
 		akteur = (Kunde)userVer.findUserByNumber(akteur.getNummer());
 		akteur.getWarenkorb().leeren();
 		return akteur;
@@ -150,9 +147,9 @@ public class ShopVerwaltung {
 	
 	/**
 	 * Methode, um einen Artikel nach der Nummer zu suchen.
-	 * @param artID
-	 * @return
-	 * @throws ArtikelNichtGefundenException
+	 * @param artID Nummer des Artikels.
+	 * @return Artikel der gefunden wurde.
+	 * @throws ArtikelNichtGefundenException wird geworfen, wenn der Artikel nicht gefunden wurde.
 	 */
 	public Artikel findArtikelByNumber(int artID) throws ArtikelNichtGefundenException{
 		return artVer.findArtikelByNumber(artID);
@@ -160,7 +157,7 @@ public class ShopVerwaltung {
 	
 	/**
 	 * Methode, die die Artikelliste ausgibt.
-	 * @return
+	 * @return Gibt die Artikelliste zurück.
 	 */
 	public List<Artikel> gibAlleArtikel(){
 		return artVer.getArtikelBestand();
@@ -168,7 +165,7 @@ public class ShopVerwaltung {
 	
 	/**
 	 * Methode, die die Benutzerliste ausgibt.
-	 * @return
+	 * @return Gibt alle User zurück.
 	 */
 	public List<User> gibAlleUser(){
 		return userVer.getUserBestand();
@@ -176,8 +173,8 @@ public class ShopVerwaltung {
 	
 	/**
 	 * Methode die den Warenkorb des Users ausgibt.
-	 * @param user
-	 * @return
+	 * @param user eingeloggter User.
+	 * @return Gibt WK des Kunden zurück.
 	 */
 	public Warenkorb gibWarenkorb(Kunde user){
 		return user.getWarenkorb();
@@ -192,7 +189,7 @@ public class ShopVerwaltung {
 
 	/**
 	 * Methode, die die Protokollliste ausgibt.
-	 * @return
+	 * @return Protokollliste.
 	 */
 	public List<Ereignis> gibProtokollListe() {
 		return erVer.gibProtokollListe();
@@ -200,10 +197,10 @@ public class ShopVerwaltung {
 	
 	/**
 	 * Methode, die die Mengenänderung einliest und an die Artikelverwaltung weitergibt.
-	 * @param nummer
-	 * @param anzahl
-	 * @param akteur
-	 * @throws ArtikelNichtGefundenException
+	 * @param nummer Artikel ID
+	 * @param anzahl Menge die ein-/ausgelagert werden soll.
+	 * @param akteur Der User der an Aktion beteiligt ist.
+	 * @throws ArtikelNichtGefundenException wird geworfen, wenn der Artikel nicht gefunden wurde.
 	 */
 	public void mengeAendern(int nummer, int anzahl, User akteur) throws ArtikelNichtGefundenException{
 		Artikel derWars = artVer.findArtikelByNumber(nummer);
@@ -231,11 +228,12 @@ public class ShopVerwaltung {
 	
 	/**
 	 * Methode, die den zu löschenden Benutzer an die Userverwaltung weitergibt.
-	 * @param userNr
-	 * @param aktuellerBenutzer
+	 * @param userNr User ID
+	 * @param aktuellerBenutzer Der User der an der Aktion beteiligt ist.
+	 * @throws UserNichtGefundenException wird geworfen, wenn der zu löschende User nicht gefunden wurde.
 	 */
-	public void loescheUser(int userNr, User aktuellerBenutzer){
-		userVer.loescheUser(userNr, aktuellerBenutzer);
+	public void loescheUser(int userNr) throws UserNichtGefundenException{
+		userVer.loescheUser(userNr);
 	}
 	
 	/**
@@ -254,7 +252,7 @@ public class ShopVerwaltung {
 	
 	/**
 	 * Methode zum Ausgeben des Warenkorbs.
-	 * @param user
+	 * @param user User dem der WK gehört.
 	 */
 	public void getWarenkorbInhalt(User user){
 		warkoVer.getWarenkorbInhalt(user);
@@ -262,21 +260,22 @@ public class ShopVerwaltung {
 	
 	/**
 	 * Methode, die einließt, welcher Artikel im Warenkorb geändert werden soll und das an die Warenkorbverwaltung weiterleitet.
-	 * @param artID
-	 * @param menge
-	 * @param akteur
-	 * @return
+	 * @param artID Artikel nummer
+	 * @param menge Menge die in den wk soll.
+	 * @param akteur Der User der eingeloggt ist.
+	 * @return Gibt neuen WK Bestand wieder.
 	 * @throws ArtikelNichtGefundenException
+	 * @throws UserNichtGefundenException 
 	 */
-	public HashMap<Artikel, Integer> artikelMengeImWarenkorbAendern(int artID, int menge, Kunde akteur) throws ArtikelNichtGefundenException{			
+	public HashMap<Artikel, Integer> artikelMengeImWarenkorbAendern(int artID, int menge, Kunde akteur) throws ArtikelNichtGefundenException, UserNichtGefundenException{			
 		Artikel a = artVer.findArtikelByNumber(artID);
 		return warkoVer.setArtikelMenge(a, menge, (Kunde)userVer.findUserByNumber(akteur.getNummer()));
 	}
 	
 	/**
 	 * Methode zum ausgeben des Ereignisverlaufs eines Artikels.
-	 * @param artID
-	 * @throws ArtikelNichtGefundenException
+	 * @param artID Artikelnummer.
+	 * @throws ArtikelNichtGefundenException wird geworfen, wenn ein Artikel nicht gefunden wurde.
 	 */
 	public void einkaufsVerlauf(int artID) throws ArtikelNichtGefundenException{
 		Artikel a = artVer.findArtikelByNumber(artID);
@@ -296,9 +295,9 @@ public class ShopVerwaltung {
 	
 	/**
 	 * Methode, die einließt welcher Artikel gelöscht werden soll und das an die Artikelverwaltung weiterreicht.
-	 * @param artID
-	 * @param aktuellerBenutzer
-	 * @throws ArtikelNichtGefundenException
+	 * @param artID Artikelnummer.
+	 * @param aktuellerBenutzer Benutzer der eingeloggt ist
+	 * @throws ArtikelNichtGefundenException wird geworfen, wenn der Artikel nicht gefunden wurde.
 	 */
 	public void loescheArtikel(int artID, User aktuellerBenutzer) throws ArtikelNichtGefundenException{
 		Artikel a = artVer.findArtikelByNumber(artID);
@@ -308,13 +307,13 @@ public class ShopVerwaltung {
 	
 	/**
 	 * Methode, die einließt, welcher User sich einloggen will und die Überprüfung an die Userverwaltung übergibt.
-	 * @param name
-	 * @param passwort
-	 * @return
-	 * @throws KennwortFalschException
-	 * @throws BereitsEingeloggtException
+	 * @param name Benutzername des Users.
+	 * @param passwort PW des Users.
+	 * @return Den eingeloggten User.
+	 * @throws KennwortFalschException wird geworfen, wenn das PW falsch eingegeben wurde.
+	 * @throws UserNichtGefundenException wird geworfe, wenn der User nicht gefunden wurde.
 	 */
-	public User userLogin(String name, String passwort) throws KennwortFalschException{
+	public User userLogin(String name, String passwort) throws KennwortFalschException, UserNichtGefundenException{
 		eingeloggterUser = userVer.userLogin(name, passwort);
 		return eingeloggterUser;
 	}
@@ -339,7 +338,11 @@ public class ShopVerwaltung {
 		return rechnung;
 	}*/
 	
-	
+	/**
+	 * Methode leitet an Speichermethoden in den anderen Verwaltungen weiter.
+	 * @throws FileNotFoundException wird geworfen, wenn Datei nicht gefunden wurde.
+	 * @throws IOException wenn es einen fehler beim schreiben gab.
+	 */
 	public void speichereDaten() throws FileNotFoundException, IOException {
 		artVer.schreibeDatenMehrfachartikel();
 //		artVer.schreibeDatenArtikel();
@@ -350,14 +353,12 @@ public class ShopVerwaltung {
 
 	/**
 	 * Methode, die zum kaufen des Warenkorbinhaltes dient. Erstellen einer Rechnung und leeren des Warenkorbs. Weiterreichen an die entsprechenden Verwaltungen.
-	 * @param k
-	 * @return
-	 * @throws NichtEingeloggtException
-	 * @throws NichtGenugAufLagerException
-	 * @throws BereitsVorhandenException
-	 * @throws WarenkorbLeerException
+	 * @param k Kunde der einkauft.
+	 * @return Gibt die Rechnung zurück.
+	 * @throws NichtGenugAufLagerException wird geworfen, wenn nicht genug Artikel auf Lager sind.
+	 * @throws WarenkorbLeerException wird geworfen, wenn der WK leer ist.
 	 */
-	public Rechnung kaufen(Kunde k) throws NichtGenugAufLagerException, BereitsVorhandenException, WarenkorbLeerException{
+	public Rechnung kaufen(Kunde k) throws NichtGenugAufLagerException, WarenkorbLeerException{
 		HashMap<Artikel, Integer> warenkorb = k.getWarenkorb().getInhalt();
 		System.out.println(warenkorb);
 		if(warenkorb.isEmpty()){

@@ -10,6 +10,8 @@ import Valueobjects.User;
 import exceptions.ArtikelNichtGefundenException;
 import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 import exceptions.KennwortFalschException;
+import exceptions.NichtGenugAufLagerException;
+import exceptions.UserNichtGefundenException;
 
 
 /**
@@ -158,9 +160,10 @@ public class CUI implements Runnable {
 	 * @param passwort
 	 * @return eingeloggten Benuter
 	 * @throws KennwortFalschException
+	 * @throws UserNichtGefundenException 
 	 * @throws BereitsEingeloggtException
 	 */
-	private User userLogin(String name, String passwort) throws KennwortFalschException{
+	private User userLogin(String name, String passwort) throws KennwortFalschException, UserNichtGefundenException{
 		return shopVer.userLogin(name, passwort);
 	}
 	
@@ -236,7 +239,11 @@ public class CUI implements Runnable {
 	private void benutzerLoeschen() throws IOException{
 		System.out.println("Welchen Mitarbeiter willst du loeschen?");
 		int userNr = Integer.parseInt(liesEingabe());
-		shopVer.loescheUser(userNr, aktuellerBenutzer);
+		try {
+			shopVer.loescheUser(userNr);
+		} catch (UserNichtGefundenException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 	
 	/**
@@ -399,7 +406,12 @@ public class CUI implements Runnable {
 				System.out.println("Wieviele davon?");
 				eingabe = liesEingabe();
 				menge = Integer.parseInt(eingabe);
-				shopVer.artikelInWarenkorb(artID, menge,(Kunde) aktuellerBenutzer);
+				try {
+					shopVer.artikelInWarenkorb(artID, menge,(Kunde) aktuellerBenutzer);
+				} catch (NichtGenugAufLagerException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				break;
 			case "d": 
 				System.out.println("Welchen Artikel entfernen?");

@@ -368,7 +368,7 @@ public class ArtikelPanel extends JPanel {
 						HauptFenster.shopVerwaltung.fuegeArtikelEin(name, menge, stueckPreis);
 					}
 					//HauptFenster.shopVerwaltung.lagerEreignisEinfuegen(1, HauptFenster.benutzer, a, menge);
-				} catch (EinlagernException | BereitsVorhandenException e) {
+				} catch (EinlagernException e) {
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(ArtikelPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					dialog.setVisible(true);

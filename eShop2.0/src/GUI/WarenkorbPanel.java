@@ -141,17 +141,7 @@ public class WarenkorbPanel extends JPanel{
 						JOptionPane.showMessageDialog(WarenkorbPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						fehler.setVisible(true);
 						return;
-					} catch (BereitsVorhandenException e) {
-						JOptionPane fehler = new JOptionPane();
-						JOptionPane.showMessageDialog(WarenkorbPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-						fehler.setVisible(true);
-						return;
-					} /*catch (FalscherWertException e) {
-						JOptionPane fehler = new JOptionPane();
-						JOptionPane.showMessageDialog(WarenkorbPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-						fehler.setVisible(true);
-						return;
-					}*//*Wo soll die Exception geworfen werden?*/
+					}
 				}
 					
 				//speichern:

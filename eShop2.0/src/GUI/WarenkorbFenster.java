@@ -17,6 +17,7 @@ import Valueobjects.Artikel;
 import Valueobjects.Kunde;
 import exceptions.ArtikelNichtGefundenException;
 import exceptions.ArtikelNurInEinheitenVerfuegbarException;
+import exceptions.NichtGenugAufLagerException;
 
 
 @SuppressWarnings("serial")
@@ -106,6 +107,11 @@ public class WarenkorbFenster extends JDialog{
 					dialog.setVisible(true);
 					return;
 				} catch (ArtikelNurInEinheitenVerfuegbarException e1) {
+					JOptionPane dialog = new JOptionPane();
+					JOptionPane.showMessageDialog(WarenkorbFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					dialog.setVisible(true);
+					return;
+				} catch (NichtGenugAufLagerException e1) {
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(WarenkorbFenster.this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					dialog.setVisible(true);

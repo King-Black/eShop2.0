@@ -14,10 +14,10 @@ public class WarenkorbVerwaltung {
 	
 /**
  * Diese Methode gibt die Artikel im Warkenkorb wieder die der Kunde in den Warenkorb gelegt hat.
- * @param einArtikel
- * @param menge
- * @param k
- * @return
+ * @param einArtikel Der Artikel der in den WK gelegt wurde.
+ * @param menge Menge des Artikels der in den WK gelegt wurde.
+ * @param k Der zur zeit eingeloggte Kunde der etwas in den WK legt.
+ * @return Gibt eingeloggten Kunden zurück.
  * @throws NichtGenugAufLagerException wird geworfen, wenn nicht genügend Artikel des ausgeählten Produkts auf Lager sind.
  * @throws ArtikelNurInEinheitenVerfuegbarException wird geworfen, wenn es sich um einen Artikel mit bestimmter Packungsgröße handelt.
  */
@@ -41,25 +41,26 @@ public class WarenkorbVerwaltung {
 			NichtGenugAufLagerException e = new NichtGenugAufLagerException(einArtikel);
 			throw e;
 		}
-		//return k;
 	}
+	
 /**
  * Die Methode wird aufgerufen, wenn ein Kunde einen Artikel aus dem Warenkorb entfernt.
- * @param artikel
- * @param user
- * @return 
+ * @param artikel Artikel der aus dem Warenkorb gelöscht wird.
+ * @param user Der eingeloggte User.
+ * @return Eingeloggter User.
  * @throws WarenkorbLeerException wird geworfen, wenn der Warenkorb schon leer ist.
  */
 	public Kunde artikelAusWarenkorb(Artikel artikel, Kunde user) throws WarenkorbLeerException{		
 		user.getWarenkorb().artikelEntfernen(artikel);
 		return user;
 	}
+	
 	/**
-	 * 
-	 * @param a
-	 * @param anzahl
-	 * @param user
-	 * @return
+	 * Methode ändert Menge eines Artikels im WK.
+	 * @param a Der Artikel der geändert wird.
+	 * @param anzahl Menge die zur alten Menge addier wird.
+	 * @param user User dem der WK gehört.
+	 * @return Gibt neuen WK Bestand wieder.
 	 */
 	public HashMap<Artikel, Integer> setArtikelMenge(Artikel a, int anzahl, Kunde user) {
 		HashMap<Artikel, Integer> w = user.getWarenkorb().getInhalt();
@@ -67,9 +68,10 @@ public class WarenkorbVerwaltung {
 		w.put(a, alteMenge+anzahl);
 		return w;
 	}
+	
 	/**
 	 * Diese Methode gibt in einer Hashmap den Inahlt des Warenkorbs wieder.
-	 * @param user
+	 * @param user User dem der WK gehört.
 	 */
 	public void getWarenkorbInhalt(User user){
 		HashMap<Artikel, Integer> warenkorb = ((Kunde) user).getWarenkorb().getInhalt();
