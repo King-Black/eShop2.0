@@ -20,7 +20,6 @@ import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 import exceptions.BereitsVorhandenException;
 import exceptions.EinlagernException;
 import exceptions.KennwortFalschException;
-import exceptions.NichtEingeloggtException;
 import exceptions.NichtGenugAufLagerException;
 import exceptions.WarenkorbLeerException;
 
@@ -358,7 +357,7 @@ public class ShopVerwaltung {
 	 * @throws BereitsVorhandenException
 	 * @throws WarenkorbLeerException
 	 */
-	public Rechnung kaufen(Kunde k) throws NichtEingeloggtException, NichtGenugAufLagerException, BereitsVorhandenException, WarenkorbLeerException{
+	public Rechnung kaufen(Kunde k) throws NichtGenugAufLagerException, BereitsVorhandenException, WarenkorbLeerException{
 		HashMap<Artikel, Integer> warenkorb = k.getWarenkorb().getInhalt();
 		System.out.println(warenkorb);
 		if(warenkorb.isEmpty()){
