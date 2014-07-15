@@ -16,7 +16,6 @@ import javax.swing.JTextField;
 
 import Valueobjects.Artikel;
 import exceptions.ArtikelNichtGefundenException;
-import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 
 /**
  * Klasse zur Erstellung eines Artikel-Verwaltungs-Fensters.
@@ -140,11 +139,6 @@ public class ArtikelVerwaltenFenster extends JDialog {
 			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			dialog.setVisible(true);
 			return;
-		} catch (ArtikelNurInEinheitenVerfuegbarException e) {
-			JOptionPane dialog = new JOptionPane();
-			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			dialog.setVisible(true);
-			return;
 		}
 		
 		//Wird bei erfolgreichem Auslagern angezeigt:
@@ -167,11 +161,6 @@ public class ArtikelVerwaltenFenster extends JDialog {
 			dialog.setVisible(true);
 			return;
 		} catch (ArtikelNichtGefundenException e) {
-			JOptionPane dialog = new JOptionPane();
-			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			dialog.setVisible(true);
-			return;
-		} catch (ArtikelNurInEinheitenVerfuegbarException e) {
 			JOptionPane dialog = new JOptionPane();
 			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			dialog.setVisible(true);

@@ -11,7 +11,6 @@ import persistence.PersistenceManager;
 import Valueobjects.Artikel;
 import Valueobjects.MehrfachArtikel;
 import exceptions.ArtikelNichtGefundenException;
-import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 import exceptions.EinlagernException;
 
 
@@ -95,31 +94,15 @@ public class ArtikelVerwaltung {
 	 * @param anzahl Menge die ein-/ausgelagert werden soll.
 	 * @throws ArtikelNichtGefundenException wird geworfen, wenn der Artikel nicht gefunden wird.
 	 */
-	public void setArtikelMenge(int nummer, int anzahl) throws ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{
-		Artikel artikel = this.findArtikelByNumber(nummer);
-		boolean mehrfach = artikel instanceof MehrfachArtikel;
+	public void setArtikelMenge(int nummer, int anzahl) throws ArtikelNichtGefundenException{
 			
-		if(mehrfach){
-			int packungsGroesse = ((MehrfachArtikel)artikel).getPackungsgroesse();
-			System.out.println(packungsGroesse % anzahl == 0);
-			System.out.println(anzahl >= packungsGroesse);
-			if((packungsGroesse % anzahl == 0) && (anzahl >= packungsGroesse)){
-				System.out.println("Massengut");
-				artikel.setArtikelBestand((artikel.getArtikelBestand() + anzahl));
-			}else{
-				throw new ArtikelNurInEinheitenVerfuegbarException(packungsGroesse);
-			}
-		}else{
-			artikel.setArtikelBestand((artikel.getArtikelBestand() + anzahl));
-		}
-		
-		/*Iterator<Artikel> it = artikelBestand.iterator();
+		Iterator<Artikel> it = artikelBestand.iterator();
 		while (it.hasNext()) {
 			Artikel artikel = it.next();
 			if(artikel.getArtikelNummer() == nummer){
 				artikel.setArtikelBestand((artikel.getArtikelBestand() + anzahl));
 			} 
-		}*/
+		}
 	}
 	
 	/**

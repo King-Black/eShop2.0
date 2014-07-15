@@ -93,22 +93,26 @@ public class UserVerwaltung {
 	 */
 	public User userLogin(String name, String passwort) throws KennwortFalschException, UserNichtGefundenException{
 		Iterator<User> it = userBestand.iterator();
-	
+		boolean gefunden = false;
+		User user = null;
 		while(it.hasNext()) {	
-			User user = it.next();
+			user = it.next();
 			if(user.getName().equals(name)){
-				if (user.getPasswort().equals(passwort)) { //geändert von array equal
-					return user;
-				}else{
-					KennwortFalschException e = new KennwortFalschException();
-					throw e;
-				}
-			}/*else{
-				UserNichtGefundenException e1 = new UserNichtGefundenException();
-				throw e1;
-			}*/
+				gefunden = true;
+				break;
+			}
 		}
-		return null;
+		if(gefunden) {
+			if (user.getPasswort().equals(passwort)) { //geändert von array equal
+				return user;
+			}else{
+				KennwortFalschException e = new KennwortFalschException();
+				throw e;
+			}
+		} else {
+			UserNichtGefundenException e1 = new UserNichtGefundenException();
+			throw e1;
+		}
 	}
 	
 	/**

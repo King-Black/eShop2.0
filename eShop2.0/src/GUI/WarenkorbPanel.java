@@ -19,7 +19,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import Valueobjects.Kunde;
 import Valueobjects.Rechnung;
 import exceptions.ArtikelNichtGefundenException;
-import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 import exceptions.NichtGenugAufLagerException;
 import exceptions.WarenkorbLeerException;
 
@@ -138,11 +137,6 @@ public class WarenkorbPanel extends JPanel{
 						fehler.setVisible(true);
 						return;
 					} catch (ArtikelNichtGefundenException e) {
-						JOptionPane fehler = new JOptionPane();
-						JOptionPane.showMessageDialog(WarenkorbPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-						fehler.setVisible(true);
-						return;
-					} catch (ArtikelNurInEinheitenVerfuegbarException e) {
 						JOptionPane fehler = new JOptionPane();
 						JOptionPane.showMessageDialog(WarenkorbPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						fehler.setVisible(true);
