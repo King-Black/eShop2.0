@@ -35,7 +35,7 @@ public class ArtikelVerwaltung {
 	
 	public ArtikelVerwaltung(){
 		try {
-			this.ladeDatenArtikel();
+//			this.ladeDatenArtikel();
 			this.ladeDatenMehrfachArtikel();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -197,7 +197,7 @@ public class ArtikelVerwaltung {
 		pm.close();
 	}
 	
-	public void schreibeDatenArtikel() throws IOException  {
+/*	public void schreibeDatenArtikel() throws IOException  {
 		pm.openForWriting("Artikel.txt");
 		if (!artikelBestand.isEmpty()) {
 			for (Artikel artikel : artikelBestand) {
@@ -206,9 +206,9 @@ public class ArtikelVerwaltung {
 			}
 		}
 		pm.close();
-	}
+	}*/
 	
-	public void ladeDatenArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
+/*	public void ladeDatenArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
 		pm.openForReading("Artikel.txt");
 		Artikel a;
 		do {
@@ -220,7 +220,7 @@ public class ArtikelVerwaltung {
 		pm.close();
 		this.laufnr = this.artikelBestand.get(this.artikelBestand.size()-1).getArtikelNummer();
 			
-	}
+	}*/
 	
 	public void ladeDatenMehrfachArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
 		pm.openForReading("Mehrfachartikel.txt");

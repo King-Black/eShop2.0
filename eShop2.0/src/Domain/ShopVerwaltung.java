@@ -345,7 +345,7 @@ public class ShopVerwaltung {
 	
 	public void speichereDaten() throws FileNotFoundException, IOException {
 		artVer.schreibeDatenMehrfachartikel();
-		artVer.schreibeDatenArtikel();
+//		artVer.schreibeDatenArtikel();
 		userVer.schreibeDatenMitarbeiter();
 		userVer.schreibeDatenKunden();
 //		erVer.schreibeDaten();

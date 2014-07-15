@@ -18,7 +18,7 @@ public interface PersistenceManager {
 	public boolean close();
 
 	
-	public Artikel ladeArtikel() throws IOException;
+//	public Artikel ladeArtikel() throws IOException;
 	
 	public MehrfachArtikel ladeMehrfachArtikel() throws IOException;
 	
@@ -30,7 +30,7 @@ public interface PersistenceManager {
 	
 	
 	
-	public void speichereArtikel(Artikel a);
+//	public void speichereArtikel(Artikel a);
 	
 	public void speichereMehrfachArtikel (MehrfachArtikel m);
 	

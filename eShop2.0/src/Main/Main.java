@@ -17,12 +17,6 @@ public static void main(String[] args){
 	
 	shopVer = new ShopVerwaltung();
 		
-		/*Thread shopThread = new Thread(new GUI(shopVer));
-		//shop.shopVer.fuegeArtikelEin("SECHSSTEIN", 9.99, null, 48, 6);	
-		shopVer.fuegeUserEin("Kunde", "123", "Frau", "Regina", "Regenbogen","Elbenweg 3", 13337, "Bruchtal");
-		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");
-		cui.run();*/
-	
 		//cuiStarten();
 		guiStarten();
 		
@@ -31,10 +25,6 @@ public static void main(String[] args){
 	@SuppressWarnings("unused")
 	private static void cuiStarten(){
 		CUI shop = new CUI();
-		//Testzwecke
-//		shopVer.fuegeArtikelEin("Hose", 48, 6);
-		shopVer.fuegeUserEin("Kunde", "123", "Frau", "Regina", "Regenbogen","Elbenweg 3", 13337, "Bruchtal");
-//		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");
 		try {
 			shop.run();
 		}
@@ -46,17 +36,6 @@ public static void main(String[] args){
 	
 	@SuppressWarnings("unused")
 	private static  void guiStarten() {
-		/*try {
-			shopVer.fuegeArtikelEin("SECHSSTEIN", 48, 9.99);
-			shopVer.fuegeArtikelEin("Test", 15, 5.99);
-			shopVer.fuegeArtikelEin("Test2", 35, 1.99);
-		} catch (EinlagernException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
-		shopVer.fuegeUserEin("Kunde", "123", "Frau", "Regina", "Regenbogen","Elbenweg 3", 13337, "Bruchtal");
-		shopVer.fuegeUserEin("Mitarbeiter", "123", "Herr", "Max", "Mustermann");
-		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException
