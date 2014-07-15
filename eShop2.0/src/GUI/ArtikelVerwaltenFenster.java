@@ -121,8 +121,14 @@ public class ArtikelVerwaltenFenster extends JDialog {
 		//versucht Artikel auszulagern, legt ein Lagerereignis an und öffnet ggf. Fehlermeldungen:
 		try{
 			int auslagern = Integer.parseInt(neuerWertText.getText());
-			HauptFenster.shopVerwaltung.mengeAendern(artikel.getArtikelNummer(), -auslagern, HauptFenster.benutzer);
-			//HauptFenster.shopVerwaltung.lagerEreignisEinfuegen(0, HauptFenster.benutzer, artikel, auslagern);
+			if(artikel.getArtikelBestand() < auslagern){
+				JOptionPane dialog = new JOptionPane();
+				JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, "Es ist nicht genug auf Lager.", "Error", JOptionPane.ERROR_MESSAGE);
+				dialog.setVisible(true);
+				return;
+			} else {
+				HauptFenster.shopVerwaltung.mengeAendern(artikel.getArtikelNummer(), -auslagern, HauptFenster.benutzer);
+			}
 		}catch(NumberFormatException e){
 			JOptionPane dialog = new JOptionPane();
 			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, "Bitte geben Sie eine Zahl ein.", "Error", JOptionPane.ERROR_MESSAGE);

@@ -27,7 +27,6 @@ import Valueobjects.Artikel;
 import Valueobjects.Kunde;
 import Valueobjects.Mitarbeiter;
 import exceptions.ArtikelNichtGefundenException;
-import exceptions.BereitsVorhandenException;
 import exceptions.EinlagernException;
 
 /**

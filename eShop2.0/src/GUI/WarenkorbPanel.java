@@ -18,7 +18,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import Valueobjects.Kunde;
 import Valueobjects.Rechnung;
-import exceptions.BereitsVorhandenException;
 import exceptions.NichtGenugAufLagerException;
 import exceptions.WarenkorbLeerException;
 
@@ -79,11 +78,6 @@ public class WarenkorbPanel extends JPanel{
 		centerPanel.add(scrollPane);
 		this.add(centerPanel, BorderLayout.CENTER);
 	}
-	
-	//TODO 
-	//public void addArtikel(){
-		//this.warenkorbTabelle.
-	//}
 	
 	private void eastPanelErzeugen(){
 		//die Komponenten des EastPanels erzeugen:

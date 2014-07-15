@@ -230,19 +230,9 @@ public class RegistrierenFenster extends JDialog {
 		}
 		
 		HauptFenster.shopVerwaltung.fuegeUserEin(benutzerName, kennwort, anrede, vorName, nachName, strasse, plz, stadt);
-
-		//speichern:
-		/*try {
-			HauptFenster.shopVerwaltung.kundenSpeichern();
-		} catch (KonnteNichtSpeichernException e) {
-			JOptionPane dialog = new JOptionPane();
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			dialog.setVisible(true);
-		}*/
 		
 		//teilt dem Kunden bei Erfolg seine neue ID mit:
 		JOptionPane dialog = new JOptionPane();
-		//TODO: benutzername
 		JOptionPane.showMessageDialog(RegistrierenFenster.this, "Sie können sich nun mit dem Namen " + benutzerName + " und dem von Ihnen gewählten Passwort anmelden.", "Kunde angelegt", JOptionPane.INFORMATION_MESSAGE);
 		dialog.setVisible(true);
 		this.dispose();

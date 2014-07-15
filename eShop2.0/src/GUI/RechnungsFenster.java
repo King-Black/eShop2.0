@@ -42,7 +42,7 @@ public class RechnungsFenster extends JDialog {
 		rechnungText.setWrapStyleWord(true);
 		rechnungText.setOpaque(false);
 		rechnungText.setFont(new JLabel().getFont());
-		//rechnungText.setText(rechnung.toStringGui());
+		rechnungText.setText(rechnung.printRechnung());
 		
 		this.add(rechnungText);
 	}
