@@ -21,6 +21,9 @@ public class Mitarbeiter extends User {
 		
 	}
 	
+	/**
+	 * Die Methode gibt den Mitarbeiter als String zurück.
+	 */
 	public String toString() {
 		return ("Mitarbeiter Nr: " + nr + " | " + "Benutzername: " + name + " | Anrede: " + anrede + " | Name: " + vorName + " " + nachName);
 	}

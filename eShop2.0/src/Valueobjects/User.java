@@ -34,10 +34,6 @@ public class User {
 
 	}
 	
-	public String toString() {
-		return null;
-	}
-	
 	/**
 	 * Die Methode gibt den Benutzernamen des Usersn zurück.
 	 * @return Gibt Benutzername des Users zurück.
@@ -53,6 +49,7 @@ public class User {
 	public void setName(String name){
 		this.name = name;
 	}
+	
 	/**
 	 * Die Methode gibt die Usernummer wieder.
 	 * @return Gibt Nummer des Users wieder.
@@ -101,32 +98,32 @@ public class User {
 	}
 	
 	/**
-	 * Die Methode gibt den Nachnamen der Person zurück.
-	 * @return Gibt den Nachnamen der Person zurück.
+	 * Die Methode gibt den Nachnamen des Users zurück.
+	 * @return Gibt den Nachnamen des Users zurück.
 	 */
 	public String getNachName(){
 		return this.nachName;
 	}
 	
 	/**
-	 * Die Methode setzt den Nachname der Person.
-	 * @param nachName Der Nachname, den die Person erhalten soll.
+	 * Die Methode setzt den Nachname des Users.
+	 * @param nachName Der Nachname, den der User erhalten soll.
 	 */
 	public void setNachName(String nachName){
 		this.nachName = nachName;
 	}
 	
 	/**
-	 * Die Methode gibt das Passwort der Person zurück.
-	 * @return Gibt das Passwort der Person zurück.
+	 * Die Methode gibt das Passwort des Users zurück.
+	 * @return Gibt das Passwort des Users zurück.
 	 */
 	public String getPasswort(){
 		return this.passwort;
 	}
 	
 	/**
-	 * Die Methode setzt das Passwort der Person.
-	 * @param kennwort Das Passwort der Person.
+	 * Die Methode setzt das Passwort des Users.
+	 * @param kennwort Das Passwort des Users.
 	 */
 	public void setPasswort(String passwort){
 		this.passwort = passwort;

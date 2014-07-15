@@ -14,7 +14,13 @@ import exceptions.WarenkorbLeerException;
 public class Warenkorb {
 
 	private HashMap<Artikel, Integer> warenkorb = new HashMap<Artikel, Integer>();
-	
+/**
+ * Die Methode fügt Artikel zum Warenkorb hinzu und prüft ob die geünschte Menge noch ausreichend auf Lager ist.	
+ * @param a Artikel der hinzugefügt werden soll.
+ * @param gewuenschteMenge Menge die zum Warenkorb hinzugefügt wird.
+ * @param mengeNochDa Bestand des Artikels.
+ * @throws NichtGenugAufLagerException wird geworfen, wenn nicht ausreichend auf Lager ist.
+ */
 	public void artikelHinzufuegen(Artikel a, int gewuenschteMenge, int mengeNochDa) throws NichtGenugAufLagerException{
 		// Wenn Artikel schon im Warenkorb vorhanden dann Menge erweitern
 		if (warenkorb.containsKey(a)) { // Warenkorb hat hier nichtr den gewï¿½nschten artikel drin
@@ -23,7 +29,6 @@ public class Warenkorb {
 				System.out.println("Artikel im Warenkorb");
 				warenkorb.put(a, alteMenge + gewuenschteMenge);	
 			} else{
-				//exception artikelbestand reicht nicht
 				NichtGenugAufLagerException e = new NichtGenugAufLagerException(a);
 				throw e;
 			}
@@ -38,12 +43,10 @@ public class Warenkorb {
 	 * @param a Gibt den Artikel wieder der entfernt wurde.
 	 * @throws WarenkorbLeerException wird geworfen, wenn kein Artikel zum löschen im WK ist.
 	 */
-	//Artikel aus Warenkorb entfernen
 	public void artikelEntfernen(Artikel a) throws WarenkorbLeerException{
 		if(warenkorb.containsKey(a)) {
 			warenkorb.remove(a);
 		} else{
-			//exception warenkorb ist leer
 			WarenkorbLeerException e = new WarenkorbLeerException();
 			throw e;
 		}
@@ -53,12 +56,10 @@ public class Warenkorb {
 	 * Eine Methode zum leere des Warenkorbs.
 	 * @throws WarenkorbLeerException wird geworfen wenn kein Artikel im Warenkorb zum löschen ist.
 	 */
-	//Warenkorb leeren
 	public void leeren() throws WarenkorbLeerException{
 		if(!warenkorb.isEmpty()){
 			warenkorb.clear();
 		} else {
-			//exception warenkorb ist leer
 			WarenkorbLeerException e = new WarenkorbLeerException();
 			throw e;
 		}
@@ -71,6 +72,10 @@ public class Warenkorb {
 		return warenkorb;
 	}
 	
+	/**
+	 * Die Methode setzt den Warenkorb.
+	 * @param w Setzt den Warenkorb.
+	 */
 	public void setWarenkorb(HashMap<Artikel, Integer> w) {
 		warenkorb = w;
 	}

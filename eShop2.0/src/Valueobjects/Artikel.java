@@ -8,11 +8,9 @@ package Valueobjects;
 
 public class Artikel {
 	
-	//private static final String ArtikelBeschreibung = null;
 	private int artikelNummer;
 	private String artikelName;
 	private int menge;
-	//private String beschreibung;
 	private double preis;
 	
 	/**
@@ -29,6 +27,9 @@ public class Artikel {
 		this.preis = preis;	
 	}
 	
+	/**
+	 * Die Methode gibt ein Artikel als String zurück.
+	 */
 	public String toString() {
 		return ("Nr: " + artikelNummer + " | Titel: " + artikelName + " | Anzahl: " + menge + " | Einzelpreis: " + preis);
 	}
@@ -42,7 +43,7 @@ public class Artikel {
 	}
 	
 	/**
-	 * DIe Methode setzt die Artikelnummer des Artikels.
+	 * Die Methode setzt die Artikelnummer des Artikels.
 	 * @param artikelNummer Artikelnummer, die der Artikel später bekommt.
 	 */
 	public void setArtikelNummer(int artikelNummer){
@@ -66,20 +67,8 @@ public class Artikel {
 	}
 	
 	/**
-	 * Die Methode gibt dem Artikel eine Beschreibung.
-	 * @return Gibt Artikel eine Beschreibung.
-	 */
-	public String getBeschreibung(){
-		return null;
-	}
-	/*
-	public void setBeschreibung(String beschreibung){
-		this.beschreibung = beschreibung;
-	}*/
-	
-	/**
-	 * Die Methode gibt dem Artikel einen Preis.
-	 * @return Gibt Artikel einen Preis.
+	 * Die Methode gibt den Preis des Artikels zurück.
+	 * @return Gibt Preis des Artikels zurück.
 	 */
 	public double getPreis(){
 		return this.preis;

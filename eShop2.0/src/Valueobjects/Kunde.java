@@ -57,7 +57,7 @@ public class Kunde extends User {
 	}
 	
 	/**
-	 * Die Methode gibt die Strasse des Kunden zurück
+	 * Die Methode gibt die Strasse des Kunden zurück.
 	 * @return Gibt Strasse des kunden zurück.
 	 */
 	public String getStrasse() {

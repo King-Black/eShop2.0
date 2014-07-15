@@ -15,6 +15,7 @@ public class Rechnung {
 	private Warenkorb warenkorb;
 	private Date datum;
 	private double gesamtpreis;
+	private HashMap<Artikel, Integer> wkorb;
 	
 	/**
 	 * Initalisiert ein Rechnungsobjekt.
@@ -29,7 +30,7 @@ public class Rechnung {
 				"Kunde: " + kunde.getVorName() + kunde.getNachName() +
 				" | Datum: " + datum);
 		this.warenkorb = warenkorb;
-		HashMap<Artikel, Integer> wkorb = warenkorb.getInhalt();
+		this.wkorb = warenkorb.getInhalt();
 		double gesamtpreis = 0;
 		for (Artikel a : wkorb.keySet()) {
 			System.out.println(a.getArtikelName() + " | Anzahl: " + wkorb.get(a) + " | Einzelpreis: " + a.getPreis() + " | Gesamtpreis: " + wkorb.get(a)*a.getPreis());
@@ -39,26 +40,22 @@ public class Rechnung {
 		this.gesamtpreis = gesamtpreis;
 	}
 	
-	public String getAnrede() {		
-		return kunde.getAnrede();
-	}
-	public String getVorName() {		
-		return kunde.getVorName();
-	}
-	public String getNachName() {		
-		return kunde.getNachName();
-	}
-	public String getAdresse() {		
-		return kunde.getAdresse();
-	}
-	public Date getDatum() {
-		return this.datum;
-	}
-	public double getGesamtbetrag() {
-		return this.gesamtpreis;
-	}
-	public Warenkorb getWarenkorb(){
-		return this.warenkorb;
+	/**
+	 * Die Methode gibt das rechnungsfenster in der Gui aus.
+	 * @return Gibt das rechnungsfenster in der Gui aus.
+	 */
+	public String printRechnung() { 
+		String str = ""; 
+		str += "Rechnung\n\n"; 
+		str += "Kunde: \t" + kunde.getVorName() + " " + kunde.getNachName() + "\n"; 
+		str += "Datum: \t" + datum + "\n\n"; 
+		str += "gekaufte Artikel: \n"; 
+		for (Artikel a : wkorb.keySet()) { 
+			str += a.getArtikelName() + " | Anzahl: " + wkorb.get(a) + " | Einzelpreis: " + a.getPreis() + " | Gesamtpreis: " + wkorb.get(a)*a.getPreis() + "\n"; 
+			gesamtpreis = gesamtpreis + wkorb.get(a)*a.getPreis(); 
+		} 
+		str += "Gesamtpreis: \t" + gesamtpreis; 
+		return str; 
 	}
 	
 }
