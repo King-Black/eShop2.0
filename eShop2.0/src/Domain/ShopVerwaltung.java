@@ -201,8 +201,9 @@ public class ShopVerwaltung {
 	 * @param anzahl Menge die ein-/ausgelagert werden soll.
 	 * @param akteur Der User der an Aktion beteiligt ist.
 	 * @throws ArtikelNichtGefundenException wird geworfen, wenn der Artikel nicht gefunden wurde.
+	 * @throws ArtikelNurInEinheitenVerfuegbarException 
 	 */
-	public void mengeAendern(int nummer, int anzahl, User akteur) throws ArtikelNichtGefundenException{
+	public void mengeAendern(int nummer, int anzahl, User akteur) throws ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{
 		Artikel derWars = artVer.findArtikelByNumber(nummer);
 		if (derWars != null) {
 			artVer.setArtikelMenge(nummer, anzahl);		
@@ -357,8 +358,10 @@ public class ShopVerwaltung {
 	 * @return Gibt die Rechnung zurück.
 	 * @throws NichtGenugAufLagerException wird geworfen, wenn nicht genug Artikel auf Lager sind.
 	 * @throws WarenkorbLeerException wird geworfen, wenn der WK leer ist.
+	 * @throws ArtikelNurInEinheitenVerfuegbarException 
+	 * @throws ArtikelNichtGefundenException 
 	 */
-	public Rechnung kaufen(Kunde k) throws NichtGenugAufLagerException, WarenkorbLeerException{
+	public Rechnung kaufen(Kunde k) throws NichtGenugAufLagerException, WarenkorbLeerException, ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{
 		HashMap<Artikel, Integer> warenkorb = k.getWarenkorb().getInhalt();
 		System.out.println(warenkorb);
 		if(warenkorb.isEmpty()){
