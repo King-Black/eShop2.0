@@ -137,16 +137,6 @@ public class WarenkorbPanel extends JPanel{
 						return;
 					}
 				}
-					
-				//speichern:
-			/*	try {
-					HauptFenster.shopVerwaltung.artikelSpeichern();
-					HauptFenster.shopVerwaltung.lagerEreignisseSpeichern();
-				} catch (KonnteNichtSpeichernException e) {
-					JOptionPane dialog2 = new JOptionPane();
-					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-					dialog2.setVisible(true);
-				}*/
 			}
 		};
 		return kaufen;

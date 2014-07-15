@@ -32,30 +32,30 @@ public class Rechnung {
 				" | Datum: " + datum);
 		this.warenkorb = warenkorb;
 		this.wkorb = warenkorb.getInhalt();
-		double gesamtpreis = 0;
+		this.gesamtpreis = 0;
 		for (Artikel a : wkorb.keySet()) {
 			System.out.println(a.getArtikelName() + " | Anzahl: " + wkorb.get(a) + " | Einzelpreis: " + a.getPreis() + " | Gesamtpreis: " + wkorb.get(a)*a.getPreis());
 			gesamtpreis = gesamtpreis + wkorb.get(a)*a.getPreis();			
 		}
 		System.out.println("Gesamtpreis: " + gesamtpreis);
-		this.gesamtpreis = gesamtpreis;
 	}
 	
 	/**
 	 * Die Methode gibt das rechnungsfenster in der Gui aus.
 	 * @return Gibt das rechnungsfenster in der Gui aus.
 	 */
-	public String printRechnung() { 
+	public String printRechnung() {
+		this.gesamtpreis = 0;
 		String str = ""; 
 		str += "Rechnung\n\n"; 
 		str += "Kunde: \t" + kunde.getVorName() + " " + kunde.getNachName() + "\n"; 
 		str += "Datum: \t" + datum + "\n\n"; 
 		str += "gekaufte Artikel: \n"; 
-		for (Artikel a : wkorb.keySet()) { 
-			str += a.getArtikelName() + " | Anzahl: " + wkorb.get(a) + " | Einzelpreis: " + a.getPreis() + " | Gesamtpreis: " + wkorb.get(a)*a.getPreis() + "\n"; 
+		for (Artikel a : wkorb.keySet()) {
+			str += a.getArtikelName() + " | Anzahl: " + wkorb.get(a) + " | Einzelpreis: " + a.getPreis() + " | Gesamtpreis: " + wkorb.get(a)*a.getPreis() + "\n";
 			gesamtpreis = gesamtpreis + wkorb.get(a)*a.getPreis(); 
 		} 
-		str += "Gesamtpreis: \t" + gesamtpreis; 
+		str += "Rechnungsbetrag: \t" + gesamtpreis; 
 		return str; 
 	}
 	

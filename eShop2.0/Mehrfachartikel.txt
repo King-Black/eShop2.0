@@ -7,7 +7,7 @@ Bier
 Socken
 2
 5.0
-30
+20
 2
 2.5
 Tisch

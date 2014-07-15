@@ -140,16 +140,6 @@ public class ArtikelVerwaltenFenster extends JDialog {
 			dialog.setVisible(true);
 			return;
 		}
-
-		//speichern:
-		/*try {
-			HauptFenster.shopVerwaltung.artikelSpeichern();
-			HauptFenster.shopVerwaltung.lagerEreignisseSpeichern();
-		} catch (KonnteNichtSpeichernException e) {
-			JOptionPane dialog = new JOptionPane();
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			dialog.setVisible(true);
-		}*/
 		
 		//Wird bei erfolgreichem Auslagern angezeigt:
 		JOptionPane dialog = new JOptionPane();
@@ -165,7 +155,6 @@ public class ArtikelVerwaltenFenster extends JDialog {
 		try{
 			int einlagern = Integer.parseInt(neuerWertText.getText());
 			HauptFenster.shopVerwaltung.mengeAendern(artikel.getArtikelNummer(), einlagern, HauptFenster.benutzer);
-			//HauptFenster.shopVerwaltung.lagerEreignisEinfuegen(1, HauptFenster.benutzer, artikel, einlagern);
 		}catch(NumberFormatException e){
 			JOptionPane dialog = new JOptionPane();
 			JOptionPane.showMessageDialog(ArtikelVerwaltenFenster.this, "Bitte geben Sie eine Zahl ein.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -177,16 +166,6 @@ public class ArtikelVerwaltenFenster extends JDialog {
 			dialog.setVisible(true);
 			return;
 		}
-
-		//speichern:
-		/*try {
-			HauptFenster.shopVerwaltung.artikelSpeichern();
-			HauptFenster.shopVerwaltung.lagerEreignisseSpeichern();
-		} catch (KonnteNichtSpeichernException e) {
-			JOptionPane dialog = new JOptionPane();
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			dialog.setVisible(true);
-		}*/
 		
 		//Wird bei erfolgreichem Einlagern angezeigt:
 		JOptionPane dialog = new JOptionPane();
@@ -208,15 +187,6 @@ public class ArtikelVerwaltenFenster extends JDialog {
 			dialog.setVisible(true);
 			return;
 		}
-
-		//speichern:
-		/*try {
-			HauptFenster.shopVerwaltung.artikelSpeichern();
-		} catch (KonnteNichtSpeichernException e) {
-			JOptionPane dialog = new JOptionPane();
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			dialog.setVisible(true);
-		}*/
 		
 		//Wird bei erfolgreichem Preis ändern angezeigt:
 		JOptionPane dialog = new JOptionPane();

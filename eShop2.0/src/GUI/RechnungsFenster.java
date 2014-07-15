@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Dimension;
 import java.awt.Window;
 
 import javax.swing.JDialog;
@@ -28,7 +29,7 @@ public class RechnungsFenster extends JDialog {
 		this.rechnung = rechnung;
 		
 		this.initialisieren();
-		this.pack();
+		this.setSize(new Dimension(400, 200));
 	}
 	
 	/**
