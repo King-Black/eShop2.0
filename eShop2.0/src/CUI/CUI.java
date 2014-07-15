@@ -12,6 +12,11 @@ import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 import exceptions.BereitsEingeloggtException;
 import exceptions.KennwortFalschException;
 
+
+/**
+ * CUI
+ * Die CUI das Command U Interface, welches in der Kommandozeile alles ausgibt, was sie über die Shopverwaltung erhält.
+ */
 public class CUI implements Runnable {
 	
 	private static  ShopVerwaltung shopVer;
@@ -24,22 +29,23 @@ public class CUI implements Runnable {
 		aktuellerBenutzer = null;
 		in = new BufferedReader(new InputStreamReader(System.in));
 	}
+	
 	public void run() {
 		try {
-//			shopVer.ladeDaten();
 			gibMenue();
 			shopVer.speichereDaten();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
 	/**
-	 * Die Methode ptüft, welches Menü ausgegeben werden soll.
+	 * Die Methode ptüft, ob ein Benutzer eingeloggt ist und gibt dementsprechend ein Menü aus.
 	 * @throws IOException
 	 * @throws ArtikelNichtGefundenException
 	 * @throws ArtikelNurInEinheitenVerfuegbarException
 	 */
-	//Wenn Benutzer nicht eingeloggt ist, wir "menueNichtEingeloggt" ausgeführt. Solange nicht q für Quit eingegeben wird.
+	//Wenn Benutzer nicht eingeloggt ist, wird "menueNichtEingeloggt" ausgeführt. Solange nicht q für Quit eingegeben wird.
 	private void gibMenue() throws IOException, ArtikelNichtGefundenException, ArtikelNurInEinheitenVerfuegbarException{
 		do{
 			if(aktuellerBenutzer != null){
@@ -85,8 +91,9 @@ public class CUI implements Runnable {
 			System.exit(0);
 		}
 	}
+	
 	/**
-	 * Diese Methode gibt das Menü aus, dass erscheint wenn ein Kunde eingeloggt ist.
+	 * Diese Methode gibt das Kundenmenü aus, wenn sich ein Kunde einloggt.
 	 * @throws IOException
 	 * @throws ArtikelNichtGefundenException
 	 * @throws ArtikelNurInEinheitenVerfuegbarException
@@ -107,6 +114,7 @@ public class CUI implements Runnable {
 		} while (!eingabe.equals("a"));
 		aktuellerBenutzer = null;
 	}
+	
 	/**
 	 * Diese Methode gibt Menü zum registrieren eines Kunden aus.
 	 * @throws IOException
@@ -137,12 +145,14 @@ public class CUI implements Runnable {
 		String ort = liesEingabe();
 		CUI.shopVer.fuegeUserEin(name, passwort, anrede, vorName, nachName, adresse, plz, ort);
 	}
+	
 	/**
-	 * Methode gibt eine Artikelliste aus die sie in der Shopverwaltung aufruft.
+	 * Methode gibt die Artikelliste aus die sie über Shopverwaltung aufruft.
 	 */
 	private void gibArtikellisteAus() {
 		shopVer.gibArtikellisteAus();
 	}
+	
 	/**
 	 * Die Methode gibt den eingeloggten benutzer mit Namen und PW wieder.
 	 * @param name
@@ -154,6 +164,7 @@ public class CUI implements Runnable {
 	private User userLogin(String name, String passwort) throws KennwortFalschException, BereitsEingeloggtException{
 		return shopVer.userLogin(name, passwort);
 	}
+	
 	/**
 	 * Diese Methode gibt das Menü aus wenn der User als Mitarbeiter eingeloggt ist.
 	 * @throws IOException
@@ -204,6 +215,7 @@ public class CUI implements Runnable {
 			default: System.out.println("Falsche Eingabe.");
 		}
 	}
+	
 	/**
 	 * Diese Methode ist zum löschen der Artikel.
 	 * @throws IOException
@@ -216,8 +228,9 @@ public class CUI implements Runnable {
 		int artID = Integer.parseInt(liesEingabe());
 		shopVer.loescheArtikel(artID, aktuellerBenutzer);
 	}
+	
 	/**
-	 * Diese Methode ist zum löschen von Mitarebitern gedacht.
+	 * Diese Methode ist zum löschen von Mitarbeitern gedacht.
 	 * @throws IOException
 	 */
 	//Methode zum löschen eines Mitarbeiters
@@ -235,6 +248,7 @@ public class CUI implements Runnable {
 		System.out.println("Auf Wiedersehen!");
 		menueNichtEingeloggt();
 	}
+	
 	/**
 	 * Diese Methode wird zum erstellen eines Mitarbeiters aufgerufen.
 	 * @throws IOException
@@ -264,6 +278,7 @@ public class CUI implements Runnable {
 			System.out.println(e);				
 		}
 	}
+	
 	/**
 	 * Diese Methode dient zum ändern der Artikelmenge in die Artikelliste.
 	 * @throws IOException
@@ -286,6 +301,7 @@ public class CUI implements Runnable {
 		}
 		System.out.println("Artikel wurden hinzugefuegt!");
 	}
+	
 	/**
 	 * Diese Methode wird zum Anelgen von neuen Artikeln aufgerufen.
 	 * @throws IOException
@@ -326,6 +342,7 @@ public class CUI implements Runnable {
 			System.out.println(e);
 		}
 	}
+	
 	/**
 	 * Diese Methode wird aufgerufen wenn ein Kunde eingeloggt ist und zeigt das Kundenmenü.
 	 * @throws IOException
@@ -416,20 +433,22 @@ public class CUI implements Runnable {
 		}
 		
 	}
+	
 	/**
 	 * Diese Methode erstellt eine Rechnung aus der Shopverwaltung.
 	 */
-	//Methode ruft on Shopverwaltung die Methode rechnungErstellen auf
+	//Methode ruft von Shopverwaltung die Methode rechnungErstellen auf
 	public void zurKasse(){
 		try {
-			shopVer.rechnungErstellen((Kunde)aktuellerBenutzer);
+			shopVer.kaufen((Kunde) aktuellerBenutzer);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
+	
 	/**
 	 * Diese Methode liest Eingaben ein.
-	 * @return
+	 * @return Eingaben
 	 * @throws IOException
 	 */
 	//Methode zum einlesen der Eingaben

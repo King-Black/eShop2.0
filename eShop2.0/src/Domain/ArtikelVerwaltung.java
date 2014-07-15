@@ -15,6 +15,13 @@ import Valueobjects.User;
 import exceptions.ArtikelNichtGefundenException;
 import exceptions.EinlagernException;
 
+
+/**
+ * Artikelverwaltung
+ * Zur Verwaltung aller Methoden, die etwas mit Artikeln zu tun haben, wie z.B. einfügen, löschen etc.
+ * 
+ */
+
 public class ArtikelVerwaltung {
 	 
 	private List<Artikel> artikelBestand = new Vector<Artikel>();
@@ -24,6 +31,7 @@ public class ArtikelVerwaltung {
 	private int bestimmeNr() {
 		return ++laufnr;
 	}
+	
 	
 	public ArtikelVerwaltung(){
 		try {
@@ -92,6 +100,12 @@ public class ArtikelVerwaltung {
 		//return null;
 	}
 	
+	
+	/**
+	 * Methode zum ändern der Artikelmenge
+	 * @param nummer Artikel ID
+	 * @param anzahl
+	 */
 	public void setArtikelMenge(int nummer, int anzahl){
 		Iterator<Artikel> it = artikelBestand.iterator();
 		while  (it.hasNext()) {
@@ -102,11 +116,16 @@ public class ArtikelVerwaltung {
 		}
 	}
 	
+	/**
+	 * Methode, die die Artikelliste übergibt.
+	 * @return
+	 */
 	public List<Artikel> getArtikelBestand() {
 		return artikelBestand;
 	}
+	
 	/**
-	 * Mathode zum löschen von Artikeln.
+	 * Methode zum löschen von Artikeln.
 	 * @param a
 	 * @throws ArtikelNichtGefundenException wird geworfen, wenn es den zu löschenden Artikel gar nicht gibt.
 	 */
@@ -121,6 +140,9 @@ public class ArtikelVerwaltung {
 		}
 	}
 	
+	/**
+	 * Methode zum ausgeben der Artikelliste.
+	 */
 	public void gibArtikellisteAus(){		
 		if(artikelBestand.isEmpty()) {
 			System.out.println("Liste ist leer.");
@@ -137,6 +159,7 @@ public class ArtikelVerwaltung {
 		}
 		System.out.println(" ");
 	}
+	
 	/**
 	 * Methode findet Artikel anhand der Artikelnummer.
 	 * @param artID

@@ -27,6 +27,7 @@ import Valueobjects.Artikel;
 import Valueobjects.Kunde;
 import Valueobjects.Mitarbeiter;
 import exceptions.ArtikelNichtGefundenException;
+import exceptions.BereitsVorhandenException;
 import exceptions.EinlagernException;
 
 /**
@@ -367,7 +368,7 @@ public class ArtikelPanel extends JPanel {
 						HauptFenster.shopVerwaltung.fuegeArtikelEin(name, menge, stueckPreis);
 					}
 					//HauptFenster.shopVerwaltung.lagerEreignisEinfuegen(1, HauptFenster.benutzer, a, menge);
-				} catch (EinlagernException e) {
+				} catch (EinlagernException | BereitsVorhandenException e) {
 					JOptionPane dialog = new JOptionPane();
 					JOptionPane.showMessageDialog(ArtikelPanel.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					dialog.setVisible(true);

@@ -17,15 +17,29 @@ import Valueobjects.Artikel;
 import Valueobjects.Ereignis;
 import Valueobjects.User;
 
+/**
+ * Ereignisverwaltung
+ * Verwaltungsklasse, die alle Ereignismethoden verwaltet.
+ */
 public class EreignisVerwaltung {
 	
 	private List<Ereignis> protokoll = new Vector<Ereignis>();
 
+	/**
+	 * Methode, die ein Ereignis protokolliert
+	 * @param derWars Artikel
+	 * @param artikelBestand Menge
+	 * @param aktion
+	 * @param nutzer
+	 */
 	public void ereignisEinfuegen(Artikel derWars, int artikelBestand, String aktion, User nutzer) {
 		Ereignis ereignis = new Ereignis(derWars, artikelBestand, aktion, nutzer);
 		protokoll.add(ereignis);
 	}
 
+	/**
+	 * Methode, die die Liste aller Ereignisse ausgibt.
+	 */
 	public void gibProtokollAus() {
 		if(protokoll.isEmpty()) {
 			System.out.println("Liste ist leer.");
@@ -39,6 +53,11 @@ public class EreignisVerwaltung {
 		System.out.println(" ");
 	}
 	
+	/**
+	 * Methode, die die Liste sortiert nach Artikeln und Tagen.
+	 * @param a
+	 * @return sortierte liste
+	 */
 	public List<Ereignis> gibEreignisseNachArtikelUndTagen(Artikel a) {
 		// anzahl tage wird nicht benutzt
 			List<Ereignis> liste = new Vector<Ereignis>();
@@ -66,11 +85,15 @@ public class EreignisVerwaltung {
 		
 	}
 	
+	/**
+	 * Methode, die die Protokollliste übergibt
+	 * @return Protokollliste
+	 */
 	public List<Ereignis> gibProtokollListe() {
 		return protokoll;
 	}
 
-	public void ladeDaten() throws FileNotFoundException, IOException, ClassNotFoundException{
+	/*public void ladeDaten() throws FileNotFoundException, IOException, ClassNotFoundException{
 		int count = 0;
 		ObjectInputStream in = new ObjectInputStream(new FileInputStream("Ereignisse.txt"));
 		protokoll.clear();
@@ -117,6 +140,6 @@ public class EreignisVerwaltung {
 		System.out.println(count + " Ereignisse gespeichert.");
 		// muss aufgerufen werden, bevor der datenstrom zur eingabe verwendet werden soll
 		out.close();
-	}
+	}*/
 	
 }
