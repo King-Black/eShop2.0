@@ -344,8 +344,8 @@ public class ShopVerwaltung {
 	 * @throws IOException wenn es einen fehler beim schreiben gab.
 	 */
 	public void speichereDaten() throws FileNotFoundException, IOException {
-		artVer.schreibeDatenMehrfachartikel();
-//		artVer.schreibeDatenArtikel();
+//		artVer.schreibeDatenMehrfachartikel();
+		artVer.schreibeDatenArtikel();
 		userVer.schreibeDatenMitarbeiter();
 		userVer.schreibeDatenKunden();
 //		erVer.schreibeDaten();

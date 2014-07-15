@@ -33,8 +33,8 @@ public class ArtikelVerwaltung {
 	
 	public ArtikelVerwaltung(){
 		try {
-//			this.ladeDatenArtikel();
-			this.ladeDatenMehrfachArtikel();
+			this.ladeDatenArtikel();
+//			this.ladeDatenMehrfachArtikel();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -176,7 +176,7 @@ public class ArtikelVerwaltung {
 	 * @throws FileNotFoundException wird geworfen, wenn Datei nicht gefunden wurde.
 	 * @throws IOException wenn es einen fehler beim schreiben gab.
 	 */
-	public void schreibeDatenMehrfachartikel() throws FileNotFoundException, IOException {		
+/*	public void schreibeDatenMehrfachartikel() throws FileNotFoundException, IOException {		
 		pm.openForWriting("Mehrfachartikel.txt");
 		if (!artikelBestand.isEmpty()) {
 			for (Artikel artikel : artikelBestand) {
@@ -185,14 +185,14 @@ public class ArtikelVerwaltung {
 			}
 		}
 		pm.close();
-	}
+	}*/
 	
 	/**
 	 * Methode speichert alle Artikel in einer Textdatei.
 	 * @throws FileNotFoundException wird geworfen, wenn Datei nicht gefunden wurde.
 	 * @throws IOException wenn es einen fehler beim schreiben gab.
 	 */
-/*	public void schreibeDatenArtikel() throws IOException  {
+	public void schreibeDatenArtikel() throws IOException  {
 		pm.openForWriting("Artikel.txt");
 		if (!artikelBestand.isEmpty()) {
 			for (Artikel artikel : artikelBestand) {
@@ -201,14 +201,15 @@ public class ArtikelVerwaltung {
 			}
 		}
 		pm.close();
-	}*/
+	}
+	
 	/**
 	 * Methode läd alle Artikel aus einer Textdatei.
 	 * @throws FileNotFoundException wird geworfen, wenn Datei nicht gefunden wurde.
 	 * @throws IOException wenn es einen fehler beim lesen gab.
 	 * @throws ClassNotFoundException
 	 */
-/*	public void ladeDatenArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
+	public void ladeDatenArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
 		pm.openForReading("Artikel.txt");
 		Artikel a;
 		do {
@@ -220,7 +221,7 @@ public class ArtikelVerwaltung {
 		pm.close();
 		this.laufnr = this.artikelBestand.get(this.artikelBestand.size()-1).getArtikelNummer();
 			
-	}*/
+	}
 	
 	/**
 	 * Methode läd alle Mehrfachartikel aus einer Textdatei.
@@ -228,7 +229,7 @@ public class ArtikelVerwaltung {
 	 * @throws IOException wenn es einen fehler beim lesen gab.
 	 * @throws ClassNotFoundException
 	 */
-	public void ladeDatenMehrfachArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
+/*	public void ladeDatenMehrfachArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
 		pm.openForReading("Mehrfachartikel.txt");
 		MehrfachArtikel a;
 		do {
@@ -240,6 +241,6 @@ public class ArtikelVerwaltung {
 		pm.close();
 		this.laufnr = this.artikelBestand.get(this.artikelBestand.size()-1).getArtikelNummer();
 			
-	}
+	}*/
 	
 }
