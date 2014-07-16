@@ -28,7 +28,7 @@ public class MehrfachArtikel extends Artikel {
 	 * Die Methode gibt die Mehrfahartikel als String zurück.
 	 */
 	public String toString() {
-		return (super.toString() + " Packungsgroesse: " + packungsGroesse);
+		return (super.toString() + " Packungsgroesse: " + packungsGroesse + " Stueckpreis: " + stueckPreis);
 	}
 	
 	/**

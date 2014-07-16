@@ -8,10 +8,10 @@ package Valueobjects;
 
 public class Artikel {
 	
-	private int artikelNummer;
-	private String artikelName;
-	private int menge;
-	private double preis;
+	protected int artikelNummer;
+	protected String artikelName;
+	protected int menge;
+	protected double preis;
 	
 	/**
 	 * Initalisieren eines Artikelobjets.
@@ -25,13 +25,6 @@ public class Artikel {
 		this.artikelName = artikelName;
 		this.menge = menge;
 		this.preis = preis;	
-	}
-	
-	/**
-	 * Die Methode gibt ein Artikel als String zurück.
-	 */
-	public String toString() {
-		return ("Nr: " + artikelNummer + " | Titel: " + artikelName + " | Anzahl: " + menge + " | Einzelpreis: " + preis);
 	}
 	
 	/**

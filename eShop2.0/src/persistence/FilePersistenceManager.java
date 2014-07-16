@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 
-import Valueobjects.Artikel;
+import Valueobjects.EinArtikel;
 import Valueobjects.Ereignis;
 import Valueobjects.Kunde;
 import Valueobjects.MehrfachArtikel;
@@ -88,7 +88,7 @@ public class FilePersistenceManager implements PersistenceManager {
 	}*/
 	
 	@Override
-	public Artikel ladeArtikel() throws IOException {
+	public EinArtikel ladeEinArtikel() throws IOException {
 		String titel = liesZeile();
 		if (titel == null || titel.length() == 0) {
 			return null;
@@ -96,7 +96,7 @@ public class FilePersistenceManager implements PersistenceManager {
 		int artikelNr = Integer.parseInt(liesZeile());
 		double preis = Double.parseDouble(liesZeile());
 		int menge = Integer.parseInt(liesZeile());		
-		return new Artikel(artikelNr, titel, menge, preis);
+		return new EinArtikel(artikelNr, titel, menge, preis);
 	}
 	
 	public MehrfachArtikel ladeMehrfachArtikel() throws IOException {
@@ -169,7 +169,7 @@ public class FilePersistenceManager implements PersistenceManager {
 	
 	
 	@Override
-	public void speichereArtikel(Artikel a) {
+	public void speichereEinArtikel(EinArtikel a) {
 		schreibeZeile(a.getArtikelName());
 		schreibeZeile(a.getArtikelNummer() + "");
 		schreibeZeile(a.getPreis() + "");

@@ -362,9 +362,9 @@ public class ArtikelPanel extends JPanel {
 				//und wirft ggf. Exceptions:
 				try {
 					if(einheit > 1){
-						HauptFenster.shopVerwaltung.fuegeArtikelEin(name, menge, einheit*stueckPreis, einheit, stueckPreis);
+						HauptFenster.shopVerwaltung.fuegeMehrfachArtikelEin(name, menge, einheit*stueckPreis, einheit, stueckPreis);
 					}else{
-						HauptFenster.shopVerwaltung.fuegeArtikelEin(name, menge, stueckPreis);
+						HauptFenster.shopVerwaltung.fuegeEinArtikelEin(name, menge, stueckPreis);
 					}
 					//HauptFenster.shopVerwaltung.lagerEreignisEinfuegen(1, HauptFenster.benutzer, a, menge);
 				} catch (EinlagernException e) {

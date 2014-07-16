@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import Valueobjects.Artikel;
+import Valueobjects.EinArtikel;
 import Valueobjects.Ereignis;
 import Valueobjects.Kunde;
 import Valueobjects.MehrfachArtikel;
@@ -51,8 +52,8 @@ public class ShopVerwaltung {
 	 * @param d Preis des Artikels.
 	 * @throws EinlagernException wird geworfen, wenn Menge oder Preis kleiner oder gleich 0 sind.
 	 */
-	public void fuegeArtikelEin(String artikelName, int menge, double d) throws EinlagernException{
-		Artikel a = artVer.einfuegen(artikelName, menge, d);
+	public void fuegeEinArtikelEin(String artikelName, int menge, double d) throws EinlagernException{
+		EinArtikel a = artVer.einfuegen(artikelName, menge, d);
 		Date datum = new Date();
 		erVer.ereignisEinfuegen(datum, a, a.getArtikelBestand(), "Neuer Artikel erstellt.", eingeloggterUser);
 	}
@@ -66,7 +67,7 @@ public class ShopVerwaltung {
 	 * @param stueckPreis Stückpreis des Artikels.
 	 * @throws EinlagernException wird geworfen, wenn Menge oder Preis kleiner oder gleich 0 sind.
 	 */
-	public void fuegeArtikelEin(String artikelName, int menge, double d, int packungsGroesse, float stueckPreis) throws EinlagernException{ 
+	public void fuegeMehrfachArtikelEin(String artikelName, int menge, double d, int packungsGroesse, float stueckPreis) throws EinlagernException{ 
 		MehrfachArtikel a = artVer.einfuegen(artikelName, menge, d, packungsGroesse, stueckPreis);
 		Date datum = new Date();
 		erVer.ereignisEinfuegen(datum, a, a.getArtikelBestand(), "Neuer Artikel erstellt.", eingeloggterUser);
@@ -328,8 +329,8 @@ public class ShopVerwaltung {
 	 * @throws IOException wenn es einen fehler beim schreiben gab.
 	 */
 	public void speichereDaten() throws FileNotFoundException, IOException {
-//		artVer.schreibeDatenMehrfachartikel();
-		artVer.schreibeDatenArtikel();
+		artVer.schreibeDatenMehrfachartikel();
+		artVer.schreibeDatenEinArtikel();
 		userVer.schreibeDatenMitarbeiter();
 		userVer.schreibeDatenKunden();
 //		erVer.schreibeDaten();

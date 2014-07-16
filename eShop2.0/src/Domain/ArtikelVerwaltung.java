@@ -9,6 +9,7 @@ import java.util.Vector;
 import persistence.FilePersistenceManager;
 import persistence.PersistenceManager;
 import Valueobjects.Artikel;
+import Valueobjects.EinArtikel;
 import Valueobjects.MehrfachArtikel;
 import exceptions.ArtikelNichtGefundenException;
 import exceptions.EinlagernException;
@@ -33,8 +34,8 @@ public class ArtikelVerwaltung {
 	
 	public ArtikelVerwaltung(){
 		try {
-			this.ladeDatenArtikel();
-//			this.ladeDatenMehrfachArtikel();
+			this.ladeDatenEinArtikel();
+			this.ladeDatenMehrfachArtikel();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -53,13 +54,13 @@ public class ArtikelVerwaltung {
 	 * @return Artikel Gibt den neu erstellten Artikel zurück.
 	 * @throws EinlagernException wird geworfen, wenn Menge oder Preis kleiner oder gleich 0 sind.
 	 */
-	public Artikel einfuegen(String artikelName, int menge, double preis) throws EinlagernException{ 
+	public EinArtikel einfuegen(String artikelName, int menge, double preis) throws EinlagernException{ 
 		if(preis<=0||menge<=0) {
 			EinlagernException e = new EinlagernException();
 			throw e;
 		} else {
 			int artikelNummer = bestimmeNr();
-			Artikel einArtikel = new Artikel(artikelNummer, artikelName, menge, preis);
+			EinArtikel einArtikel = new EinArtikel(artikelNummer, artikelName, menge, preis);
 			artikelBestand.add(einArtikel);
 			return einArtikel;
 		}
@@ -192,12 +193,12 @@ public class ArtikelVerwaltung {
 	 * @throws FileNotFoundException wird geworfen, wenn Datei nicht gefunden wurde.
 	 * @throws IOException wenn es einen fehler beim schreiben gab.
 	 */
-	public void schreibeDatenArtikel() throws IOException  {
+	public void schreibeDatenEinArtikel() throws IOException  {
 		pm.openForWriting("Artikel.txt");
 		if (!artikelBestand.isEmpty()) {
 			for (Artikel artikel : artikelBestand) {
-				if (artikel instanceof Artikel)
-					pm.speichereArtikel((Artikel)artikel);				
+				if (artikel instanceof EinArtikel)
+					pm.speichereEinArtikel((EinArtikel)artikel);				
 			}
 		}
 		pm.close();
@@ -209,11 +210,11 @@ public class ArtikelVerwaltung {
 	 * @throws IOException wenn es einen fehler beim lesen gab.
 	 * @throws ClassNotFoundException
 	 */
-	public void ladeDatenArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
+	public void ladeDatenEinArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
 		pm.openForReading("Artikel.txt");
-		Artikel a;
+		EinArtikel a;
 		do {
-			a = pm.ladeArtikel();
+			a = pm.ladeEinArtikel();
 			if (a != null) {
 				artikelBestand.add(a);
 			}				
@@ -229,7 +230,7 @@ public class ArtikelVerwaltung {
 	 * @throws IOException wenn es einen fehler beim lesen gab.
 	 * @throws ClassNotFoundException
 	 */
-/*	public void ladeDatenMehrfachArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
+	public void ladeDatenMehrfachArtikel() throws FileNotFoundException, IOException, ClassNotFoundException{
 		pm.openForReading("Mehrfachartikel.txt");
 		MehrfachArtikel a;
 		do {
@@ -241,6 +242,6 @@ public class ArtikelVerwaltung {
 		pm.close();
 		this.laufnr = this.artikelBestand.get(this.artikelBestand.size()-1).getArtikelNummer();
 			
-	}*/
+	}
 	
 }

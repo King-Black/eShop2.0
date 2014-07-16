@@ -3,6 +3,7 @@ package persistence;
 import java.io.IOException;
 
 import Valueobjects.Artikel;
+import Valueobjects.EinArtikel;
 import Valueobjects.Ereignis;
 import Valueobjects.Kunde;
 import Valueobjects.MehrfachArtikel;
@@ -23,7 +24,7 @@ public interface PersistenceManager {
 	public boolean close();
 
 	
-	public Artikel ladeArtikel() throws IOException;
+	public EinArtikel ladeEinArtikel() throws IOException;
 	
 	public MehrfachArtikel ladeMehrfachArtikel() throws IOException;
 	
@@ -35,7 +36,7 @@ public interface PersistenceManager {
 	
 	
 	
-	public void speichereArtikel(Artikel a);
+	public void speichereEinArtikel(EinArtikel a);
 	
 	public void speichereMehrfachArtikel (MehrfachArtikel m);
 	

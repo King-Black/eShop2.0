@@ -335,9 +335,9 @@ public class CUI implements Runnable {
 				packungsGroesse = Integer.parseInt(portion);
 				String sPreis = liesEingabe();
 				stueckPreis = Float.parseFloat(sPreis);
-				shopVer.fuegeArtikelEin(artikelName, menge, preis, packungsGroesse, stueckPreis); // mehrfachartikel
+				shopVer.fuegeMehrfachArtikelEin(artikelName, menge, preis, packungsGroesse, stueckPreis); // mehrfachartikel
 			} else if (mehrfach.equals("n")) {
-				shopVer.fuegeArtikelEin(artikelName, menge, preis);
+				shopVer.fuegeEinArtikelEin(artikelName, menge, preis);
 	
 			} else {
 				throw new IOException("Bitte entscheide dich f�r ja oder nein.");
