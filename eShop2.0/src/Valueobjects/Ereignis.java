@@ -21,7 +21,7 @@ public class Ereignis {
 	 * @param aktion Aktion die Ausgeführt wird. (Ein-/Auslagern).
 	 * @param nutzer Nutzer, der das Lagerereignis ausführt.
 	 */
-	public Ereignis(Artikel artikel, int anzahl	, String aktion, User nutzer) {
+	public Ereignis(Date datum, Artikel artikel, int anzahl	, String aktion, User nutzer) {
 		
 		this.datum = new Date();
 		this.artikel = artikel;

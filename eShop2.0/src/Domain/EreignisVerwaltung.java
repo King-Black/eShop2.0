@@ -1,6 +1,7 @@
 package Domain;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
@@ -25,8 +26,8 @@ public class EreignisVerwaltung {
 	 * @param aktion Aktion die Ausgeführt wird. (Ein-/Auslagern).
 	 * @param nutzer Nutzer, der das Lagerereignis ausführt.
 	 */
-	public void ereignisEinfuegen(Artikel derWars, int artikelBestand, String aktion, User nutzer) {
-		Ereignis ereignis = new Ereignis(derWars, artikelBestand, aktion, nutzer);
+	public void ereignisEinfuegen(Date datum, Artikel derWars, int artikelBestand, String aktion, User nutzer) {
+		Ereignis ereignis = new Ereignis(datum, derWars, artikelBestand, aktion, nutzer);
 		protokoll.add(ereignis);
 	}
 

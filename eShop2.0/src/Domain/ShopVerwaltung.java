@@ -53,7 +53,8 @@ public class ShopVerwaltung {
 	 */
 	public void fuegeArtikelEin(String artikelName, int menge, double d) throws EinlagernException{
 		Artikel a = artVer.einfuegen(artikelName, menge, d);
-		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Neuer Artikel erstellt.", eingeloggterUser);
+		Date datum = new Date();
+		erVer.ereignisEinfuegen(datum, a, a.getArtikelBestand(), "Neuer Artikel erstellt.", eingeloggterUser);
 	}
 	
 	/**
@@ -67,7 +68,8 @@ public class ShopVerwaltung {
 	 */
 	public void fuegeArtikelEin(String artikelName, int menge, double d, int packungsGroesse, float stueckPreis) throws EinlagernException{ 
 		MehrfachArtikel a = artVer.einfuegen(artikelName, menge, d, packungsGroesse, stueckPreis);
-		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Neuer Artikel erstellt.", eingeloggterUser);
+		Date datum = new Date();
+		erVer.ereignisEinfuegen(datum, a, a.getArtikelBestand(), "Neuer Artikel erstellt.", eingeloggterUser);
 	}
 	
 	/**
@@ -127,7 +129,8 @@ public class ShopVerwaltung {
 	public Kunde artikelAusWarenkorb(int artID, Kunde akteur) throws ArtikelNichtGefundenException, WarenkorbLeerException, UserNichtGefundenException{	
 		Artikel a = artVer.findArtikelByNumber(artID);
 		Kunde kunde = warkoVer.artikelAusWarenkorb(a, (Kunde)userVer.findUserByNumber(akteur.getNummer()));
-		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Artikel " + a.getArtikelName() + " aus dem Warenkorb entfernt.", eingeloggterUser);
+		Date datum = new Date();
+		erVer.ereignisEinfuegen(datum, a, a.getArtikelBestand(), "Artikel " + a.getArtikelName() + " aus dem Warenkorb entfernt.", eingeloggterUser);
 		return kunde;
 	}
 	
@@ -205,10 +208,10 @@ public class ShopVerwaltung {
 	public void mengeAendern(int nummer, int anzahl, User akteur) throws ArtikelNichtGefundenException{
 		Artikel derWars = artVer.findArtikelByNumber(nummer);
 		if (derWars != null) {
-			artVer.setArtikelMenge(nummer, anzahl);		
-	
+			artVer.setArtikelMenge(nummer, anzahl);	
+			Date datum = new Date();
 			// aus nummer und anzahl muss ich den rest herausfinden
-			erVer.ereignisEinfuegen(derWars, anzahl, "Bestandsanzahl geaendert.", eingeloggterUser);
+			erVer.ereignisEinfuegen(datum, derWars, anzahl, "Bestandsanzahl geaendert.", eingeloggterUser);
 		}
 	}
 	
@@ -301,7 +304,8 @@ public class ShopVerwaltung {
 	 */
 	public void loescheArtikel(int artID, User aktuellerBenutzer) throws ArtikelNichtGefundenException{
 		Artikel a = artVer.findArtikelByNumber(artID);
-		erVer.ereignisEinfuegen(a, a.getArtikelBestand(), "Artikel geloescht.", eingeloggterUser); //aktuellerBenutzer,
+		Date datum = new Date();
+		erVer.ereignisEinfuegen(datum, a, a.getArtikelBestand(), "Artikel geloescht.", eingeloggterUser); //aktuellerBenutzer,
 		artVer.loescheArtikel(a);		
 	}
 	
@@ -348,8 +352,8 @@ public class ShopVerwaltung {
 			// Artikelmenge im Artikelbestand verringern
 			for(Artikel key : warenkorb.keySet()) {
 				artVer.setArtikelMenge(key.getArtikelNummer(), (warenkorb.get(key)*-(1))); 
-
-				erVer.ereignisEinfuegen(key, warenkorb.get(key), "Artikel gekauft. (Rechnung wurde erstellt)", eingeloggterUser);
+				Date datum = new Date();
+				erVer.ereignisEinfuegen(datum, key, warenkorb.get(key), "Artikel gekauft. (Rechnung wurde erstellt)", eingeloggterUser);
 		    }
 		}
 		Rechnung rechnung = new Rechnung(k, k.getWarenkorb(), new Date());

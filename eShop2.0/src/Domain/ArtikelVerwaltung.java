@@ -176,7 +176,7 @@ public class ArtikelVerwaltung {
 	 * @throws FileNotFoundException wird geworfen, wenn Datei nicht gefunden wurde.
 	 * @throws IOException wenn es einen fehler beim schreiben gab.
 	 */
-/*	public void schreibeDatenMehrfachartikel() throws FileNotFoundException, IOException {		
+	public void schreibeDatenMehrfachartikel() throws FileNotFoundException, IOException {		
 		pm.openForWriting("Mehrfachartikel.txt");
 		if (!artikelBestand.isEmpty()) {
 			for (Artikel artikel : artikelBestand) {
@@ -185,7 +185,7 @@ public class ArtikelVerwaltung {
 			}
 		}
 		pm.close();
-	}*/
+	}
 	
 	/**
 	 * Methode speichert alle Artikel in einer Textdatei.

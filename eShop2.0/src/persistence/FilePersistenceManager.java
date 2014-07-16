@@ -7,11 +7,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import Valueobjects.Artikel;
+import Valueobjects.Ereignis;
 import Valueobjects.Kunde;
 import Valueobjects.MehrfachArtikel;
 import Valueobjects.Mitarbeiter;
+import Valueobjects.User;
 
 /**
  * Realisierung einer Schnittstelle zur persistenten Speicherung von
@@ -59,6 +62,20 @@ public class FilePersistenceManager implements PersistenceManager {
 			writer.println(daten);
 	}
 	
+/*	private void schreibeZeile(Date daten) {
+		if (writer != null)
+			writer.println(daten);
+	}
+	
+	private void schreibeZeile(Artikel daten) {
+		if (writer != null)
+			writer.println(daten);
+	}
+	
+	private void schreibeZeile(User daten) {
+		if (writer != null)
+			writer.println(daten);
+	}*/
 	
 	@Override
 	public Artikel ladeArtikel() throws IOException {
@@ -128,34 +145,17 @@ public class FilePersistenceManager implements PersistenceManager {
 	}
 	
 	
-/*	public Ereignis ladeEreignis() throws IOException {
-		String stringDatum = liesZeile();	
-		if (stringDatum == null){
-			return null;
-		}
-		Date df = null;
-		try {
-			df = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy", Locale.ENGLISH).parse(stringDatum);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+	/*public Ereignis ladeEreignis() throws IOException {
+		String datum = liesZeile();	
 
-		String kundenName = liesZeile();
-		String kundenId = liesZeile();
-		String artikelBezeichnung = liesZeile();
+		String artikel = liesZeile();
+		int menge = Integer.valueOf(liesZeile());
+		String aktion = liesZeile();
+		String user = liesZeile();
 		
-		int veraenderung = Integer.valueOf(liesZeile());
-		int artikelNr = Integer.valueOf(liesZeile());
-		String booleanIstAuslagerung = liesZeile();		
-		boolean istAuslagerung;
-		if(booleanIstAuslagerung.equals("t"))
-			istAuslagerung = true;
-		else 
-			istAuslagerung = false;
 		
-		return null //new Ereignis(df, kundenName, kundenId, artikelBezeichnung, veraenderung, artikelNr, istAuslagerung);
-	}
-*/
+		return new Ereignis(datum, artikel, menge, aktion, user);
+	}*/
 	
 	
 	@Override
@@ -178,7 +178,6 @@ public class FilePersistenceManager implements PersistenceManager {
 	
 	
 	public void speichereKunde(Kunde k)	{
-		// Name, Kundennr, Adresse schreiben
 		schreibeZeile(k.getName());
 		schreibeZeile(k.getPasswort());
 		schreibeZeile(Integer.toString(k.getNummer()));
@@ -202,18 +201,13 @@ public class FilePersistenceManager implements PersistenceManager {
 
 	
 
-//	@Override
-//	public void speichereEreignisse(Ereignis e) throws IOException {
-//		schreibeZeile(String.valueOf(e.getDate().toString()));
-//		schreibeZeile(e.getKundenName());
-//		schreibeZeile(e.getKundenId());
-//		schreibeZeile(e.getArtikelBezeichung());
-//		schreibeZeile(String.valueOf(e.getArtikelBestand()));
-//		schreibeZeile(String.valueOf(e.getArtikelNr()));
-//		if (e.istAuslagerung())
-//			schreibeZeile("t");
-//		else
-//			schreibeZeile("f");		
-//	}
+/*	@Override
+	public void speichereEreignisse(Ereignis e) throws IOException {
+		schreibeZeile(e.getDate());
+		schreibeZeile(e.getArtikel());
+		schreibeZeile(Integer.toString(e.getMenge()));
+		schreibeZeile(e.getAktion());
+		schreibeZeile(e.getNutzer());
+	}*/
 
 }
