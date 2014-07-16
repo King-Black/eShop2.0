@@ -16,7 +16,7 @@ import exceptions.UserNichtGefundenException;
 
 /**
  * CUI
- * Die CUI das Command U Interface, welches in der Kommandozeile alles ausgibt, was sie über die Shopverwaltung erhält.
+ * Die CUI das Command User Interface, welches in der Kommandozeile alles ausgibt, was sie über die Shopverwaltung erhält.
  */
 public class CUI implements Runnable {
 	
@@ -170,7 +170,7 @@ public class CUI implements Runnable {
 	/**
 	 * Diese Methode gibt das Menü aus wenn der User als Mitarbeiter eingeloggt ist.
 	 * @throws IOException
-	 * @throws ArtikelNichtGefundenException
+	 * @throws ArtikelNichtGefundenException wird geworfen, wenn der Artikel nicht existiert.
 	 */
 	//Ist das Menue wenn User als Mitarbeiter eingeloggt ist
 	public void menueMitarbeiter() throws IOException, ArtikelNichtGefundenException{
@@ -409,7 +409,6 @@ public class CUI implements Runnable {
 				try {
 					shopVer.artikelInWarenkorb(artID, menge,(Kunde) aktuellerBenutzer);
 				} catch (NichtGenugAufLagerException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				break;

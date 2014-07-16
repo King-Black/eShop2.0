@@ -9,6 +9,11 @@ import Valueobjects.MehrfachArtikel;
 import Valueobjects.Mitarbeiter;
 
 
+/**
+ * Klasse zum laden und speichern der .txt Dateien.
+ * @author King-Black
+ *
+ */
 public interface PersistenceManager {
 
 	public void openForReading(String datenquelle) throws IOException;

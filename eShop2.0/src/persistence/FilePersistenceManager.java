@@ -27,6 +27,7 @@ public class FilePersistenceManager implements PersistenceManager {
 	private BufferedReader reader = null;
 	private PrintWriter writer = null;
 	
+	
 	public void openForReading(String datei) throws FileNotFoundException {
 		reader = new BufferedReader(new FileReader(datei));
 	}
@@ -50,6 +51,11 @@ public class FilePersistenceManager implements PersistenceManager {
 	}
 	
 	
+	/**
+	 * Methode, die eine Zeile lieﬂt, in der ein String gespeichert wurde.
+	 * @return String
+	 * @throws IOException
+	 */
 	private String liesZeile() throws IOException {
 		if (reader != null)
 			return reader.readLine();
@@ -57,6 +63,10 @@ public class FilePersistenceManager implements PersistenceManager {
 			return "";
 	}
 
+	/**
+	 * Methode, die in einer Zeile einen String schreibt.
+	 * @param daten
+	 */
 	private void schreibeZeile(String daten) {
 		if (writer != null)
 			writer.println(daten);
@@ -146,7 +156,7 @@ public class FilePersistenceManager implements PersistenceManager {
 	
 	
 	/*public Ereignis ladeEreignis() throws IOException {
-		String datum = liesZeile();	
+		Date datum = Date.parseDate(liesZeile());	
 
 		String artikel = liesZeile();
 		int menge = Integer.valueOf(liesZeile());

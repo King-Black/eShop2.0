@@ -1,5 +1,7 @@
 package Domain;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -7,8 +9,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import persistence.FilePersistenceManager;
+import persistence.PersistenceManager;
 import Valueobjects.Artikel;
 import Valueobjects.Ereignis;
+import Valueobjects.Kunde;
+import Valueobjects.Mitarbeiter;
 import Valueobjects.User;
 
 /**
@@ -18,6 +24,7 @@ import Valueobjects.User;
 public class EreignisVerwaltung {
 	
 	private List<Ereignis> protokoll = new Vector<Ereignis>();
+	private PersistenceManager pm = new FilePersistenceManager();
 
 	/**
 	 * Methode, die ein Ereignis protokolliert.
@@ -86,63 +93,39 @@ public class EreignisVerwaltung {
 	}
 	
 	/**
-	 * Methode läd alle Ereignisse aus einer Textdatei.
+	 * Methode schreibt alle Ereignisse in einer Textdatei.
 	 * @throws FileNotFoundException wird geworfen, wenn Datei nicht gefunden wurde.
 	 * @throws IOException wenn es einen fehler beim lesen gab.
 	 * @throws ClassNotFoundException
 	 */
-	/*public void ladeDaten() throws FileNotFoundException, IOException, ClassNotFoundException{
-		int count = 0;
-		ObjectInputStream in = new ObjectInputStream(new FileInputStream("Ereignisse.txt"));
-		protokoll.clear();
-		try {  
-			Ereignis er = null;
-			for(;;) {
-				er = (Ereignis) in.readObject();
-				count++;
-				protokoll.add(er);
-			}
-		} catch (EOFException e) { // wg. readObject
-			System.out.println("Es wurden " + count + " Ereignisse geladen.");
-		} catch (IOException e) {
-			System.out.println(e);
-		} catch (ClassNotFoundException e) { // wg readObject
-			System.out.println(e);
-		} finally {
-			try {
-				if (in!=null) {
-					in.close();
-				} 
-			} 
-			catch (IOException e) {
-					e.printStackTrace();
+	
+	/*public void schreibeDatenEreignis() throws FileNotFoundException, IOException{
+		pm.openForWriting("Ereignis.txt");
+		if (!protokoll.isEmpty()) {
+			for (Ereignis er : protokoll){
+				if (er instanceof Ereignis)
+				pm.speichereEreignis((Ereignis)er);				
 			}
 		}
-	}
+		pm.close();
+	}*/
 	
 	/**
-	 * Methode speichert alle Ereignisse in einer Textdatei.
+	 * Methode läd alle Mitarbeiter aus einer Textdatei.
 	 * @throws FileNotFoundException wird geworfen, wenn Datei nicht gefunden wurde.
-	 * @throws IOException wenn es einen fehler beim schreiben gab.
-	 
-	public void schreibeDaten() throws FileNotFoundException, IOException {
-		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Ereignisse.txt")); 
-		// hier schleife in der dir jeweiligen objekte (artikel, user, ereignisse durchgegangen werden
-		
-		Iterator<Ereignis> it = protokoll.iterator();
-		// Artikel erstellen
-		Ereignis er = null;
-		// Ereignisse durchlaufen
-		int count = 0;
-		while (it.hasNext()) {
-			er = it.next();
-			// Ereignis in Datei speichern
-			out.writeObject(er);
-			count ++;
-		}
-		System.out.println(count + " Ereignisse gespeichert.");
-		// muss aufgerufen werden, bevor der datenstrom zur eingabe verwendet werden soll
-		out.close();
+	 * @throws IOException wenn es einen fehler beim lesen gab.
+	 * @throws ClassNotFoundException
+	 */
+	/*public void ladeDatenEreignis() throws FileNotFoundException, IOException{
+		pm.openForReading("Ereignis.txt");
+		Ereignis er;
+		do {
+			er = pm.ladeEreignis();
+			if (er != null) {
+				protokoll.add(er);
+			}				
+		} while (er != null);	
+		pm.close();
 	}*/
 	
 }

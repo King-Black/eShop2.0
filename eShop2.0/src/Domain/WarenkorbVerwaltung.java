@@ -10,6 +10,10 @@ import exceptions.ArtikelNurInEinheitenVerfuegbarException;
 import exceptions.NichtGenugAufLagerException;
 import exceptions.WarenkorbLeerException;
 
+/**
+ * Klasse zur Verwaltung des Warenkorbs.
+ *
+ */
 public class WarenkorbVerwaltung {
 	
 /**
